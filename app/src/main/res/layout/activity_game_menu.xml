@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.angitha.mygame.view.MenuView
+    android:id="@+id/menuView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.example.angitha.mygame.activity.GameMenuActivity">
+
+    <TextView
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:drawablePadding="10dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/app_title"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/app_name"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/difficulty"
+            android:textSize="@dimen/option_title_size"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/difficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="2"
+            android:progress="3"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/level_1"
+                android:textSize="@dimen/seekbar_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/level_2"
+                android:textSize="@dimen/seekbar_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/level_3"
+                android:textSize="@dimen/seekbar_text_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="16dp"
+        android:layout_below="@+id/level"
+        android:background="@color/colorPrimary"
+        android:text="@string/play"
+        android:drawableTop="@drawable/play"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/play_font_size"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/levels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/levels1"
+            android:layout_margin="6dp"/>
+        <ImageView
+            android:id="@+id/achievements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/trophy"
+            android:layout_margin="6dp"/>
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/like1"
+            android:layout_margin="6dp"/>
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share1"
+            android:layout_margin="6dp"/>
+        <ImageView
+            android:id="@+id/quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/close1"
+            android:layout_margin="6dp"/>
+    </LinearLayout>
+
+</com.example.angitha.mygame.view.MenuView>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Brainvita</string>
+
+    <string name="play">Play</string>
+    <string name="restart_game">Restart Game? </string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="back">Back</string>
+    <string name="difficulty">DIFFICULTY</string>
+
+    <string name="level_1">Easy</string>
+    <string name="level_2">Medium</string>
+    <string name="level_3">Extreme</string>
+</resources>
