@@ -27,7 +27,6 @@ public class MenuView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-
     /**
      * Listener for menu events
      * @param gameMenuController game menu controller instance
@@ -36,6 +35,7 @@ public class MenuView extends RelativeLayout {
 
         findViewById(R.id.play).setOnClickListener(gameMenuController);
         findViewById(R.id.levels).setVisibility(VISIBLE);
+        ((SeekBar) findViewById(R.id.difficulty)).setOnSeekBarChangeListener(gameMenuController);
     }
 
     /**

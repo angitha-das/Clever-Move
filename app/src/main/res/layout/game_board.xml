@@ -27,6 +27,12 @@
         <include layout="@layout/board_row" />
 
         <include layout="@layout/board_row" />
+
+        <include layout="@layout/board_row" />
+
+        <include layout="@layout/board_row" />
+
+        <include layout="@layout/board_row" />
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

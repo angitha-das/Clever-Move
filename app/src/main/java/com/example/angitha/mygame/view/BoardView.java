@@ -1,8 +1,11 @@
 package com.example.angitha.mygame.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
@@ -25,6 +28,7 @@ public class BoardView extends RelativeLayout {
     private static final String TAG = GamePlayController.class.getName();
     private GameRules mGameRules;
     private GamePlayController mListener;
+    private int[][] mBoardGrid;
 
     /**
      * Array to hold all discs dropped
@@ -62,9 +66,10 @@ public class BoardView extends RelativeLayout {
         mBoardView = findViewById(R.id.game_board);
     }
 
-    public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules) {
+    public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules, int[][] boardGrid) {
         this.mGameRules = gameRules;
         this.mListener = gamePlayController;
+        this.mBoardGrid = boardGrid;
         buildCells();
     }
 
@@ -75,96 +80,27 @@ public class BoardView extends RelativeLayout {
         mCells = new ImageView[ROWS][COLS];
         for (int r = 0; r < ROWS; r++) {
             ViewGroup row = (ViewGroup) ((ViewGroup) mBoardView).getChildAt(r);
-            //row.setClipChildren(false);
+            row.setClipChildren(false);
             for (int c = 0; c < COLS; c++) {
                 ImageView imageView = (ImageView) row.getChildAt(c);
-                imageView.setImageResource(android.R.color.transparent);
-                imageView.setOnClickListener(mListener);
+                if(mBoardGrid[r][c] == 0){
+                    imageView.setImageResource(R.color.red);
+                }else if(mBoardGrid[r][c] == 1){
+                    imageView.setImageResource(R.drawable.peg);
+                }else{
+                    imageView.setImageResource(android.R.color.transparent);
+                }
+                imageView.setOnDragListener(new GamePlayController.PegDragListener);
+                imageView.setOnTouchListener(new GamePlayController.PegTouchListener);
                 mCells[r][c] = imageView;
             }
         }
     }
 
     /**
-     * get row from touch
-     *
-     * @param x touch location
-     * @return row from  the location(0..8)
-     */
-    public int gridAt_x(float x) {
-        float rowHeight = mCells[0][0].getHeight();
-        int row = (int) x / (int) rowHeight;
-        if (row < 0)
-            return 0;
-        if (row > 9)
-            return 9;
-        return row;
-    }
-
-    /**
-     * get column from touch
-     *
-     * @param y touch location
-     * @return column from  the location(0..8)
-     */
-    public int gridAt_y(float y) {
-        float colWidth = mCells[0][0].getWidth();
-        int col = (int) y / (int) colWidth;
-        if (col < 0)
-            return 0;
-        if (col > 9)
-            return 9;
-        return col;
-    }
-
-
-    /**
-     * Reset boar for new game
+     * Reset board for new game same level
      */
     public void resetBoard() {
-        //clear board mCells
-        for (ImageView[] cell : mCells) {
-            for (ImageView imageView : cell) {
-                imageView.setImageResource(android.R.color.transparent);
-            }
-        }
-//        showWinStatus(BoardLogic.Outcome.NOTHING, null);
+        buildCells();
     }
-
-    /**
-     * Drop a disc of the current player at available row of selected column
-     *
-     * @param col column to drop disc
-     * @param row row of the column
-     */
-    public void moveMarble(int row, int col, final int playerTurn) {
-        final ImageView cell = mCells[row][col];
-        float move = -(cell.getHeight() * row + cell.getHeight() + 15);
-        cell.setY(move);
-        cell.setImageResource(mGameRules.getRule(GameRules.DISC));
-        cell.animate().translationY(0).setInterpolator(new BounceInterpolator()).start();
-    }
-
-
-//    /**
-//     * Update UI with winning status
-//     *
-//     * @param outcome  winning status
-//     * @param winDiscs winning move discs
-//     */
-//    public void showWinStatus(@NonNull BoardLogic.Outcome outcome, @NonNull ArrayList<ImageView> winDiscs) {
-//        if (BuildConfig.DEBUG) {
-//            Log.e(TAG, outcome.name());
-//        }
-//        if (outcome != BoardLogic.Outcome.NOTHING) {
-//            switch (outcome) {
-//                case WIN:
-//                    break;
-//                case LOSE:
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    }
 }

@@ -1,22 +1,29 @@
 package com.example.angitha.mygame.controller;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.angitha.mygame.BuildConfig;
+import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
+
+import static com.example.angitha.mygame.levels.gameLevels.gridForLevel1;
+import static com.example.angitha.mygame.levels.gameLevels.setGameBoard;
 
 
 /**
  * Created by angitha on 1/7/17.
  */
 
-public class GamePlayController implements View.OnClickListener {
+public class GamePlayController{
 
     private static final String TAG = GamePlayController.class.getName();
     /**
@@ -32,7 +39,7 @@ public class GamePlayController implements View.OnClickListener {
     /**
      * mGrid, contains 0 for empty cell or player ID
      */
-    private final int[][] mGrid = new int[ROWS][COLS];
+    public final int[][] mGrid = new int[ROWS][COLS];
 
     /**
      * mFree cells in every column
@@ -71,7 +78,7 @@ public class GamePlayController implements View.OnClickListener {
         this.mBoardView = boardView;
         initialize();
         if (mBoardView != null) {
-            mBoardView.initialize(this, mGameRules);
+            mBoardView.initialize(this, mGameRules,mGrid);
         }
     }
 
@@ -84,54 +91,144 @@ public class GamePlayController implements View.OnClickListener {
         mFinished = false;
         mOutcome = BoardLogic.Outcome.NOTHING;
 
-        // create levels
-//        if (mGameRules.getRule(GameRules.LEVEL) == GameRules.LEVEL) {
-//            switch (mGameRules.getRule(GameRules.LEVEL)) {
-//                case GameRules.Level.LEVEL1:
-//                    break;
-//                case GameRules.Level.LEVEL2:
-//                    break;
-//                case GameRules.Level.LEVEL3:
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
+        // initialize board as per level
+        int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
 
-        /* Set mGrid as per level
-        Level 1:
-        0 invisible,1 empty,2 filled
-    */
-        int[][] gridForLevel1 = {
-                {0,0,2,1,1,2,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-
-        };
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                mGrid[i][j] = gridForLevel1[i][j];
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                mGrid[r][c] = mLevelGrid[r][c];
             }
         }
     }
 
 
-    @Override
-    public void onClick(@NonNull View view) {
-        if (mFinished) return;
-        int row = mBoardView.gridAt_x(view.getX());
-        int col = mBoardView.gridAt_y(view.getY());
-        if (BuildConfig.DEBUG) {
-            Log.e(TAG, "Selected row,column: " + row + "," + col);
-        }
-        selectRowColumn(col);
+
+    /**
+     * Drop a disc of the current player at available row of selected column
+     *
+     * @param col column to drop disc
+     * @param row row of the column
+     */
+    public void moveMarble(int row, int col, final int playerTurn) {
+//        final ImageView cell = mCells[row][col];
+//        float move = -(cell.getHeight() * row + cell.getHeight() + 15);
+//        cell.setY(move);
+//        cell.setImageResource(mGameRules.getRule(GameRules.DISC));
+//        cell.animate().translationY(0).setInterpolator(new BounceInterpolator()).start();
     }
+
+    public static class PegDragListener implements View.OnDragListener {
+        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.square);
+        Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            BoardView boardView;
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    v.setBackgroundDrawable(hoverSquare);
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    v.setBackgroundDrawable(defaultSquare);
+                    break;
+                case DragEvent.ACTION_DROP:
+				/*
+				 * When Peg is dropped move method is called and score is updated
+				 */
+                    boardView = (BoardView) event.getLocalState();
+//                    PegLayout newSquare = (PegLayout) v;
+//                    oldSquare = (PegLayout) view.getParent();
+//                    if (boardView.move(oldSquare, newSquare, getSquares())) {
+//                        int score = getScore();
+//                        score--;
+//                        setScore(score);
+//                        updateTextViewScore();
+//                    }
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+                    boardView = (BoardView) event.getLocalState();
+                    boardView.setVisibility(View.VISIBLE);
+                    v.setBackgroundDrawable(defaultSquare);
+                default:
+                    break;
+            }
+            return true;
+        }
+
+    }
+
+    /**
+     * Touch listener for dragging of PegViews
+     * Calls startDrag() which is used in the DragListener
+     * Pegs are dragged into PegLayouts which are assigned to DragListeners
+     *
+     * @author chris
+     *
+     */
+    public final class PegTouchListener implements View.OnTouchListener {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == event.ACTION_DOWN) {
+                //ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                v.startDrag(null, shadowBuilder, v, 0);
+                v.setVisibility(View.INVISIBLE);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+    /**
+     * Move method, takes original square and new square to go to as well as array of PegLayouts in board
+     * Checks whether square to move to is empty and in right place as well as whether there is a Peg to jump over
+     * Sets new row and col values for PegView
+     *
+     * @param oldSquare
+     * @param newSquare
+     * @param squares
+     * @return bool
+     */
+//    public boolean move(PegLayout oldSquare, PegLayout newSquare, PegLayout[][] squares) {
+//
+//        int newRow = newSquare.getRow();
+//        int newCol = newSquare.getColumn();
+//
+//        int oldRow = oldSquare.getRow();
+//        int oldCol = oldSquare.getColumn();
+//
+//
+//        if (newSquare.isEmpty()) {
+//            if (((Math.abs(newRow - oldRow) == 2) && (newCol == oldCol)) ||
+//                    (Math.abs(newCol - oldCol) == 2) && (newRow == oldRow)) {
+//                if ((oldCol - newCol == -2) && (!squares[newRow][newCol - 1].isEmpty())) {
+//                    squares[newRow][newCol - 1].removeAllViews();
+//                } else if ((oldCol - newCol == 2) && (!squares[newRow][newCol + 1].isEmpty())) {
+//                    squares[newRow][newCol + 1].removeAllViews();
+//                } else if ((oldRow - newRow == -2) && (!squares[newRow - 1][newCol].isEmpty())) {
+//                    squares[newRow - 1][newCol].removeAllViews();
+//                } else if ((oldRow - newRow == 2) && (!squares[newRow + 1][newCol].isEmpty())) {
+//                    squares[newRow + 1][newCol].removeAllViews();
+//                } else {
+//                    return false;
+//                }
+//                oldSquare.removeView(this);
+//                newSquare.addView(this);
+//                this.row = newRow;
+//                this.col = newCol;
+//                this.setVisibility(View.VISIBLE);
+//                return true;
+//            }
+//
+//        }
+//        return false;
+//    }
+
+
 
     /**
      * drop disc into a row , column

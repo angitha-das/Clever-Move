@@ -11,7 +11,7 @@ import com.example.angitha.mygame.view.MenuView;
  * Created by angitha on 1/7/17.
  */
 
-public class GameMenuController implements View.OnClickListener ,SeekBar.OnSeekBarChangeListener {
+public class GameMenuController implements View.OnClickListener,SeekBar.OnSeekBarChangeListener {
     private final MenuView mMenuView;
     private final MenuControllerListener mListener;
     private final GameRules mGameRules = new GameRules();

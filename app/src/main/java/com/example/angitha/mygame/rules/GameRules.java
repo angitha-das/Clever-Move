@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 
 public class GameRules {
 
-    public static final int DISC = 3;
-
     /**
      * Levels of the Game
      */

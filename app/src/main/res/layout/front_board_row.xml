@@ -9,60 +9,60 @@
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".17"
         android:adjustViewBounds="true"
-        android:src="@drawable/cell_frame" />
+        android:src="@drawable/square" />
 </LinearLayout>
