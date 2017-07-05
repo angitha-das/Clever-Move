@@ -7,15 +7,16 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TableRow;
 
 import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
-import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
+import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.view.PegView;
 
-import static com.example.angitha.mygame.levels.gameLevels.gridForLevel1;
 import static com.example.angitha.mygame.levels.gameLevels.setGameBoard;
 
 
@@ -64,7 +65,18 @@ public class GamePlayController{
 
     private final Context mContext;
 
-    private final BoardView mBoardView;
+    private final BoardView mTableLayout;
+
+
+    private int score = 32;
+
+    int height = dpToPixels(45);
+    int width = dpToPixels(45);
+
+    private BoardView[][] squares = new BoardView[7][7];
+    private TableRow[] row  = new TableRow[7];
+    private PegView[][] pieces = new PegView[7][7];
+
 
     /**
      * Game rules
@@ -72,13 +84,13 @@ public class GamePlayController{
     @NonNull
     private final GameRules mGameRules;
 
-    public GamePlayController(Context context, BoardView boardView, @NonNull GameRules mGameRules) {
+    public GamePlayController(Context context, BoardView gameTableLayout, @NonNull GameRules mGameRules) {
         this.mContext = context;
         this.mGameRules = mGameRules;
-        this.mBoardView = boardView;
+        this.mTableLayout = gameTableLayout;
         initialize();
-        if (mBoardView != null) {
-            mBoardView.initialize(this, mGameRules,mGrid);
+        if (mTableLayout != null) {
+            mTableLayout.initialize(this, mGameRules,mGrid);
         }
     }
 
@@ -102,27 +114,36 @@ public class GamePlayController{
     }
 
 
-
-    /**
-     * Drop a disc of the current player at available row of selected column
-     *
-     * @param col column to drop disc
-     * @param row row of the column
-     */
-    public void moveMarble(int row, int col, final int playerTurn) {
-//        final ImageView cell = mCells[row][col];
-//        float move = -(cell.getHeight() * row + cell.getHeight() + 15);
-//        cell.setY(move);
-//        cell.setImageResource(mGameRules.getRule(GameRules.DISC));
-//        cell.animate().translationY(0).setInterpolator(new BounceInterpolator()).start();
+    public void exitGame() {
+        ((GamePlayActivity) mContext).finish();
     }
 
-    public static class PegDragListener implements View.OnDragListener {
+    /**
+     * restart game by resetting values and UI
+     */
+    public void restartGame() {
+        initialize();
+        mTableLayout.resetBoard();
+        if (BuildConfig.DEBUG) {
+            Log.e(TAG, "Game restarted");
+        }
+    }
+
+    /**
+     * DragListener for PegLayouts in board, waits until something has been dragged over it
+     *
+     * @author chris
+     *
+     */
+    public class SquareDragListener implements View.OnDragListener {
+
         Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.square);
         Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
+
         @Override
         public boolean onDrag(View v, DragEvent event) {
-            BoardView boardView;
+            PegView view;
+            BoardView oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     break;
@@ -136,19 +157,19 @@ public class GamePlayController{
 				/*
 				 * When Peg is dropped move method is called and score is updated
 				 */
-                    boardView = (BoardView) event.getLocalState();
-//                    PegLayout newSquare = (PegLayout) v;
-//                    oldSquare = (PegLayout) view.getParent();
-//                    if (boardView.move(oldSquare, newSquare, getSquares())) {
-//                        int score = getScore();
-//                        score--;
-//                        setScore(score);
-//                        updateTextViewScore();
-//                    }
+                    view = (PegView) event.getLocalState();
+                    BoardView newSquare = (BoardView) v;
+                    oldSquare = (BoardView) view.getParent();
+                    if (view.move(oldSquare, newSquare, getSquares())) {
+                        int score = getScore();
+                        score--;
+                        setScore(score);
+                        updateTextViewScore();
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    boardView = (BoardView) event.getLocalState();
-                    boardView.setVisibility(View.VISIBLE);
+                    view = (PegView) event.getLocalState();
+                    view.setVisibility(View.VISIBLE);
                     v.setBackgroundDrawable(defaultSquare);
                 default:
                     break;
@@ -162,9 +183,6 @@ public class GamePlayController{
      * Touch listener for dragging of PegViews
      * Calls startDrag() which is used in the DragListener
      * Pegs are dragged into PegLayouts which are assigned to DragListeners
-     *
-     * @author chris
-     *
      */
     public final class PegTouchListener implements View.OnTouchListener {
 
@@ -184,104 +202,53 @@ public class GamePlayController{
 
 
     /**
-     * Move method, takes original square and new square to go to as well as array of PegLayouts in board
-     * Checks whether square to move to is empty and in right place as well as whether there is a Peg to jump over
-     * Sets new row and col values for PegView
+     * Can't set height and width as device independent pixels, so have to convert
      *
-     * @param oldSquare
-     * @param newSquare
-     * @param squares
-     * @return bool
+     * @param dps
+     * @return pixels
      */
-//    public boolean move(PegLayout oldSquare, PegLayout newSquare, PegLayout[][] squares) {
-//
-//        int newRow = newSquare.getRow();
-//        int newCol = newSquare.getColumn();
-//
-//        int oldRow = oldSquare.getRow();
-//        int oldCol = oldSquare.getColumn();
-//
-//
-//        if (newSquare.isEmpty()) {
-//            if (((Math.abs(newRow - oldRow) == 2) && (newCol == oldCol)) ||
-//                    (Math.abs(newCol - oldCol) == 2) && (newRow == oldRow)) {
-//                if ((oldCol - newCol == -2) && (!squares[newRow][newCol - 1].isEmpty())) {
-//                    squares[newRow][newCol - 1].removeAllViews();
-//                } else if ((oldCol - newCol == 2) && (!squares[newRow][newCol + 1].isEmpty())) {
-//                    squares[newRow][newCol + 1].removeAllViews();
-//                } else if ((oldRow - newRow == -2) && (!squares[newRow - 1][newCol].isEmpty())) {
-//                    squares[newRow - 1][newCol].removeAllViews();
-//                } else if ((oldRow - newRow == 2) && (!squares[newRow + 1][newCol].isEmpty())) {
-//                    squares[newRow + 1][newCol].removeAllViews();
-//                } else {
-//                    return false;
-//                }
-//                oldSquare.removeView(this);
-//                newSquare.addView(this);
-//                this.row = newRow;
-//                this.col = newCol;
-//                this.setVisibility(View.VISIBLE);
-//                return true;
-//            }
-//
-//        }
-//        return false;
-//    }
-
-
-
-    /**
-     * drop disc into a row , column
-     *
-     * @param column column to drop disc
-     */
-    private void selectRowColumn(int column) {
-
-//        if (mFree[row][column] == 0) {
-//            if (BuildConfig.DEBUG) {
-//                Log.e(TAG, "full column or game is mFinished");
-//            }
-//            return;
-//        }
-//
-//        mBoardLogic.placeMove(column);
-//
-//        // put disc
-//        mBoardView.dropDisc(mFree[column], column);
-//
-//        // check if someone has won
-//        checkForWin();
-//    }
-}
-
-
-    /**
-     * execute board mBoardLogic for win check and update ui
-     */
-    private void checkForWin() {
-//        mOutcome = mBoardLogic.checkWin();
-//
-//        if (mOutcome != BoardLogic.Outcome.NOTHING) {
-//            mFinished = true;
-//            ArrayList<ImageView> winDiscs = mBoardLogic.getWinDiscs(mBoardView.getCells());
-//            mBoardView.showWinStatus(mOutcome, winDiscs);
-    }
-
-
-    public void exitGame() {
-        ((GamePlayActivity) mContext).finish();
+    public int dpToPixels(int dps) {
+        float scale = mContext.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
     }
 
     /**
-     * restart game by resetting values and UI
+     * Getter for array of PegLayouts which make up the board
+     *
+     * @return squares
      */
-    public void restartGame() {
-        initialize();
-        mBoardView.resetBoard();
-        if (BuildConfig.DEBUG) {
-            Log.e(TAG, "Game restarted");
+    public BoardView[][] getSquares() {
+        return squares;
+
+    }
+
+    /**
+     * Setter for score
+     *
+     * @param s score to be set to
+     */
+    public void setScore(int s) {
+        score = s;
+    }
+
+    /**
+     * Getter for score
+     *
+     * @return score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Updates score TextView and opens dialog if 1 Peg remaining
+     *
+     */
+    public void updateTextViewScore() {
+
+        int score = getScore();
+        if (score == 1) {;
         }
     }
-
-
 }

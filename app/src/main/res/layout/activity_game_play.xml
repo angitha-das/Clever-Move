@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.angitha.mygame.view.BoardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout android:id="@+id/game_linear_layout"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/gameView"
-    tools:context="com.example.angitha.mygame.activity.GamePlayActivity">
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</com.example.angitha.mygame.view.BoardView>
+    <TableLayout
+        android:id="@+id/game_table_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textview_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:text="@string/game_score" />
+
+    <Button
+        android:id="@+id/button_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/finish_game"/>
+
+</LinearLayout>

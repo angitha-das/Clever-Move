@@ -1,33 +1,41 @@
 package com.example.angitha.mygame.activity;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
-import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
+import com.example.angitha.mygame.rules.GameRules;
 
 public class GamePlayActivity extends AppCompatActivity {
 
     private GamePlayController mGameController;
     private final GameRules mGameRules = new GameRules();
 
+    private BoardView boardView;
+
+    private TextView textviewScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
+        textviewScore = (TextView) findViewById(R.id.textview_score);
 
-        BoardView boardView = (BoardView) findViewById(R.id.gameView);
         mGameRules.importFrom(getIntent().getExtras());
+        boardView = new BoardView(this,9,9);
         mGameController = new GamePlayController(this, boardView, mGameRules);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
+
+        textviewScore.setText(Integer.toString(mGameController.getScore()));
     }
 
     @Override
