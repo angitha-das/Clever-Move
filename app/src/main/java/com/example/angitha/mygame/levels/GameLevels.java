@@ -6,18 +6,18 @@ import com.example.angitha.mygame.rules.GameRules;
  * Created by angitha on 4/7/17.
  */
 
-public class gameLevels {
+public class GameLevels {
     /*
     0 invisible
     1 filled
     2 empty
      */
     public static int[][] gridForLevel1 = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
             {0,0,2,1,1,2,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},

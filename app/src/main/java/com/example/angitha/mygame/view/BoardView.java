@@ -1,146 +1,68 @@
 package com.example.angitha.mygame.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
 
-public class BoardView extends LinearLayout {
+public class BoardView extends TableLayout {
 
 	private static final String TAG = GamePlayController.class.getName();
 
-	private int Row;
-	private int Col;
+	private int Row = 9;
+	private int Col = 9;
 
-	private TableRow[] row  = new TableRow[0];
-	private BoardView[][] squares = new BoardView[0][];
-	private PegView[][] pieces = new PegView[0][];
+	private TableRow[] row  = new TableRow[9];
+	private PegLayout[][] squares;
+	private PegView[][] pieces = new PegView[9][9];
 	private Drawable defaultSquare;
 
+	private Context mContext;
 
 	private GameRules mGameRules;
 	private GamePlayController mListener;
 	private int[][] mBoardMatrix;
 
 	private View mBoardView;
+	private GamePlayController.SquareDragListener squareDragListener;
+	private GamePlayController.PegTouchListener pegTouchListener;
 
-	private Context mContext;
-
-	/**
-	 * Takes Row and column as well as superclass constructor
-	 *
-	 * @param context
-	 * @param r
-	 * @param c
-	 */
-	public BoardView(Context context, int r, int c) {
+	public BoardView(Context context) {
 		super(context);
-		Row = r;
-		Col = c;
-		init(context);
-
-	}
-
-	/**
-	 * Takes Row and column as well as superclass constructor
-	 *
-	 * @param context
-	 * @param attrs
-	 * @param r
-	 * @param c
-	 */
-	public BoardView(Context context, AttributeSet attrs, int r, int c) {
-		super(context, attrs);
-		Row = r;
-		Col = c;
-		init(context);
-
-	}
-
-	/**
-	 * Takes Row and column as well as superclass constructor
-	 *
-	 * @param context
-	 * @param attrs
-	 * @param defStyle
-	 * @param r
-	 * @param c
-	 */
-	public BoardView(Context context, AttributeSet attrs, int defStyle, int r, int c) {
-		super(context, attrs, defStyle);
-		Row = r;
-		Col = c;
-		init(context);
-
-	}
-
-	/**
-	 * Setter for Row in table
-	 *
-	 * @param r
-	 */
-	public void setRow(int r) {
-		Row = r;
-	}
-
-	/**
-	 * Getter for Row in table
-	 *
-	 * @return Row
-	 */
-	public int getRow() {
-		return Row;
-	}
-
-	/**
-	 * Setter for column in table
-	 *
-	 * @param c
-	 */
-	public void setColumn(int c) {
-		Col = c;
-	}
-
-	/**
-	 * Getter for column in table
-	 *
-	 * @return column
-	 */
-	public int getColumn() {
-		return Col;
-	}
-
-	/**
-	 * Checks whether it has any children
-	 *
-	 * @return bool
-	 */
-	public boolean isEmpty() {
-		if (this.getChildCount() == 0) {
-			return true;
-		}
-		return false;
-
-	}
-
-	private void init(Context context) {
 		this.mContext = context;
-		inflate(context, R.layout.activity_game_play, this);
-		mBoardView = findViewById(R.id.game_table_layout);
+		init();
 	}
 
-	public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules, int[][] boardMatrix) {
+	public BoardView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.mContext = context;
+		init();
+	}
+
+
+	private void init() {
+		defaultSquare = getResources().getDrawable(R.drawable.square);
+	}
+
+	public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules, int[][] boardMatrix,
+						   GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
+		this.squareDragListener = squareDragListener;
+		this.pegTouchListener = pegTouchListener;
 		this.mGameRules = gameRules;
 		this.mListener = gamePlayController;
 		this.mBoardMatrix = boardMatrix;
+		this.squares = gamePlayController.getSquares();
 		buildCells();
 	}
 
@@ -150,21 +72,21 @@ public class BoardView extends LinearLayout {
 	*/
 
 	private void buildCells() {
-		defaultSquare = getResources().getDrawable(R.drawable.square);
+		removeAllViewsInLayout();
 		int height = dpToPixels(45);
 		int width = dpToPixels(45);
-		for (int r = 0; r < Row; r++) {
+		for (int r = 0; r < 7; r++) {
 			row[r] = new TableRow(mContext);
-			for (int c = 0; c < Col; c++) {
-				if( r == 0 && c == 0) {
-					squares[r][c] = new BoardView(this, r, c);
+			for (int c = 0; c < 7; c++) {
+				if (!(mBoardMatrix[r][c] == 0)) {
+					squares[r][c] = new PegLayout(mContext, r, c);
 					squares[r][c].setBackgroundDrawable(defaultSquare);
-                    squares[r][c].setOnDragListener(new GamePlayController.SquareDragListener());
-					if (r == 1 && c == 1) {
-						pieces[r][c] = new PegView(this, r, c);
+					squares[r][c].setOnDragListener(squareDragListener);
+					if (mBoardMatrix[r][c] == 1) {
+						pieces[r][c] = new PegView(mContext, r, c);
 						pieces[r][c].setImageResource(R.drawable.peg);
-						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(height, width));
-                        pieces[r][c].setOnTouchListener(new GamePlayController.PegTouchListener());
+						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(height,width));
+						pieces[r][c].setOnTouchListener(pegTouchListener);
 						squares[r][c].addView(pieces[r][c]);
 					}
 					row[r].addView(squares[r][c]);
@@ -174,9 +96,8 @@ public class BoardView extends LinearLayout {
 					params.width = width;
 					squares[r][c].setLayoutParams(params);
 				}
-
 			}
-			gameTableLayout.addView(row[r], new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			addView(row[r], new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		}
 	}
 
@@ -187,7 +108,7 @@ public class BoardView extends LinearLayout {
 	 * @return pixels
 	 */
 	public int dpToPixels(int dps) {
-		float scale = mContext.getResources().getDisplayMetrics().density;
+		float scale = getResources().getDisplayMetrics().density;
 		int pixels = (int) (dps * scale + 0.5f);
 		return pixels;
 	}

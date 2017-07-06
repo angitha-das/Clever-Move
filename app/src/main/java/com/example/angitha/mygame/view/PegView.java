@@ -106,7 +106,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	 * @param squares
 	 * @return bool
 	 */
-	public boolean move(BoardView oldSquare, BoardView newSquare, BoardView[][] squares) {
+	public boolean move(PegLayout oldSquare, PegLayout newSquare, PegLayout[][] squares) {
 		 
 		int newRow = newSquare.getRow();
 		int newCol = newSquare.getColumn();
@@ -140,8 +140,4 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		}
 		return false;
 	}
-	
-
-	
-
 }

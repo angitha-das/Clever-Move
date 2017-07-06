@@ -27,10 +27,11 @@ public class GamePlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
+
         textviewScore = (TextView) findViewById(R.id.textview_score);
 
         mGameRules.importFrom(getIntent().getExtras());
-        boardView = new BoardView(this,9,9);
+        boardView = (BoardView) findViewById(R.id.game_table_layout);
         mGameController = new GamePlayController(this, boardView, mGameRules);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);

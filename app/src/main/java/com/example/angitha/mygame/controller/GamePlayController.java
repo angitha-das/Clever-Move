@@ -15,9 +15,10 @@ import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
 
-import static com.example.angitha.mygame.levels.gameLevels.setGameBoard;
+import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
 
 
 /**
@@ -64,18 +65,10 @@ public class GamePlayController{
     private boolean mFinished = true;
 
     private final Context mContext;
-
-    private final BoardView mTableLayout;
-
+    private final BoardView mBoardView;
 
     private int score = 32;
-
-    int height = dpToPixels(45);
-    int width = dpToPixels(45);
-
-    private BoardView[][] squares = new BoardView[7][7];
-    private TableRow[] row  = new TableRow[7];
-    private PegView[][] pieces = new PegView[7][7];
+    PegLayout[][] squares = new PegLayout[9][9] ;
 
 
     /**
@@ -84,13 +77,13 @@ public class GamePlayController{
     @NonNull
     private final GameRules mGameRules;
 
-    public GamePlayController(Context context, BoardView gameTableLayout, @NonNull GameRules mGameRules) {
+    public GamePlayController(Context context, BoardView boardView, @NonNull GameRules mGameRules) {
         this.mContext = context;
         this.mGameRules = mGameRules;
-        this.mTableLayout = gameTableLayout;
+        this.mBoardView = boardView;
         initialize();
-        if (mTableLayout != null) {
-            mTableLayout.initialize(this, mGameRules,mGrid);
+        if (mBoardView != null) {
+            mBoardView.initialize(this, mGameRules,mGrid,new SquareDragListener(),new PegTouchListener());
         }
     }
 
@@ -105,7 +98,6 @@ public class GamePlayController{
 
         // initialize board as per level
         int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
-
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
                 mGrid[r][c] = mLevelGrid[r][c];
@@ -123,7 +115,7 @@ public class GamePlayController{
      */
     public void restartGame() {
         initialize();
-        mTableLayout.resetBoard();
+        mBoardView.resetBoard();
         if (BuildConfig.DEBUG) {
             Log.e(TAG, "Game restarted");
         }
@@ -143,7 +135,7 @@ public class GamePlayController{
         @Override
         public boolean onDrag(View v, DragEvent event) {
             PegView view;
-            BoardView oldSquare;
+            PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     break;
@@ -158,13 +150,13 @@ public class GamePlayController{
 				 * When Peg is dropped move method is called and score is updated
 				 */
                     view = (PegView) event.getLocalState();
-                    BoardView newSquare = (BoardView) v;
-                    oldSquare = (BoardView) view.getParent();
+                    PegLayout newSquare = (PegLayout) v;
+                    oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares())) {
-                        int score = getScore();
-                        score--;
-                        setScore(score);
-                        updateTextViewScore();
+//                        int score = getScore();
+//                        score--;
+//                        setScore(score);
+//                        updateTextViewScore();
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -200,27 +192,13 @@ public class GamePlayController{
         }
     }
 
-
-    /**
-     * Can't set height and width as device independent pixels, so have to convert
-     *
-     * @param dps
-     * @return pixels
-     */
-    public int dpToPixels(int dps) {
-        float scale = mContext.getResources().getDisplayMetrics().density;
-        int pixels = (int) (dps * scale + 0.5f);
-        return pixels;
-    }
-
     /**
      * Getter for array of PegLayouts which make up the board
      *
      * @return squares
      */
-    public BoardView[][] getSquares() {
+    public PegLayout[][] getSquares() {
         return squares;
-
     }
 
     /**
