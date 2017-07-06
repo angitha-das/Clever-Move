@@ -1,10 +1,5 @@
 package com.example.angitha.mygame.rules;
 
-/**
- * Rules base class
- * Created by Rahul on 30/05/17.
- */
-
 abstract class Rule {
 
     /** list of all possibles IDs for a rule*/

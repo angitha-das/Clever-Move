@@ -1,14 +1,10 @@
 package com.example.angitha.mygame.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -30,11 +26,8 @@ public class BoardView extends TableLayout {
 
 	private Context mContext;
 
-	private GameRules mGameRules;
-	private GamePlayController mListener;
 	private int[][] mBoardMatrix;
 
-	private View mBoardView;
 	private GamePlayController.SquareDragListener squareDragListener;
 	private GamePlayController.PegTouchListener pegTouchListener;
 
@@ -59,8 +52,6 @@ public class BoardView extends TableLayout {
 						   GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
 		this.squareDragListener = squareDragListener;
 		this.pegTouchListener = pegTouchListener;
-		this.mGameRules = gameRules;
-		this.mListener = gamePlayController;
 		this.mBoardMatrix = boardMatrix;
 		this.squares = gamePlayController.getSquares();
 		buildCells();
@@ -75,12 +66,13 @@ public class BoardView extends TableLayout {
 		removeAllViewsInLayout();
 		int height = dpToPixels(45);
 		int width = dpToPixels(45);
-		for (int r = 0; r < 7; r++) {
+		for (int r = 0; r < Row; r++) {
 			row[r] = new TableRow(mContext);
-			for (int c = 0; c < 7; c++) {
+			for (int c = 0; c < Col; c++) {
 				if (!(mBoardMatrix[r][c] == 0)) {
 					squares[r][c] = new PegLayout(mContext, r, c);
 					squares[r][c].setBackgroundDrawable(defaultSquare);
+					squares[r][c].setPadding(2,2,2,2);
 					squares[r][c].setOnDragListener(squareDragListener);
 					if (mBoardMatrix[r][c] == 1) {
 						pieces[r][c] = new PegView(mContext, r, c);
@@ -92,6 +84,7 @@ public class BoardView extends TableLayout {
 					row[r].addView(squares[r][c]);
 					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
 					params.column = c;
+					params.setMargins(0,0,2,2);
 					params.height = height;
 					params.width = width;
 					squares[r][c].setLayoutParams(params);

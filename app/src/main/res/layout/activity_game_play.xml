@@ -9,7 +9,7 @@
     <com.example.angitha.mygame.view.BoardView
         android:id="@+id/game_table_layout"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" >
+        android:layout_width="wrap_content">
     </com.example.angitha.mygame.view.BoardView>
 
     <TextView
