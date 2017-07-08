@@ -1,5 +1,7 @@
 package com.example.angitha.mygame.controller;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.SeekBar;

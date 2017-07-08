@@ -1,6 +1,7 @@
 package com.example.angitha.mygame.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -28,6 +29,8 @@ public class BoardView extends TableLayout {
 
 	private int[][] mBoardMatrix;
 
+	private GamePlayController gamePlayController;
+
 	private GamePlayController.SquareDragListener squareDragListener;
 	private GamePlayController.PegTouchListener pegTouchListener;
 
@@ -49,11 +52,12 @@ public class BoardView extends TableLayout {
 	}
 
 	public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules, int[][] boardMatrix,
-						   GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
+						    GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
 		this.squareDragListener = squareDragListener;
 		this.pegTouchListener = pegTouchListener;
 		this.mBoardMatrix = boardMatrix;
 		this.squares = gamePlayController.getSquares();
+		this.gamePlayController = gamePlayController;
 		buildCells();
 	}
 

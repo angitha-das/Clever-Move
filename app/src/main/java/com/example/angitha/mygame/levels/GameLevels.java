@@ -1,5 +1,9 @@
 package com.example.angitha.mygame.levels;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.example.angitha.mygame.rules.GameRules;
 
 /**
@@ -63,13 +67,13 @@ public class GameLevels {
     };
 
     private static int[][] gridForLevel5 = {
-            {0,0,0,2,2,2,0,0,0},
-            {0,0,0,2,1,2,0,0,0},
-            {0,2,2,2,1,2,2,2,0},
+            {0,0,0,0,2,0,0,0,0},
+            {0,0,0,0,1,0,0,0,0},
+            {0,0,0,0,1,0,0,0,0},
             {0,2,1,1,1,1,1,2,0},
-            {0,2,2,2,1,2,2,2,0},
-            {0,0,0,2,1,2,0,0,0},
-            {0,0,0,2,2,2,0,0,0},
+            {0,0,0,0,1,0,0,0,0},
+            {0,0,0,0,1,0,0,0,0},
+            {0,0,0,0,2,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
 
@@ -133,8 +137,8 @@ public class GameLevels {
             {0,2,2,1,1,1,2,2,0},
             {0,2,1,1,2,1,1,2,0},
             {0,2,2,1,1,1,2,2,0},
-            {0,0,2,1,2,0,0,0,0},
-            {0,0,2,2,2,0,0,0,0},
+            {0,0,0,2,1,2,0,0,0},
+            {0,0,0,2,2,2,0,0,0},
             {0,0,0,0,0,0,0,0,0},
 
 

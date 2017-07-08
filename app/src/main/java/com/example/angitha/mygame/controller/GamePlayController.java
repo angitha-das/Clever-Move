@@ -1,20 +1,24 @@
 package com.example.angitha.mygame.controller;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
-import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
 
@@ -31,27 +35,25 @@ public class GamePlayController{
     /**
      * number of columns
      */
-    public static final int COLS = 9;
+    private static final int COLS = 9;
 
     /**
      * number of rows
      */
-    public static final int ROWS = 9;
+    private static final int ROWS = 9;
 
     /**
      * mGrid, contains 0 for empty cell or player ID
      */
-    public final int[][] mGrid = new int[ROWS][COLS];
-
+    private final int[][] mGrid = new int[ROWS][COLS];
     /**
-     * mFree cells in every column
+     * mScore, contains number of Pegs in the game level
      */
-    private final int[][] mFree = new int[ROWS][COLS];
-
-    /**
-     * board mBoardLogic (winning check)
-     */
-    private final BoardLogic mBoardLogic = new BoardLogic(mGrid, mFree);
+    private int mScore;
+    private int mTotalScore;
+    private TextView mTextViewScore;
+    SharedPreferences.Editor mEditor;
+    public static final String KEY_LEVEL = "levelCrossed";
 
     /**
      * current status
@@ -66,8 +68,8 @@ public class GamePlayController{
 
     private final Context mContext;
     private final BoardView mBoardView;
+    private int nextLevel;
 
-    private int score = 32;
     PegLayout[][] squares = new PegLayout[9][9] ;
 
 
@@ -77,14 +79,19 @@ public class GamePlayController{
     @NonNull
     private final GameRules mGameRules;
 
-    public GamePlayController(Context context, BoardView boardView, @NonNull GameRules mGameRules) {
+    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, SharedPreferences.Editor editor, @NonNull GameRules mGameRules) {
         this.mContext = context;
         this.mGameRules = mGameRules;
         this.mBoardView = boardView;
+        this.mTextViewScore = textviewScore;
+        this.mEditor =editor;
         initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
         if (mBoardView != null) {
             mBoardView.initialize(this, mGameRules,mGrid,new SquareDragListener(),new PegTouchListener());
         }
+
     }
 
 
@@ -93,14 +100,18 @@ public class GamePlayController{
      */
     private void initialize() {
         // unfinished the game
+        mTotalScore=0;
         mFinished = false;
         mOutcome = BoardLogic.Outcome.NOTHING;
-
         // initialize board as per level
-        int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
+//        int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
+        int mLevelGrid[][] = setGameBoard(getGameLevelCompleted());
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
                 mGrid[r][c] = mLevelGrid[r][c];
+                if(mLevelGrid[r][c] == 1){
+                    ++mTotalScore;
+                }
             }
         }
     }
@@ -115,6 +126,8 @@ public class GamePlayController{
      */
     public void restartGame() {
         initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
         mBoardView.resetBoard();
         if (BuildConfig.DEBUG) {
             Log.e(TAG, "Game restarted");
@@ -153,10 +166,10 @@ public class GamePlayController{
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares())) {
-//                        int score = getScore();
-//                        score--;
-//                        setScore(score);
-//                        updateTextViewScore();
+                        mScore = getScore();
+                        --mScore;
+                        setScore(mScore);
+                        updateTextViewScore();
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -207,7 +220,7 @@ public class GamePlayController{
      * @param s score to be set to
      */
     public void setScore(int s) {
-        score = s;
+        mScore = s;
     }
 
     /**
@@ -216,17 +229,28 @@ public class GamePlayController{
      * @return score
      */
     public int getScore() {
-        return score;
+        return mScore;
     }
 
     /**
      * Updates score TextView and opens dialog if 1 Peg remaining
      *
      */
-    public void updateTextViewScore() {
+    private void updateTextViewScore() {
+            mTextViewScore.setText(Integer.toString(getScore()));
+            if(getScore() == 1){
+                nextLevel = getGameLevelCompleted()+1;
+                setGameLevelCompleted(nextLevel);
+                mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
+            }
+    }
 
-        int score = getScore();
-        if (score == 1) {;
-        }
+    private void setGameLevelCompleted(int nextLevel) {
+        mEditor.putInt(KEY_LEVEL, this.nextLevel);
+        mEditor.commit();
+    }
+    public int getGameLevelCompleted() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return mPrefs.getInt(KEY_LEVEL, 0);
     }
 }

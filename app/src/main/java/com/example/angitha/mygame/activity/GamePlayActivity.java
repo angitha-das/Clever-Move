@@ -1,6 +1,8 @@
 package com.example.angitha.mygame.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -20,23 +22,27 @@ public class GamePlayActivity extends AppCompatActivity {
     private final GameRules mGameRules = new GameRules();
 
     private BoardView boardView;
-
     private TextView textviewScore;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
-        textviewScore = (TextView) findViewById(R.id.textview_score);
-
         mGameRules.importFrom(getIntent().getExtras());
         boardView = (BoardView) findViewById(R.id.game_table_layout);
-        mGameController = new GamePlayController(this, boardView, mGameRules);
+        textviewScore = (TextView) findViewById(R.id.score);
+        sharedPref = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        mGameController = new GamePlayController(this, boardView,textviewScore,editor, mGameRules);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
-
-        textviewScore.setText(Integer.toString(mGameController.getScore()));
     }
 
     @Override

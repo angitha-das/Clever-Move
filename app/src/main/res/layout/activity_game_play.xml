@@ -13,8 +13,8 @@
     </com.example.angitha.mygame.view.BoardView>
 
     <TextView
-        android:visibility="gone"
-        android:id="@+id/textview_score"
+        android:visibility="visible"
+        android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
