@@ -1,7 +1,6 @@
 package com.example.angitha.mygame.view;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -12,6 +11,10 @@ import android.widget.TableRow;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
+
+/**
+ * Created by angitha on 1/7/17.
+ */
 
 public class BoardView extends TableLayout {
 

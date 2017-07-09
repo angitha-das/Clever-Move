@@ -1,11 +1,8 @@
 package com.example.angitha.mygame.controller;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.SeekBar;
 
+import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
 
@@ -13,7 +10,7 @@ import com.example.angitha.mygame.view.MenuView;
  * Created by angitha on 1/7/17.
  */
 
-public class GameMenuController implements View.OnClickListener,SeekBar.OnSeekBarChangeListener {
+public class GameMenuController implements View.OnClickListener{
     private final MenuView mMenuView;
     private final MenuControllerListener mListener;
     private final GameRules mGameRules = new GameRules();
@@ -21,33 +18,26 @@ public class GameMenuController implements View.OnClickListener,SeekBar.OnSeekBa
     public GameMenuController(MenuControllerListener mListener, MenuView mMenuView) {
         this.mMenuView = mMenuView;
         this.mListener = mListener;
-        this.mMenuView.setupMenu(getDefaultGameRules());
     }
 
     @Override
     public void onClick(View v) {
-        mListener.onPlay(mGameRules);
-    }
+        switch(v.getId()){
 
-    @NonNull
-    private GameRules getDefaultGameRules() {
-        mGameRules.setRule(GameRules.LEVEL, GameRules.Level.LEVEL1);
-        return mGameRules;
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        mGameRules.setRule(GameRules.LEVEL, progress);
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
+            case R.id.play:mListener.onPlay(mGameRules);
+                break;
+            case R.id.levels:mListener.showAllLevels();
+                break;
+            case R.id.achievements:
+                break;
+            case R.id.like:
+                break;
+            case R.id.share:
+                break;
+            case R.id.quit:mListener.quitGame();
+                break;
+            default:break;
+        }
     }
 
     public interface MenuControllerListener {
@@ -56,5 +46,7 @@ public class GameMenuController implements View.OnClickListener,SeekBar.OnSeekBa
          * menu Activity about to start game
          */
         void onPlay(GameRules gameRules);
+        void quitGame();
+        void showAllLevels();
     }
 }

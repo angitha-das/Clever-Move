@@ -7,9 +7,7 @@ import android.widget.LinearLayout;
 /**
  * PegLayout is subclassed LinearLayout for holding PegViews
  * Are also assigned DragListeners for drag and drop
- * 
- * @author Chris Green
- *
+ * Created by angitha on 1/7/17.
  */
 public class PegLayout extends LinearLayout {
 

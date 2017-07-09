@@ -8,6 +8,10 @@ import android.os.Bundle;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.utils.Constants;
 
+/**
+ * Created by angitha on 1/7/17.
+ */
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override

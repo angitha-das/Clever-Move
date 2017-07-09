@@ -1,12 +1,10 @@
 package com.example.angitha.mygame.controller;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -23,6 +21,8 @@ import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
 
 import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
+import static com.example.angitha.mygame.utils.LevelCrossedPrefUtils.getFromPrefs;
+import static com.example.angitha.mygame.utils.LevelCrossedPrefUtils.saveToPrefs;
 
 
 /**
@@ -52,8 +52,8 @@ public class GamePlayController{
     private int mScore;
     private int mTotalScore;
     private TextView mTextViewScore;
-    SharedPreferences.Editor mEditor;
     public static final String KEY_LEVEL = "levelCrossed";
+
 
     /**
      * current status
@@ -68,9 +68,9 @@ public class GamePlayController{
 
     private final Context mContext;
     private final BoardView mBoardView;
-    private int nextLevel;
 
     PegLayout[][] squares = new PegLayout[9][9] ;
+    private int nextLevel;
 
 
     /**
@@ -79,12 +79,11 @@ public class GamePlayController{
     @NonNull
     private final GameRules mGameRules;
 
-    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, SharedPreferences.Editor editor, @NonNull GameRules mGameRules) {
+    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, @NonNull GameRules mGameRules) {
         this.mContext = context;
         this.mGameRules = mGameRules;
         this.mBoardView = boardView;
         this.mTextViewScore = textviewScore;
-        this.mEditor =editor;
         initialize();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -105,7 +104,7 @@ public class GamePlayController{
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
 //        int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
-        int mLevelGrid[][] = setGameBoard(getGameLevelCompleted());
+        int mLevelGrid[][] = setGameBoard(getFromPrefs(mContext,KEY_LEVEL,0));
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
                 mGrid[r][c] = mLevelGrid[r][c];
@@ -239,18 +238,42 @@ public class GamePlayController{
     private void updateTextViewScore() {
             mTextViewScore.setText(Integer.toString(getScore()));
             if(getScore() == 1){
-                nextLevel = getGameLevelCompleted()+1;
-                setGameLevelCompleted(nextLevel);
                 mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
+                alertProceedToNextLevel(R.string.next_level);
             }
     }
-
-    private void setGameLevelCompleted(int nextLevel) {
-        mEditor.putInt(KEY_LEVEL, this.nextLevel);
-        mEditor.commit();
+    private void saveGameLevelCompleted(){
+        nextLevel = getFromPrefs(mContext,KEY_LEVEL,0)+1;
+        saveToPrefs(mContext,KEY_LEVEL,nextLevel);
+        initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
+        mBoardView.resetBoard();
     }
-    public int getGameLevelCompleted() {
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return mPrefs.getInt(KEY_LEVEL, 0);
+
+    private void alertProceedToNextLevel(final int msgId) {
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.app_name)
+                .setMessage(msgId)
+                .setCancelable(false)
+                .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                restartGame();
+                            }
+                        }
+                )
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (msgId == R.string.next_level) {
+                            playNextLevel();
+                        }
+                    }
+                }).show();
+
+    }
+
+    private void playNextLevel(){
+        saveGameLevelCompleted();
     }
 }

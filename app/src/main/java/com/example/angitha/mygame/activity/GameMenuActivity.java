@@ -10,6 +10,10 @@ import com.example.angitha.mygame.controller.GameMenuController;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
 
+/**
+ * Created by angitha on 1/7/17.
+ */
+
 public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener{
 
     @Override
@@ -27,5 +31,16 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         Intent gamePlayIntent = new Intent(this,GamePlayActivity.class);
         gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));
         startActivity(gamePlayIntent);
+    }
+
+    @Override
+    public void quitGame(){
+        finish();
+    }
+
+    @Override
+    public void showAllLevels(){
+        Intent gameLevelsIntent = new Intent(this,LevelsRecyclerActivity.class);
+        startActivity(gameLevelsIntent);
     }
 }

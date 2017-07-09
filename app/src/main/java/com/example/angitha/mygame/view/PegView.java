@@ -7,8 +7,7 @@ import android.view.View;
 
 /**
  * PegView is a subclassed ImageView for storing the Pegs
- * 
- * @author chris
+ * Created by angitha on 1/7/17.
  *
  */
 public class PegView extends android.support.v7.widget.AppCompatImageView {

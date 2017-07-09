@@ -1,8 +1,6 @@
 package com.example.angitha.mygame.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -13,8 +11,12 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
-import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.view.BoardView;
+
+/**
+ * Created by angitha on 1/7/17.
+ */
 
 public class GamePlayActivity extends AppCompatActivity {
 
@@ -23,11 +25,6 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private BoardView boardView;
     private TextView textviewScore;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +34,8 @@ public class GamePlayActivity extends AppCompatActivity {
         mGameRules.importFrom(getIntent().getExtras());
         boardView = (BoardView) findViewById(R.id.game_table_layout);
         textviewScore = (TextView) findViewById(R.id.score);
-        sharedPref = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
-        editor = sharedPref.edit();
 
-        mGameController = new GamePlayController(this, boardView,textviewScore,editor, mGameRules);
+        mGameController = new GamePlayController(this, boardView,textviewScore, mGameRules);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
     }

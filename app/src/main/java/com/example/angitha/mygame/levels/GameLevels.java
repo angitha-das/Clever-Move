@@ -1,9 +1,5 @@
 package com.example.angitha.mygame.levels;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.example.angitha.mygame.rules.GameRules;
 
 /**

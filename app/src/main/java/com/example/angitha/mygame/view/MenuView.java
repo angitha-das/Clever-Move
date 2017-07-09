@@ -34,23 +34,10 @@ public class MenuView extends RelativeLayout {
     public void setListeners(GameMenuController gameMenuController) {
 
         findViewById(R.id.play).setOnClickListener(gameMenuController);
-        findViewById(R.id.levels).setVisibility(VISIBLE);
-        ((SeekBar) findViewById(R.id.difficulty)).setOnSeekBarChangeListener(gameMenuController);
-    }
-
-    /**
-     * change difficulty ui
-     * @param difficulty game rule - difficulty value
-     */
-    public void setDifficulty(int difficulty){
-        ((SeekBar) findViewById(R.id.difficulty)).setProgress(difficulty);
-    }
-
-    /**
-     * set menu with default rules
-     * @param defaultGameRules default game rule
-     */
-    public void setupMenu(@NonNull GameRules defaultGameRules) {
-        setDifficulty(defaultGameRules.getRule(GameRules.LEVEL));
+        findViewById(R.id.levels).setOnClickListener(gameMenuController);
+        findViewById(R.id.achievements).setOnClickListener(gameMenuController);
+        findViewById(R.id.like).setOnClickListener(gameMenuController);
+        findViewById(R.id.share).setOnClickListener(gameMenuController);
+        findViewById(R.id.quit).setOnClickListener(gameMenuController);
     }
 }

@@ -3,6 +3,7 @@
 
     <string name="play">Play</string>
     <string name="restart_game">Restart Game? </string>
+    <string name="next_level">Proceed To Next Level? </string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="back">Back</string>
