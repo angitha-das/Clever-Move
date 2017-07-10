@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class LevelCrossedPrefUtils {
+public class PrefUtils {
 
     public static void saveToPrefs(Context context, String key, int value) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -19,12 +19,7 @@ public class LevelCrossedPrefUtils {
 
     public static int getFromPrefs(Context context, String key, int defaultValue) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        try {
-            return sharedPrefs.getInt(key, defaultValue);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return defaultValue;
-        }
+        return sharedPrefs.getInt(key, defaultValue);
     }
 
 //    public static void removeFromPrefs(Context context, int key) {

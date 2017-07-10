@@ -20,11 +20,11 @@ public class LevelsRecyclerActivity extends AppCompatActivity {
 
         recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
         Bitmap[] logos = new Bitmap[5];
-        logos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
-        logos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
-        logos[2] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
-        logos[3] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
-        logos[4] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
+        logos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.play);
+        logos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.play);
+        logos[2] = BitmapFactory.decodeResource(getResources(), R.drawable.play);
+        logos[3] = BitmapFactory.decodeResource(getResources(), R.drawable.play);
+        logos[4] = BitmapFactory.decodeResource(getResources(), R.drawable.play);
         MyLevelsAdapter adapter = new MyLevelsAdapter(getResources().getStringArray(R.array.levelList), logos);
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(LevelsRecyclerActivity.this, 3));
         recyclerViewLevels.setAdapter(adapter);

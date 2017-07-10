@@ -21,8 +21,8 @@ import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
 
 import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
-import static com.example.angitha.mygame.utils.LevelCrossedPrefUtils.getFromPrefs;
-import static com.example.angitha.mygame.utils.LevelCrossedPrefUtils.saveToPrefs;
+import static com.example.angitha.mygame.utils.PrefUtils.getFromPrefs;
+import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
 
 
 /**
