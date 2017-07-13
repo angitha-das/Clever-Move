@@ -15,14 +15,13 @@ import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
+import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
 
 import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
-import static com.example.angitha.mygame.utils.PrefUtils.getFromPrefs;
-import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
 
 
 /**
@@ -52,8 +51,6 @@ public class GamePlayController{
     private int mScore;
     private int mTotalScore;
     private TextView mTextViewScore;
-    public static final String KEY_LEVEL = "levelCrossed";
-
 
     /**
      * current status
@@ -61,16 +58,11 @@ public class GamePlayController{
     @NonNull
     private BoardLogic.Outcome mOutcome = BoardLogic.Outcome.NOTHING;
 
-    /**
-     * if the game is mFinished
-     */
-    private boolean mFinished = true;
-
     private final Context mContext;
     private final BoardView mBoardView;
 
-    PegLayout[][] squares = new PegLayout[9][9] ;
-    private int nextLevel;
+    private PegLayout[][] squares = new PegLayout[9][9] ;
+    private GameLevels gameLevelsObject = new GameLevels();
 
 
     /**
@@ -93,18 +85,16 @@ public class GamePlayController{
 
     }
 
-
     /**
      * initialize game board with default values and player turn
      */
     private void initialize() {
         // unfinished the game
         mTotalScore=0;
-        mFinished = false;
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
 //        int mLevelGrid[][] = setGameBoard(mGameRules.getRule(GameRules.LEVEL));
-        int mLevelGrid[][] = setGameBoard(getFromPrefs(mContext,KEY_LEVEL,0));
+        int mLevelGrid[][] = setGameBoard(gameLevelsObject.getGameLevel(mContext));
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
                 mGrid[r][c] = mLevelGrid[r][c];
@@ -243,8 +233,7 @@ public class GamePlayController{
             }
     }
     private void saveGameLevelCompleted(){
-        nextLevel = getFromPrefs(mContext,KEY_LEVEL,0)+1;
-        saveToPrefs(mContext,KEY_LEVEL,nextLevel);
+        gameLevelsObject.updateLevelStatus(mContext);
         initialize();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -266,14 +255,9 @@ public class GamePlayController{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (msgId == R.string.next_level) {
-                            playNextLevel();
+                            saveGameLevelCompleted();
                         }
                     }
                 }).show();
-
-    }
-
-    private void playNextLevel(){
-        saveGameLevelCompleted();
     }
 }

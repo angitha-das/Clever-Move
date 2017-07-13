@@ -1,12 +1,24 @@
 package com.example.angitha.mygame.levels;
 
+import android.content.Context;
+
 import com.example.angitha.mygame.rules.GameRules;
+
+import static com.example.angitha.mygame.utils.PrefUtils.getFromPrefs;
+import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
 
 /**
  * Created by angitha on 4/7/17.
  */
 
 public class GameLevels {
+    int highesLlevelCompleted;
+    int currentGameLevel;
+    int nextUpcomingLevel;
+    int numberOfLevels = 12;
+    public static final String KEY_LEVEL = "levelCrossed";
+    Context mContext;
+
     /*
     0 invisible
     1 filled
@@ -197,5 +209,23 @@ public class GameLevels {
             default:break;
         }
         return new int[0][];
+    }
+
+    //updating status of levels
+    public void updateLevelStatus(Context mContext){
+        this.mContext = mContext;
+        highesLlevelCompleted = getFromPrefs(mContext,KEY_LEVEL,0);
+        currentGameLevel = getGameLevel(mContext)+1;
+        saveToPrefs(mContext,KEY_LEVEL,currentGameLevel);
+        nextUpcomingLevel = currentGameLevel + 1;
+    }
+
+    public int getGameLevel(Context mContext){
+        this.mContext = mContext;
+        return getFromPrefs(mContext,KEY_LEVEL,0);
+    }
+
+    public int getNumberOfLevels(){
+        return numberOfLevels;
     }
 }

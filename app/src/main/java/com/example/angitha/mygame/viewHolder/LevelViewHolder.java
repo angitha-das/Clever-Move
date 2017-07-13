@@ -18,6 +18,7 @@ public class LevelViewHolder extends RecyclerView.ViewHolder{
 
     public LevelViewHolder(View itemView) {
         super(itemView);
+
         locks = (ImageView)itemView.findViewById(R.id.locks);
         levelName = (TextView)itemView.findViewById(R.id.levelName);
     }
