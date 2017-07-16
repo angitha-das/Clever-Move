@@ -54,7 +54,7 @@ public class BoardView extends TableLayout {
 		defaultSquare = getResources().getDrawable(R.drawable.square);
 	}
 
-	public void initialize(GamePlayController gamePlayController, @NonNull GameRules gameRules, int[][] boardMatrix,
+	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
 						    GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
 		this.squareDragListener = squareDragListener;
 		this.pegTouchListener = pegTouchListener;

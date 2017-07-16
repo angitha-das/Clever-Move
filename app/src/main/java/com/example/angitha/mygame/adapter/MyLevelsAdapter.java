@@ -1,9 +1,9 @@
 package com.example.angitha.mygame.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +12,7 @@ import android.widget.Toast;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
-import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
-import com.example.angitha.mygame.controller.GamePlayController;
+import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.viewHolder.LevelViewHolder;
 
@@ -25,10 +24,15 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
 
     String[] levelList;
     Bitmap[] locksList;
+    Context mContext;
+    GameRules gameRules = new GameRules();
+    GameLevels mGameLevels = GameLevels.getInstance();
+    private GameLevels gameLevelsObject = mGameLevels;
 
-    public MyLevelsAdapter(String[] levelList, Bitmap[] locksList) {
+    public MyLevelsAdapter(Context mContext, String[] levelList, Bitmap[] locksList) {
         this.levelList = levelList;
         this.locksList = locksList;
+        this.mContext = mContext;
     }
 
     @Override
@@ -40,14 +44,19 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
 
     @Override
     public void onBindViewHolder(LevelViewHolder holder, final int position) {
-        holder.locks.setImageBitmap(locksList[position]);
-        holder.locks.setOnClickListener(new View.OnClickListener() {
+        holder.locksImage.setImageBitmap(locksList[position]);
+        holder.levelName.setText(levelList[position]);
+        holder.picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Do something replay any completed level or resume current level
+                Toast.makeText(mContext, "Level "+(position+1), Toast.LENGTH_SHORT).show();
+                gameLevelsObject.playLevelClicked = position;
+                Intent gamePlayIntent = new Intent(mContext,GamePlayActivity.class);
+                gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));
+                mContext.startActivity(gamePlayIntent);
+
             }
         });
-        holder.levelName.setText(levelList[position]);
     }
 
     @Override

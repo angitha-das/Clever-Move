@@ -1,6 +1,7 @@
 package com.example.angitha.mygame.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +26,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private BoardView boardView;
     private TextView textviewScore;
+    Integer position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,15 @@ public class GamePlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_play);
 
         mGameRules.importFrom(getIntent().getExtras());
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            position = extras.getInt("Position");
+        }
         boardView = (BoardView) findViewById(R.id.game_table_layout);
         textviewScore = (TextView) findViewById(R.id.score);
 
-        mGameController = new GamePlayController(this, boardView,textviewScore, mGameRules);
+        mGameController = new GamePlayController(this, boardView,textviewScore,position);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
     }

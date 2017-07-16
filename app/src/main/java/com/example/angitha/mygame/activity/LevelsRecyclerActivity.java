@@ -1,21 +1,16 @@
 package com.example.angitha.mygame.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
-import com.example.angitha.mygame.adapter.MyLevelsAdapter;
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.controller.GameMenuController;
-import com.example.angitha.mygame.controller.GamePlayController;
+import com.example.angitha.mygame.adapter.MyLevelsAdapter;
 import com.example.angitha.mygame.levels.GameLevels;
-import com.example.angitha.mygame.rules.GameRules;
 
 public class LevelsRecyclerActivity extends AppCompatActivity{
     RecyclerView recyclerViewLevels;
@@ -27,7 +22,10 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels_recycler);
 
-        GameLevels gameLevelsObject = new GameLevels();
+
+        GameLevels mGameLevels = GameLevels.getInstance();
+        GameLevels gameLevelsObject = mGameLevels;
+
         recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
         levelPicker = (LinearLayout) findViewById(R.id.levelPicker);
         totalNumberOfLevels= gameLevelsObject.getNumberOfLevels();
@@ -46,7 +44,7 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
             }
             levelList[i] = "Level " + (i + 1);
         }
-        MyLevelsAdapter adapter = new MyLevelsAdapter(levelList, logos);
+        MyLevelsAdapter adapter = new MyLevelsAdapter(getApplicationContext(),levelList, logos);
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(LevelsRecyclerActivity.this, 3));
         recyclerViewLevels.setAdapter(adapter);
     }

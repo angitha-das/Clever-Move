@@ -12,11 +12,12 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
  */
 
 public class GameLevels {
-    int highesLlevelCompleted;
-    int currentGameLevel;
-    int nextUpcomingLevel;
-    int numberOfLevels = 12;
-    public static final String KEY_LEVEL = "levelCrossed";
+    private int highesLlevelCompleted;
+    public int currentGameLevel;
+    private int nextUpcomingLevel;
+    private int numberOfLevels = 12;
+    public int playLevelClicked;
+    private static final String KEY_LEVEL = "levelCrossed";
     Context mContext;
 
     /*
@@ -191,6 +192,18 @@ public class GameLevels {
             {1,2,1,2,1,2,2,2,1},
             {2,1,2,2,2,1,2,1,2},
     };
+
+    private static GameLevels myObj;
+
+    private GameLevels(){
+
+    }
+    public static GameLevels getInstance(){
+        if(myObj == null){
+            myObj = new GameLevels();
+        }
+        return myObj;
+    }
 
     public static int[][] setGameBoard(int Level){
         switch (Level) {
