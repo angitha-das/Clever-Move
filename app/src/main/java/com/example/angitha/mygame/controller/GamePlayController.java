@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -10,7 +11,6 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
@@ -64,7 +64,6 @@ public class GamePlayController{
     private PegLayout[][] squares = new PegLayout[9][9] ;
 
     GameLevels mGameLevels = GameLevels.getInstance();
-    private GameLevels gameLevelsObject = mGameLevels;
 
     int playLevel;
     int position;
@@ -90,8 +89,12 @@ public class GamePlayController{
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
-        playLevel = gameLevelsObject.playLevelClicked;
-        if (playLevel <= gameLevelsObject.getGameLevel(mContext)) {
+        if(mContext instanceof LevelsRecyclerActivity){
+            playLevel = mGameLevels.playLevelClicked;
+        }else{
+            playLevel = mGameLevels.getGameLevel(mContext);
+        }
+        if (playLevel <= mGameLevels.getGameLevel(mContext)) {
             int mLevelGrid[][] = setGameBoard(playLevel);
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
@@ -228,8 +231,8 @@ public class GamePlayController{
     private void updateTextViewScore() {
             mTextViewScore.setText(Integer.toString(getScore()));
             if(getScore() == 1){
-                if(gameLevelsObject.playLevelClicked > gameLevelsObject.getGameLevel(mContext)){
-                    gameLevelsObject.updateLevelStatus(mContext);
+                if(mGameLevels.playLevelClicked <= mGameLevels.getGameLevel(mContext)){
+                    mGameLevels.updateLevelStatus(mContext);
                 }
                 mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
                 alertProceedToNextLevel(R.string.next_level);
@@ -249,7 +252,7 @@ public class GamePlayController{
                 .setCancelable(false)
                 .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                restartGame();
+                                exitGame();
                             }
                         }
                 )

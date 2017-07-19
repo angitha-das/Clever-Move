@@ -27,7 +27,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
     Context mContext;
     GameRules gameRules = new GameRules();
     GameLevels mGameLevels = GameLevels.getInstance();
-    private GameLevels gameLevelsObject = mGameLevels;
+
 
     public MyLevelsAdapter(Context mContext, String[] levelList, Bitmap[] locksList) {
         this.levelList = levelList;
@@ -50,7 +50,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "Level "+(position+1), Toast.LENGTH_SHORT).show();
-                gameLevelsObject.playLevelClicked = position;
+                mGameLevels.playLevelClicked = position;
                 Intent gamePlayIntent = new Intent(mContext,GamePlayActivity.class);
                 gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));
                 mContext.startActivity(gamePlayIntent);

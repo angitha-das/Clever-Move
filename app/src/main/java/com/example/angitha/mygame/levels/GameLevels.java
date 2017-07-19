@@ -13,10 +13,14 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
 
 public class GameLevels {
     private int highesLlevelCompleted;
-    public int currentGameLevel;
+    private int currentGameLevel;
     private int nextUpcomingLevel;
+
     private int numberOfLevels = 12;
+
+    //clicked from levels activity.disable unlocked levels from click
     public int playLevelClicked;
+
     private static final String KEY_LEVEL = "levelCrossed";
     Context mContext;
 
@@ -178,21 +182,6 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0},
 
     };
-
-
-
-    private static int[][] gridForLevel120 = {
-            {2,1,2,1,2,2,2,1,2},
-            {1,2,1,2,1,2,1,2,1},
-            {1,1,2,1,2,1,2,1,2},
-            {1,2,1,2,1,2,1,2,2},
-            {2,1,2,1,2,1,2,1,2},
-            {2,2,1,2,1,2,1,2,1},
-            {2,1,2,1,2,1,2,2,2},
-            {1,2,1,2,1,2,2,2,1},
-            {2,1,2,2,2,1,2,1,2},
-    };
-
     private static GameLevels myObj;
 
     private GameLevels(){
