@@ -42,7 +42,7 @@ public class GamePlayActivity extends AppCompatActivity {
         boardView = (BoardView) findViewById(R.id.game_table_layout);
         textviewScore = (TextView) findViewById(R.id.score);
 
-        mGameController = new GamePlayController(this, boardView,textviewScore,position);
+        mGameController = new GamePlayController(this, boardView,textviewScore);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
     }

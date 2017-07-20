@@ -27,16 +27,16 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
 
         recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
         levelPicker = (LinearLayout) findViewById(R.id.levelPicker);
-        totalNumberOfLevels= mGameLevels.getNumberOfLevels();
+        totalNumberOfLevels= mGameLevels.getTotalNumberOfLevels();
 
         int i;
         Bitmap[] logos = new Bitmap[totalNumberOfLevels];
         String[] levelList = new String[totalNumberOfLevels];
 
         for(i= 0;i< totalNumberOfLevels; i++) {
-            if (i < mGameLevels.getGameLevel(getApplicationContext())) {
+            if (i < mGameLevels.getGameLevelToPlay(getApplicationContext())) {
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_open_amber_400_24dp);
-            } else if(i == mGameLevels.getGameLevel(getApplicationContext())) {
+            } else if(i == mGameLevels.getGameLevelToPlay(getApplicationContext())) {
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
             }else{
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_black_24dp);

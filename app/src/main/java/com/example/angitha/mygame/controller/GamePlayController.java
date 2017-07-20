@@ -1,6 +1,5 @@
 package com.example.angitha.mygame.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -11,10 +10,10 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
 import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
-import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.board.BoardLogic;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
@@ -63,16 +62,13 @@ public class GamePlayController{
 
     private PegLayout[][] squares = new PegLayout[9][9] ;
 
-    GameLevels mGameLevels = GameLevels.getInstance();
+    private GameLevels mGameLevels = GameLevels.getInstance();
 
-    int playLevel;
-    int position;
 
-    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, Integer position) {
+    public GamePlayController(Context context, BoardView boardView, TextView textviewScore) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mTextViewScore = textviewScore;
-        this.position = position;
         initialize();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -89,13 +85,7 @@ public class GamePlayController{
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
-        if(mContext instanceof LevelsRecyclerActivity){
-            playLevel = mGameLevels.playLevelClicked;
-        }else{
-            playLevel = mGameLevels.getGameLevel(mContext);
-        }
-        if (playLevel <= mGameLevels.getGameLevel(mContext)) {
-            int mLevelGrid[][] = setGameBoard(playLevel);
+            int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -104,7 +94,6 @@ public class GamePlayController{
                     }
                 }
             }
-        }
     }
 
 
@@ -123,6 +112,52 @@ public class GamePlayController{
         if (BuildConfig.DEBUG) {
             Log.e(TAG, "Game restarted");
         }
+    }
+
+    private int getScore() {
+        return mScore;
+    }
+
+    /**
+     * Updates score TextView and opens dialog if 1 Peg remaining
+     *
+     */
+    private void updateTextViewScore() {
+            mTextViewScore.setText(Integer.toString(getScore()));
+            if(getScore() == 1){
+                if(mGameLevels.levelToPlay <= mGameLevels.highesLlevelCompleted){
+                    mGameLevels.updateLevelStatus(mContext);
+                }
+                mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
+                alertProceedToNextLevel(R.string.next_level);
+            }
+    }
+    private void saveGameLevelCompleted(){
+        initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
+        mBoardView.resetBoard();
+    }
+
+    private void alertProceedToNextLevel(final int msgId) {
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.app_name)
+                .setMessage(msgId)
+                .setCancelable(false)
+                .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                exitGame();
+                            }
+                        }
+                )
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (msgId == R.string.next_level) {
+                            saveGameLevelCompleted();
+                        }
+                    }
+                }).show();
     }
 
     /**
@@ -211,7 +246,7 @@ public class GamePlayController{
      *
      * @param s score to be set to
      */
-    public void setScore(int s) {
+    private void setScore(int s) {
         mScore = s;
     }
 
@@ -220,49 +255,4 @@ public class GamePlayController{
      *
      * @return score
      */
-    public int getScore() {
-        return mScore;
-    }
-
-    /**
-     * Updates score TextView and opens dialog if 1 Peg remaining
-     *
-     */
-    private void updateTextViewScore() {
-            mTextViewScore.setText(Integer.toString(getScore()));
-            if(getScore() == 1){
-                if(mGameLevels.playLevelClicked <= mGameLevels.getGameLevel(mContext)){
-                    mGameLevels.updateLevelStatus(mContext);
-                }
-                mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
-                alertProceedToNextLevel(R.string.next_level);
-            }
-    }
-    private void saveGameLevelCompleted(){
-        initialize();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
-    }
-
-    private void alertProceedToNextLevel(final int msgId) {
-        new AlertDialog.Builder(mContext)
-                .setTitle(R.string.app_name)
-                .setMessage(msgId)
-                .setCancelable(false)
-                .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                exitGame();
-                            }
-                        }
-                )
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (msgId == R.string.next_level) {
-                            saveGameLevelCompleted();
-                        }
-                    }
-                }).show();
-    }
 }

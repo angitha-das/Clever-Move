@@ -21,12 +21,5 @@ public class PrefUtils {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPrefs.getInt(key, defaultValue);
     }
-
-//    public static void removeFromPrefs(Context context, int key) {
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        final SharedPreferences.Editor editor = prefs.edit();
-//        editor.remove(key);
-//        editor.commit();
-//    }
 }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GameMenuController;
+import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
 
@@ -15,7 +16,7 @@ import com.example.angitha.mygame.view.MenuView;
  */
 
 public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener{
-
+    GameLevels gameLevels = GameLevels.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
     @Override
     public void onPlay(@NonNull GameRules gameRules) {
+        gameLevels.fromMenu = true;
         Intent gamePlayIntent = new Intent(this,GamePlayActivity.class);
         gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));
         startActivity(gamePlayIntent);
