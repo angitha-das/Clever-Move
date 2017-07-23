@@ -16,27 +16,29 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
     RecyclerView recyclerViewLevels;
     int totalNumberOfLevels;
     LinearLayout levelPicker;
+    GameLevels mGameLevels = GameLevels.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels_recycler);
 
-
-        GameLevels mGameLevels = GameLevels.getInstance();
-
         recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
         levelPicker = (LinearLayout) findViewById(R.id.levelPicker);
         totalNumberOfLevels= mGameLevels.getTotalNumberOfLevels();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         int i;
         Bitmap[] logos = new Bitmap[totalNumberOfLevels];
         String[] levelList = new String[totalNumberOfLevels];
 
         for(i= 0;i< totalNumberOfLevels; i++) {
-            if (i < mGameLevels.getGameLevelToPlay(getApplicationContext())) {
+            if (i < mGameLevels.getGameLevelToPlay(getBaseContext())) {
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_open_amber_400_24dp);
-            } else if(i == mGameLevels.getGameLevelToPlay(getApplicationContext())) {
+            } else if(i == mGameLevels.getGameLevelToPlay(getBaseContext())) {
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
             }else{
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_black_24dp);

@@ -2,6 +2,7 @@ package com.example.angitha.mygame.levels;
 
 import android.content.Context;
 
+import com.example.angitha.mygame.adapter.MyLevelsAdapter;
 import com.example.angitha.mygame.rules.GameRules;
 
 import static com.example.angitha.mygame.utils.PrefUtils.getFromPrefs;
@@ -12,19 +13,14 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
  */
 
 public class GameLevels {
-    public int highesLlevelCompleted;
-    public int currentGameLevel;
-    public int nextUpcomingLevel;
-
     private int totalNumberOfLevels = 12;
+    private static final String KEY_LEVEL = "levelCrossed";
+    private Context mContext;
+
 
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
-
     public boolean fromMenu;
-
-    private static final String KEY_LEVEL = "levelCrossed";
-    Context mContext;
 
     /*
     0 invisible
@@ -215,24 +211,26 @@ public class GameLevels {
         return new int[0][];
     }
 
+    public int getTotalNumberOfLevels(){
+        return totalNumberOfLevels;
+    }
+
     //updating status of levels
     public void updateLevelStatus(Context mContext){
         this.mContext = mContext;
-        highesLlevelCompleted = getFromPrefs(mContext,KEY_LEVEL,0);
-        currentGameLevel = levelToPlay+1;
-        saveToPrefs(mContext,KEY_LEVEL,currentGameLevel);
-        nextUpcomingLevel = currentGameLevel + 1;
+        levelToPlay = levelToPlay+1;
+        saveToPrefs(mContext,KEY_LEVEL,levelToPlay);
     }
 
     public int getGameLevelToPlay(Context mContext){
         this.mContext = mContext;
         if(fromMenu) {
-            levelToPlay = getFromPrefs(mContext, KEY_LEVEL, 0);
+            levelToPlay = getHighestLevelCrossed(mContext) ;
         }
         return levelToPlay;
     }
 
-    public int getTotalNumberOfLevels(){
-        return totalNumberOfLevels;
+    public int getHighestLevelCrossed(Context mContext){
+      return getFromPrefs(mContext, KEY_LEVEL, 0);
     }
 }

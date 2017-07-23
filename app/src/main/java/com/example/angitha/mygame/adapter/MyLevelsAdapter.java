@@ -22,11 +22,11 @@ import com.example.angitha.mygame.viewHolder.LevelViewHolder;
 
 public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
 
-    String[] levelList;
-    Bitmap[] locksList;
-    Context mContext;
-    GameRules gameRules = new GameRules();
-    GameLevels mGameLevels = GameLevels.getInstance();
+    private String[] levelList;
+    private Bitmap[] locksList;
+    private Context mContext;
+    private GameRules gameRules = new GameRules();
+    private GameLevels mGameLevels = GameLevels.getInstance();
 
 
     public MyLevelsAdapter(Context mContext, String[] levelList, Bitmap[] locksList) {
@@ -46,7 +46,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
     public void onBindViewHolder(LevelViewHolder holder, final int position) {
         holder.locksImage.setImageBitmap(locksList[position]);
         holder.levelName.setText(levelList[position]);
-        if((position) <= mGameLevels.highesLlevelCompleted){
+        if((position) <= mGameLevels.getGameLevelToPlay(mContext)){
             holder.picker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

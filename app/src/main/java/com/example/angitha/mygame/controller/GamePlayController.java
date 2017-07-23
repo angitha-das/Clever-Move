@@ -64,6 +64,9 @@ public class GamePlayController{
 
     private GameLevels mGameLevels = GameLevels.getInstance();
 
+    MySearch mySearch = new MySearch();
+    boolean continuePlay;
+
 
     public GamePlayController(Context context, BoardView boardView, TextView textviewScore) {
         this.mContext = context;
@@ -86,6 +89,7 @@ public class GamePlayController{
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
+
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -105,7 +109,6 @@ public class GamePlayController{
      * restart game by resetting values and UI
      */
     public void restartGame() {
-        initialize();
         setScore(mTotalScore);
         updateTextViewScore();
         mBoardView.resetBoard();
@@ -125,11 +128,11 @@ public class GamePlayController{
     private void updateTextViewScore() {
             mTextViewScore.setText(Integer.toString(getScore()));
             if(getScore() == 1){
-                if(mGameLevels.levelToPlay <= mGameLevels.highesLlevelCompleted){
+                if(mGameLevels.levelToPlay <= mGameLevels.getHighestLevelCrossed(mContext)){
                     mGameLevels.updateLevelStatus(mContext);
                 }
                 mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
-                alertProceedToNextLevel(R.string.next_level);
+                alertProceedToNextLevel(R.string.next_level,R.string.continue_playing);
             }
     }
     private void saveGameLevelCompleted(){
@@ -139,26 +142,44 @@ public class GamePlayController{
         mBoardView.resetBoard();
     }
 
-    private void alertProceedToNextLevel(final int msgId) {
+    private void alertProceedToNextLevel(final int msgId, final int nowWhat) {
         new AlertDialog.Builder(mContext)
-                .setTitle(R.string.app_name)
-                .setMessage(msgId)
-                .setCancelable(false)
-                .setNegativeButton(R.string.no,  new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                exitGame();
-                            }
-                        }
-                )
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                .setTitle(msgId)
+                .setCancelable(true)
+                .setNeutralButton(nowWhat,new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (msgId == R.string.next_level) {
+                    // TODO Auto-generated method stub
+                        if(msgId == R.string.next_level ){
                             saveGameLevelCompleted();
+                        }else if(msgId == R.string.sorry_you_lost){
+                            restartGame();
                         }
                     }
                 }).show();
     }
+
+
+
+    public class MySearch {
+
+        void mySearch(int[][] inputArr) {
+            for (int i = 0; i < inputArr.length; i++) {
+                for (int j = 0; j < inputArr[i].length; j++) {
+                    while (mScore>1){
+                        if (inputArr[i][j] == 1) {
+                            continuePlay =
+                                    ((inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2)||
+                                    (inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2) ||
+                                    (inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2) ||
+                                    (inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     /**
      * DragListener for PegLayouts in board, waits until something has been dragged over it
@@ -192,6 +213,10 @@ public class GamePlayController{
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares())) {
+                        mySearch.mySearch(mGrid);
+                        if(!continuePlay){
+                            alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
+                        }
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
@@ -230,7 +255,6 @@ public class GamePlayController{
             }
         }
     }
-
 
     /**
      * Getter for array of PegLayouts which make up the board
