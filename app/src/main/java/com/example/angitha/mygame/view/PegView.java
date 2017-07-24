@@ -140,3 +140,18 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return false;
 	}
 }
+
+//	public boolean haveILost(int[][] inputArr) {
+//		for (int i = 0; i < inputArr.length; i++) {
+//			for (int j = 0; j < inputArr[i].length; j++) {
+//				if (inputArr[i][j] == 1) {
+//					return (inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2) ||
+//							(inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2) ||
+//							(inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2) ||
+//							(inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2);
+//				}
+//			}
+//		}
+//		return false;
+//	}
+//alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);

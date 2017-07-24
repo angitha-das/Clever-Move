@@ -64,10 +64,6 @@ public class GamePlayController{
 
     private GameLevels mGameLevels = GameLevels.getInstance();
 
-    MySearch mySearch = new MySearch();
-    boolean continuePlay;
-
-
     public GamePlayController(Context context, BoardView boardView, TextView textviewScore) {
         this.mContext = context;
         this.mBoardView = boardView;
@@ -159,28 +155,6 @@ public class GamePlayController{
                 }).show();
     }
 
-
-
-    public class MySearch {
-
-        void mySearch(int[][] inputArr) {
-            for (int i = 0; i < inputArr.length; i++) {
-                for (int j = 0; j < inputArr[i].length; j++) {
-                    while (mScore>1){
-                        if (inputArr[i][j] == 1) {
-                            continuePlay =
-                                    ((inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2)||
-                                    (inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2) ||
-                                    (inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2) ||
-                                    (inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2));
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
     /**
      * DragListener for PegLayouts in board, waits until something has been dragged over it
      *
@@ -213,10 +187,6 @@ public class GamePlayController{
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares())) {
-                        mySearch.mySearch(mGrid);
-                        if(!continuePlay){
-                            alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
-                        }
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
