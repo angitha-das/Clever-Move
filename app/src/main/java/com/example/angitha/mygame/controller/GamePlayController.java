@@ -186,7 +186,8 @@ public class GamePlayController{
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
-                    if (view.move(oldSquare, newSquare, getSquares())) {
+                    if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
+                        alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
@@ -215,7 +216,6 @@ public class GamePlayController{
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == event.ACTION_DOWN) {
-                //ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(null, shadowBuilder, v, 0);
                 v.setVisibility(View.INVISIBLE);
