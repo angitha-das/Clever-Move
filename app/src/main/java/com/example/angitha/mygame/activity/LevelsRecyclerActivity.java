@@ -36,12 +36,12 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
         String[] levelList = new String[totalNumberOfLevels];
 
         for(i= 0;i< totalNumberOfLevels; i++) {
-            if (i < mGameLevels.getGameLevelToPlay(getBaseContext())) {
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_open_amber_400_24dp);
-            } else if(i == mGameLevels.getGameLevelToPlay(getBaseContext())) {
+            if (i > mGameLevels.getHighestLevelCrossed(getBaseContext())) {
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_black_24dp);
+            } else if(i == mGameLevels.getHighestLevelCrossed(getBaseContext())) {
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
             }else{
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_black_24dp);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_open_amber_400_24dp);
             }
             levelList[i] = "Level " + (i + 1);
         }

@@ -105,6 +105,7 @@ public class GamePlayController{
      * restart game by resetting values and UI
      */
     public void restartGame() {
+        initialize();
         setScore(mTotalScore);
         updateTextViewScore();
         mBoardView.resetBoard();
@@ -186,11 +187,16 @@ public class GamePlayController{
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
-                    if (view.move(oldSquare, newSquare, getSquares())) {
+                    if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
                         updateTextViewScore();
+                    }
+                    if(!view.anyMoreMovesPossible(mGrid)){
+                        if(mScore>1){
+                            alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
+                        }
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:

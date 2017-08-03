@@ -46,7 +46,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
     public void onBindViewHolder(LevelViewHolder holder, final int position) {
         holder.locksImage.setImageBitmap(locksList[position]);
         holder.levelName.setText(levelList[position]);
-        if((position) <= mGameLevels.getGameLevelToPlay(mContext)){
+        if((position) <= mGameLevels.getHighestLevelCrossed(mContext)){
             holder.picker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -56,7 +56,6 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
                     Intent gamePlayIntent = new Intent(mContext,GamePlayActivity.class);
                     gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));
                     mContext.startActivity(gamePlayIntent);
-
                 }
             });
         }
