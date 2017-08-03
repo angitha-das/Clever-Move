@@ -21,6 +21,8 @@ public class GameLevels {
     public int levelToPlay;
     public boolean fromMenu;
 
+    boolean mFromMenu;
+
     /*
     0 invisible
     1 filled
