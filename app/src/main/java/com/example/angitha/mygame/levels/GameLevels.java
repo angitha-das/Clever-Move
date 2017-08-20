@@ -20,7 +20,6 @@ public class GameLevels {
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
     public boolean fromMenu;
-
     boolean mFromMenu;
 
     /*
