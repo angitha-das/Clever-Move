@@ -151,13 +151,13 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		for (int i = 0; i < inputArr.length; i++) {
 			for (int j = 0; j < inputArr[i].length; j++) {
 				if (inputArr[i][j] == 1) {
-					youHaveLost = ((inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2) ||
-							(inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2) ||
-							(inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2) ||
-							(inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2));
-							if(youHaveLost){
-								return true;//quit,you lost
-							}
+						youHaveLost = (((j-1)>0 && (j-1)<inputArr[i].length && (j-2)>0 && (j-2)<inputArr[i].length && (inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2)) ||
+								((j+1)>0 && (j+1)<inputArr[i].length && (j+2)>0 && (j+2)<inputArr[i].length && (inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2))||
+								((i+1)>0 && (i+1)<inputArr[i].length && (i+2)>0 && (i+2)<inputArr[i].length && (inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2))||
+								((i-1)>0 && (i-1)<inputArr[i].length && (i-2)>0 && (i-2)<inputArr[i].length && (inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2)));
+						if(youHaveLost){
+							return true;//quit,you lost
+						}
 					}
 				}
 			}
