@@ -7,6 +7,7 @@
     <string name="sorry_you_lost">You Have Lost! Replay?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="won">You Won</string>
     <string name="continue_playing">Continue</string>
     <string name="back">Back</string>
     <string name="difficulty">DIFFICULTY</string>

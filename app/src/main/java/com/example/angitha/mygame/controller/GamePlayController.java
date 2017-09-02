@@ -125,12 +125,7 @@ public class GamePlayController{
     private void updateTextViewScore() {
             mTextViewScore.setText(Integer.toString(getScore()));
             if(getScore() == 1){
-                if(mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)){
-                    mGameLevels.updateLevelStatus(mContext);
-                }else{
-                    mGameLevels.levelToPlay = mGameLevels.levelToPlay+1;
-                }
-                mTextViewScore.setText(Integer.toString(getScore())+" YOU WIN");
+                mTextViewScore.setText(R.string.won);
                 alertProceedToNextLevel(R.string.next_level,R.string.continue_playing);
             }
     }
@@ -150,6 +145,11 @@ public class GamePlayController{
                     public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
                         if(msgId == R.string.next_level ){
+                            if(mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)){
+                                mGameLevels.updateLevelStatus(mContext);
+                            }else{
+                                mGameLevels.levelToPlay = mGameLevels.levelToPlay+1;
+                            }
                             saveGameLevelCompleted();
                         }else if(msgId == R.string.sorry_you_lost){
                             restartGame();
