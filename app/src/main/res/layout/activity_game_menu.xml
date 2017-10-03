@@ -9,32 +9,24 @@
     tools:context="com.example.angitha.mygame.activity.GameMenuActivity">
 
     <TextView
-        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableBottom="@mipmap/ic_launcher"
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:drawablePadding="10dp"
         android:layout_centerHorizontal="true"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="@string/app_name"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/app_title"
-        android:textStyle="bold" />
+        android:textColor="@color/app_title"
+        android:textSize="20dp"/>
 
-    <Button
+    <ImageView
         android:id="@+id/play"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_above="@+id/bottom_view"
         android:padding="16dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/play"
-        android:drawableTop="@drawable/play"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/play_font_size"
-        android:textStyle="bold" />
+        android:src="@drawable/play" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
