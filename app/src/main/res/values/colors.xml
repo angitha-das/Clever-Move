@@ -6,4 +6,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="red">#f22a2d</color>
+    <color name="app_title">#2c3e50</color>
 </resources>

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Brainvita</string>
 
-    <string name="play">Play</string>
     <string name="restart_game">Restart Game? </string>
     <string name="next_level">Proceed To Next Level? </string>
     <string name="sorry_you_lost">You Have Lost! Replay?</string>
