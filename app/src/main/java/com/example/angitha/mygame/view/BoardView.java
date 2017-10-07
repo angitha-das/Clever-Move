@@ -51,7 +51,7 @@ public class BoardView extends TableLayout {
 
 
 	private void init() {
-		defaultSquare = getResources().getDrawable(R.drawable.square);
+		defaultSquare = getResources().getDrawable(R.drawable.ic_cup1);
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
@@ -83,7 +83,7 @@ public class BoardView extends TableLayout {
 					squares[r][c].setOnDragListener(squareDragListener);
 					if (mBoardMatrix[r][c] == 1) {
 						pieces[r][c] = new PegView(mContext, r, c);
-						pieces[r][c].setImageResource(R.drawable.peg);
+						pieces[r][c].setImageResource(R.drawable.ic_ball);
 						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(height,width));
 						pieces[r][c].setOnTouchListener(pegTouchListener);
 						squares[r][c].addView(pieces[r][c]);

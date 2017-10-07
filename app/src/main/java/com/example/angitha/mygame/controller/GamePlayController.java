@@ -166,7 +166,7 @@ public class GamePlayController{
      */
     public class SquareDragListener implements View.OnDragListener {
 
-        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.square);
+        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.ic_cup1);
         Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
 
         @Override
