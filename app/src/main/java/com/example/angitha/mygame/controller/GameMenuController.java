@@ -44,7 +44,6 @@ public class GameMenuController implements View.OnClickListener{
          * menu Activity about to start game
          */
         void onPlay(GameRules gameRules);
-        void quitGame();
         void showAllLevels();
     }
 }

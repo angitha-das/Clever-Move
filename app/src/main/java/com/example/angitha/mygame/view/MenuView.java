@@ -2,6 +2,7 @@ package com.example.angitha.mygame.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -14,7 +15,7 @@ import com.example.angitha.mygame.rules.GameRules;
  * Created by angitha on 1/7/17.
  */
 
-public class MenuView extends RelativeLayout {
+public class MenuView extends ConstraintLayout {
     public MenuView(Context context) {
         super(context);
     }

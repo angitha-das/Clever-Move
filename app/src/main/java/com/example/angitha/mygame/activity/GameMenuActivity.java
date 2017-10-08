@@ -50,11 +50,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     }
 
     @Override
-    public void quitGame(){
-        finish();
-    }
-
-    @Override
     public void showAllLevels(){
         Intent gameLevelsIntent = new Intent(this,LevelsRecyclerActivity.class);
         startActivity(gameLevelsIntent);
