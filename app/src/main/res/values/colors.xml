@@ -5,6 +5,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="red">#f22a2d</color>
+    <color name="alizarin">#e74c3c</color>
+    <color name="pomegranate">#c0392b</color>
+    <color name="belize_hole">#2980b9</color>
+    <color name="peter_river">#3498db</color>
+    <color name="sun_flower">#f1c40f</color>
     <color name="app_title">#2c3e50</color>
+    <color name="dark_purple">#2c0b41</color>
+    <color name="mid_purple">#6A1B9A</color>
+    <color name="light_purple">#8E24AA</color>
+
 </resources>

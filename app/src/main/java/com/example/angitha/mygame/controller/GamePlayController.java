@@ -50,6 +50,7 @@ public class GamePlayController{
     private int mScore;
     private int mTotalScore;
     private TextView mTextViewScore;
+    private TextView mLevelIndicator;
 
     /**
      * current status
@@ -64,10 +65,11 @@ public class GamePlayController{
 
     private GameLevels mGameLevels = GameLevels.getInstance();
 
-    public GamePlayController(Context context, BoardView boardView, TextView textviewScore) {
+    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, TextView levelIndicator) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mTextViewScore = textviewScore;
+        this.mLevelIndicator = levelIndicator;
         initialize();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -85,7 +87,7 @@ public class GamePlayController{
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-
+            mLevelIndicator.setText(String.format(" Level %d", mGameLevels.getGameLevelToPlay(mContext)));
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -166,7 +168,7 @@ public class GamePlayController{
      */
     public class SquareDragListener implements View.OnDragListener {
 
-        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.ic_cup1);
+        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.red_disc);
         Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
 
         @Override

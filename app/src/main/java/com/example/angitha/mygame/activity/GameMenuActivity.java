@@ -37,12 +37,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         TextView title =(TextView) findViewById(R.id.app_name);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "font/pacifico_regular.ttf");
         title.setTypeface(custom_font);
-
-        Shader myShader = new LinearGradient(
-                0, 0, 0, 70,
-                Color.WHITE, getResources().getColor(R.color.app_title),
-                Shader.TileMode.CLAMP );
-        title.getPaint().setShader( myShader );
         GameMenuController gameMenuController =new GameMenuController(this, menuView);
         menuView.setListeners(gameMenuController);
     }

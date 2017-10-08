@@ -3,9 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/option_title_size"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_margin="6dp"
+        android:text="@string/game_level"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewLevels"
         android:layout_width="match_parent"

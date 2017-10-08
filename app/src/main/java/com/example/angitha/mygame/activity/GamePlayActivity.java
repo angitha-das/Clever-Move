@@ -8,10 +8,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
+import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
 
@@ -26,13 +31,20 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private BoardView boardView;
     private TextView textviewScore;
+    private TextView levelIndicator;
+    private ImageView back;
+    private ImageView refresh;
     Integer position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_play);
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        setContentView(R.layout.activity_game_play);
         mGameRules.importFrom(getIntent().getExtras());
 
         Bundle extras = getIntent().getExtras();
@@ -41,31 +53,22 @@ public class GamePlayActivity extends AppCompatActivity {
         }
         boardView = (BoardView) findViewById(R.id.game_table_layout);
         textviewScore = (TextView) findViewById(R.id.score);
-
-        mGameController = new GamePlayController(this, boardView,textviewScore);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        levelIndicator = (TextView) findViewById(R.id.level);
+        back = (ImageView) findViewById(R.id.back);
+        refresh = (ImageView) findViewById(R.id.refresh);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 showAlert(R.string.back);
-                break;
-            case R.id.restart:
+            }
+        });
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 showAlert(R.string.restart_game);
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
+        mGameController = new GamePlayController(this, boardView,textviewScore,levelIndicator);
     }
 
     private void showAlert(final int msgId) {

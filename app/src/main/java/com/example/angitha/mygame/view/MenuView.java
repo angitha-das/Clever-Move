@@ -38,6 +38,5 @@ public class MenuView extends RelativeLayout {
         findViewById(R.id.achievements).setOnClickListener(gameMenuController);
         findViewById(R.id.like).setOnClickListener(gameMenuController);
         findViewById(R.id.share).setOnClickListener(gameMenuController);
-        findViewById(R.id.quit).setOnClickListener(gameMenuController);
     }
 }

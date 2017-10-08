@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.angitha.mygame.R;
@@ -21,6 +23,10 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_levels_recycler);
 
         recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
@@ -37,11 +43,11 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
 
         for(i= 0;i< totalNumberOfLevels; i++) {
             if (i > mGameLevels.getHighestLevelCrossed(getBaseContext())) {
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_black_24dp);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.locked);
             } else if(i == mGameLevels.getHighestLevelCrossed(getBaseContext())) {
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_outline_black_24dp);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.unlocked);
             }else{
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_lock_open_amber_400_24dp);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.star);
             }
             levelList[i] = "Level " + (i + 1);
         }

@@ -32,11 +32,11 @@ public class SplashActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "font/pacifico_regular.ttf");
         title.setTypeface(custom_font);
 
-        Shader myShader = new LinearGradient(
-                0, 0, 0, 70,
-                Color.WHITE, getResources().getColor(R.color.app_title),
-                Shader.TileMode.CLAMP );
-        title.getPaint().setShader( myShader );
+//        Shader myShader = new LinearGradient(
+//                0, 0, 0, 70,
+//                Color.WHITE, getResources().getColor(R.color.app_title),
+//                Shader.TileMode.CLAMP );
+//        title.getPaint().setShader( myShader );
 
         new Handler().postDelayed(new Runnable() {
 

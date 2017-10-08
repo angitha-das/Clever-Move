@@ -1,32 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/game_linear_layout"
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/game_linear_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:layout_marginTop="4dp"
+    android:layout_gravity="center"
+    android:background="@color/colorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="@+id/refresh"
+        app:layout_constraintEnd_toStartOf="@+id/refresh"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="@+id/refresh" />
+
+    <ImageView
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.angitha.mygame.view.BoardView
         android:id="@+id/game_table_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-    </com.example.angitha.mygame.view.BoardView>
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level" />
 
     <TextView
-        android:visibility="visible"
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
-        android:textSize="50sp"
-        android:text="@string/game_score" />
+        android:text="@string/game_score"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/button_finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/finish_game"/>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

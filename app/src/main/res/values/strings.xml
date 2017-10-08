@@ -17,4 +17,5 @@
 
     <string name="game_score">Score</string>
     <string name="finish_game">Quit</string>
+    <string name="game_level">Levels</string>
 </resources>

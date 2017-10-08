@@ -34,9 +34,7 @@ public class GameMenuController implements View.OnClickListener{
                 break;
             case R.id.share:
                 break;
-            case R.id.quit:mListener.quitGame();
-                break;
-            default:break;
+           default:break;
         }
     }
 
