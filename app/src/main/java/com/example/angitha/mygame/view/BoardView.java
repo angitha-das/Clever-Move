@@ -27,7 +27,6 @@ public class BoardView extends TableLayout {
 	private PegLayout[][] squares;
 	private PegView[][] pieces = new PegView[9][9];
 	private Drawable defaultSquare;
-	private Drawable disabledSquare;
 
 	private Context mContext;
 
@@ -53,7 +52,6 @@ public class BoardView extends TableLayout {
 
 	private void init() {
 		defaultSquare = getResources().getDrawable(R.drawable.square);
-		disabledSquare = getResources().getDrawable(R.drawable.disabled_square);
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
