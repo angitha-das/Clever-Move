@@ -6,9 +6,11 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="alizarin">#e74c3c</color>
-    <color name="pomegranate">#c0392b</color>
+    <color name="pomegranate">#a13024</color>
     <color name="belize_hole">#2980b9</color>
-    <color name="peter_river">#3498db</color>
+    <color name="peter_river">#90c7ec</color>
+    <color name="peter_river_dark">#6bb5e7</color>
+    <color name="peter_river_light">#d0edff</color>
     <color name="sun_flower">#f1c40f</color>
     <color name="app_title">#2c3e50</color>
     <color name="dark_purple">#2c0b41</color>
