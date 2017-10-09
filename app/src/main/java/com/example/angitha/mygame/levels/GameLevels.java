@@ -14,13 +14,14 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
 public class GameLevels {
     private int totalNumberOfLevels = 12;
     private static final String KEY_LEVEL = "levelCrossed";
-    private Context mContext;
+
 
 
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
+    public int previousLevel = 0;
+    public int nextLevel = 0;
     public boolean fromMenu;
-    boolean mFromMenu;
 
     /*
     0 invisible
@@ -212,16 +213,16 @@ public class GameLevels {
 
     //updating status of levels
     public void updateLevelStatus(Context mContext){
-        this.mContext = mContext;
         levelToPlay = levelToPlay+1;
         saveToPrefs(mContext,KEY_LEVEL,levelToPlay);
     }
 
     public int getGameLevelToPlay(Context mContext){
-        this.mContext = mContext;
         if(fromMenu) {
             levelToPlay = getHighestLevelCrossed(mContext) ;
         }
+        previousLevel = levelToPlay -1;
+        nextLevel = levelToPlay + 1;
         return levelToPlay;
     }
 

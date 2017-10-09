@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.BuildConfig;
@@ -49,8 +50,9 @@ public class GamePlayController{
      */
     private int mScore;
     private int mTotalScore;
-    private TextView mTextViewScore;
     private TextView mLevelIndicator;
+    private ImageView mPreviousLevel;
+    private ImageView mNextLevel;
 
     /**
      * current status
@@ -65,11 +67,14 @@ public class GamePlayController{
 
     private GameLevels mGameLevels = GameLevels.getInstance();
 
-    public GamePlayController(Context context, BoardView boardView, TextView textviewScore, TextView levelIndicator) {
+    public GamePlayController(Context context, BoardView boardView
+            , TextView levelIndicator, ImageView previousLevel,ImageView nextLevel) {
         this.mContext = context;
         this.mBoardView = boardView;
-        this.mTextViewScore = textviewScore;
         this.mLevelIndicator = levelIndicator;
+        this.mPreviousLevel = previousLevel;
+        this.mNextLevel = nextLevel;
+
         initialize();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -85,9 +90,18 @@ public class GamePlayController{
         // unfinished the game
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
+
+        //Initialize Previous and next level icon
+        if(mGameLevels.getGameLevelToPlay(mContext) > 0){
+            mPreviousLevel.setVisibility(View.VISIBLE);
+        }
+        if(mGameLevels.getHighestLevelCrossed(mContext) > mGameLevels.getGameLevelToPlay(mContext)){
+            mNextLevel.setVisibility(View.VISIBLE);
+        }
+
         // initialize board as per level
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-            mLevelIndicator.setText(String.format(" Level %d", mGameLevels.getGameLevelToPlay(mContext)));
+            mLevelIndicator.setText(String.format(" Level %d", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -97,7 +111,6 @@ public class GamePlayController{
                 }
             }
     }
-
 
     public void exitGame() {
         ((GamePlayActivity) mContext).finish();
@@ -125,7 +138,6 @@ public class GamePlayController{
      *
      */
     private void updateTextViewScore() {
-            mTextViewScore.setText(Integer.toString(getScore()));
             if(getScore() == 1){
                 if(mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)){
                     mGameLevels.updateLevelStatus(mContext);
@@ -133,8 +145,6 @@ public class GamePlayController{
                     mGameLevels.levelToPlay = mGameLevels.levelToPlay+1;
                 }
                 saveGameLevelCompleted();
-                //mTextViewScore.setText(R.string.won);
-//                alertProceedToNextLevel(R.string.next_level,R.string.continue_playing);
             }
     }
     private void saveGameLevelCompleted(){
@@ -259,10 +269,4 @@ public class GamePlayController{
     private void setScore(int s) {
         mScore = s;
     }
-
-    /**
-     * Getter for score
-     *
-     * @return score
-     */
 }

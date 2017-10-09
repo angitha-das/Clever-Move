@@ -15,7 +15,7 @@
     <string name="level_2">Medium</string>
     <string name="level_3">Extreme</string>
 
-    <string name="game_score">Score</string>
+    <string name="timer">Timer</string>
     <string name="finish_game">Quit</string>
     <string name="game_level">Levels</string>
 </resources>

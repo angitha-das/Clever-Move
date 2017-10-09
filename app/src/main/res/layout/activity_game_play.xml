@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_linear_layout"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_marginTop="4dp"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/colorWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+    tools:layout_editor_absoluteY="31dp">
 
     <ImageView
-        android:id="@+id/back"
-        android:layout_width="56dp"
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/back"
+        android:src="@drawable/close"
+        app:layout_constraintBottom_toBottomOf="@+id/timer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/level"
+        android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="20dp"
+        android:text="@string/timer"
         android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/refresh"
         app:layout_constraintEnd_toStartOf="@+id/refresh"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="@+id/refresh" />
+        app:layout_constraintStart_toEndOf="@+id/close"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/refresh"
@@ -46,6 +50,19 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/refresh"
+        app:layout_constraintEnd_toStartOf="@+id/undo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/undo"
+        app:layout_constraintBottom_toBottomOf="@+id/timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,28 +70,55 @@
         android:id="@+id/game_table_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/score"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/level"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back" />
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
+
+    <ImageView
+        android:id="@+id/previousLevel"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/back"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nextLevel" />
 
     <TextView
-        android:id="@+id/score"
-        android:layout_width="match_parent"
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:text="@string/game_score"
+        android:layout_marginTop="8dp"
+        android:text="@string/game_level"
+        android:textColor="@color/colorBlack"
         android:textSize="20dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/nextLevel"
+        app:layout_constraintStart_toEndOf="@+id/previousLevel"
+        app:layout_constraintTop_toTopOf="@+id/nextLevel" />
+
+    <ImageView
+        android:id="@+id/nextLevel"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:rotation="180"
+        android:visibility="invisible"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

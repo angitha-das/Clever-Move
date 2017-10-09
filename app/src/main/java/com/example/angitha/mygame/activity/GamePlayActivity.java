@@ -1,13 +1,9 @@
 package com.example.angitha.mygame.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
-import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
 
@@ -30,10 +25,11 @@ public class GamePlayActivity extends AppCompatActivity {
     private final GameRules mGameRules = new GameRules();
 
     private BoardView boardView;
-    private TextView textviewScore;
     private TextView levelIndicator;
-    private ImageView back;
+    private ImageView close;
     private ImageView refresh;
+    private ImageView previousLevel;
+    private ImageView nextLevel;
     Integer position;
 
     @Override
@@ -52,11 +48,13 @@ public class GamePlayActivity extends AppCompatActivity {
             position = extras.getInt("Position");
         }
         boardView = (BoardView) findViewById(R.id.game_table_layout);
-        textviewScore = (TextView) findViewById(R.id.score);
         levelIndicator = (TextView) findViewById(R.id.level);
-        back = (ImageView) findViewById(R.id.back);
+        close = (ImageView) findViewById(R.id.close);
         refresh = (ImageView) findViewById(R.id.refresh);
-        back.setOnClickListener(new View.OnClickListener() {
+        previousLevel = (ImageView) findViewById(R.id.previousLevel);
+        nextLevel = (ImageView) findViewById(R.id.nextLevel);
+
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAlert(R.string.back);
@@ -68,7 +66,19 @@ public class GamePlayActivity extends AppCompatActivity {
                 showAlert(R.string.restart_game);
             }
         });
-        mGameController = new GamePlayController(this, boardView,textviewScore,levelIndicator);
+        previousLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGameController.restartGame();
+            }
+        });
+        nextLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGameController.restartGame();
+            }
+        });
+        mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel);
     }
 
     private void showAlert(final int msgId) {

@@ -4,15 +4,15 @@
             <!-- SHADOW LAYER -->
             <item android:left="0dp" android:top="0dp">
                 <shape>
-                    <solid android:color="@color/pomegranate" />
-                    <corners android:radius="7dp"/>
+                    <solid android:color="@color/pink" />
+                    <corners android:radius="5dp"/>
                 </shape>
             </item>
             <!-- CONTENT LAYER -->
-            <item android:bottom="7dp" android:right="0dp">
+            <item android:bottom="5dp" android:right="0dp">
                 <shape>
-                    <solid android:color="@color/alizarin" />
-                    <corners android:radius="7dp"/>
+                    <solid android:color="@color/pink_dark" />
+                    <corners android:radius="5dp"/>
                 </shape>
             </item>
 </layer-list>

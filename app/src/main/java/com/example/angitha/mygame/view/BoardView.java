@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -71,10 +72,10 @@ public class BoardView extends TableLayout {
 
 	private void buildCells() {
 		removeAllViewsInLayout();
-		int height = dpToPixels(40);
-		int width = dpToPixels(40);
-		int height_peg = dpToPixels(40);
-		int width_peg = dpToPixels(40);
+		int height = (((Activity) getContext()).getWindowManager()
+				.getDefaultDisplay().getHeight())/15;
+		int width = (((Activity) getContext()).getWindowManager()
+				.getDefaultDisplay().getWidth())/10;
 		for (int r = 0; r < Row; r++) {
 			row[r] = new TableRow(mContext);
 			for (int c = 0; c < Col; c++) {
@@ -87,7 +88,7 @@ public class BoardView extends TableLayout {
 						pieces[r][c] = new PegView(mContext, r, c);
 						pieces[r][c].setImageResource(R.drawable.cell);
 						pieces[r][c].setPadding(0,0,0,0);
-						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(height_peg,width_peg));
+						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(width,height));
 						pieces[r][c].setOnTouchListener(pegTouchListener);
 						squares[r][c].addView(pieces[r][c]);
 					}

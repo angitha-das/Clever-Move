@@ -5,9 +5,13 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="pink">#e66c95</color>
+    <color name="pink_dark">#E32F6C</color>
     <color name="alizarin">#e74c3c</color>
+    <color name="alizarin_dark">#d22d1b</color>
     <color name="pomegranate">#a13024</color>
     <color name="belize_hole">#2980b9</color>
+    <color name="belize_hole_dark">#026baf</color>
     <color name="peter_river">#90c7ec</color>
     <color name="peter_river_dark">#6bb5e7</color>
     <color name="peter_river_light">#d0edff</color>
