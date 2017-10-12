@@ -107,7 +107,7 @@ public class BoardView extends TableLayout {
 					row[r].addView(squares[r][c]);
 					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
 					params.column = c;
-//					params.setMargins(0,0,3,3);
+					params.setMargins(0,0,3,3);
 					params.height = height;
 					params.width = width;
 					squares[r][c].setLayoutParams(params);
