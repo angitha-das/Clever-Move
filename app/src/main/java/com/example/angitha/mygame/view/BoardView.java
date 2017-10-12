@@ -28,6 +28,7 @@ public class BoardView extends TableLayout {
 	private PegLayout[][] squares;
 	private PegView[][] pieces = new PegView[9][9];
 	private Drawable defaultSquare;
+	private Drawable blankSquare;
 
 	private Context mContext;
 
@@ -53,6 +54,7 @@ public class BoardView extends TableLayout {
 
 	private void init() {
 		defaultSquare = getResources().getDrawable(R.drawable.square);
+		blankSquare =  getResources().getDrawable(R.drawable.blank);
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
@@ -96,6 +98,16 @@ public class BoardView extends TableLayout {
 					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
 					params.column = c;
 					params.setMargins(0,0,3,3);
+					params.height = height;
+					params.width = width;
+					squares[r][c].setLayoutParams(params);
+				}else{
+					squares[r][c] = new PegLayout(mContext, r, c);
+					squares[r][c].setBackgroundDrawable(blankSquare);
+					row[r].addView(squares[r][c]);
+					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
+					params.column = c;
+//					params.setMargins(0,0,3,3);
 					params.height = height;
 					params.width = width;
 					squares[r][c].setLayoutParams(params);

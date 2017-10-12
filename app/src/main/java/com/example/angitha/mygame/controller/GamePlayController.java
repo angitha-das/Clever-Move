@@ -76,10 +76,21 @@ public class GamePlayController{
         this.mNextLevel = nextLevel;
 
         initialize();
+        previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
         if (mBoardView != null) {
             mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
+        }
+    }
+
+    private void previousNextLevelSetup(){
+        //Initialize Previous and next level icon
+        if(mGameLevels.getGameLevelToPlay(mContext) > 0){
+            mPreviousLevel.setVisibility(View.VISIBLE);
+        }
+        if(mGameLevels.getHighestLevelCrossed(mContext) > mGameLevels.getGameLevelToPlay(mContext)){
+            mNextLevel.setVisibility(View.VISIBLE);
         }
     }
 
@@ -90,18 +101,9 @@ public class GamePlayController{
         // unfinished the game
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
-
-        //Initialize Previous and next level icon
-        if(mGameLevels.getGameLevelToPlay(mContext) > 0){
-            mPreviousLevel.setVisibility(View.VISIBLE);
-        }
-        if(mGameLevels.getHighestLevelCrossed(mContext) > mGameLevels.getGameLevelToPlay(mContext)){
-            mNextLevel.setVisibility(View.VISIBLE);
-        }
-
         // initialize board as per level
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-            mLevelIndicator.setText(String.format(" Level %d", mGameLevels.getGameLevelToPlay(mContext)+1));
+            mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -116,6 +118,22 @@ public class GamePlayController{
         ((GamePlayActivity) mContext).finish();
     }
 
+    public void playPreviousGameLevel() {
+        mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext));
+        initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
+        mBoardView.resetBoard();
+    }
+
+    public void playNextGameLevel() {
+        mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
+        initialize();
+        setScore(mTotalScore);
+        updateTextViewScore();
+        mBoardView.resetBoard();
+    }
+
     /**
      * restart game by resetting values and UI
      */
@@ -124,9 +142,6 @@ public class GamePlayController{
         setScore(mTotalScore);
         updateTextViewScore();
         mBoardView.resetBoard();
-        if (BuildConfig.DEBUG) {
-            Log.e(TAG, "Game restarted");
-        }
     }
 
     private int getScore() {

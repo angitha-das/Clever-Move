@@ -19,8 +19,6 @@ public class GameLevels {
 
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
-    public int previousLevel = 0;
-    public int nextLevel = 0;
     public boolean fromMenu;
 
     /*
@@ -221,9 +219,11 @@ public class GameLevels {
         if(fromMenu) {
             levelToPlay = getHighestLevelCrossed(mContext) ;
         }
-        previousLevel = levelToPlay -1;
-        nextLevel = levelToPlay + 1;
         return levelToPlay;
+    }
+
+    public void setGameLevelToPlay(int level){
+        levelToPlay = level;
     }
 
     public int getHighestLevelCrossed(Context mContext){
