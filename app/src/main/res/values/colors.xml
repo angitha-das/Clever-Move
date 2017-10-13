@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#121e6e</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -20,5 +20,6 @@
     <color name="dark_purple">#2c0b41</color>
     <color name="mid_purple">#6A1B9A</color>
     <color name="light_purple">#8E24AA</color>
+    <color name="dark_orange">#6CC551</color>
 
 </resources>

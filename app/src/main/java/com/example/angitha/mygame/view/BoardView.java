@@ -3,7 +3,6 @@ package com.example.angitha.mygame.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -13,7 +12,6 @@ import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
-import com.example.angitha.mygame.rules.GameRules;
 
 /**
  * Created by angitha on 1/7/17.
@@ -122,9 +120,8 @@ public class BoardView extends TableLayout {
 				PegView pegView = pieces[r][c];
 				if(pegView !=null){
 					Animation animation1 =
-							AnimationUtils.loadAnimation(getContext(),R.anim.fade);
+							AnimationUtils.loadAnimation(getContext(),R.anim.cell_popup);
 					pegView.startAnimation(animation1);
-//					pegView.animate().scaleX(1.5f).setDuration(1000).start();
 				}
 			}
 		}

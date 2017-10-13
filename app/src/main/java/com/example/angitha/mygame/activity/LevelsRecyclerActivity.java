@@ -43,9 +43,9 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
 
         for(i= 0;i< totalNumberOfLevels; i++) {
             if (i > mGameLevels.getHighestLevelCrossed(getBaseContext())) {
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.locked);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.closed_lock);
             } else if(i == mGameLevels.getHighestLevelCrossed(getBaseContext())) {
-                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.unlocked);
+                logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.open_lock);
             }else{
                 logos[i] = BitmapFactory.decodeResource(getResources(), R.drawable.star);
             }
