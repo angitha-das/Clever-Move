@@ -81,27 +81,8 @@ public class GamePlayActivity extends AppCompatActivity {
         mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel);
     }
 
-//    private void showAlert(final int msgId) {
-//        new AlertDialog.Builder(this)
-//                .setTitle(getString(R.string.app_name))
-//                .setMessage(msgId)
-//                .setCancelable(false)
-//                .setNegativeButton(R.string.no, null)
-//                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        if (msgId == R.string.back) {
-//                            mGameController.exitGame();
-//                        } else {
-//                            mGameController.restartGame();
-//                        }
-//                    }
-//                }).show();
-//    }
-
     @Override
     public void onBackPressed() {
-//        showAlert(R.string.back);
         mGameController.exitGame();
     }
 }

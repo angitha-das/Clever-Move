@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -115,7 +117,19 @@ public class BoardView extends TableLayout {
 			}
 			addView(row[r], new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		}
+		for (int r = 0; r < Row; r++) {
+			for (int c = 0; c < Col; c++) {
+				PegView pegView = pieces[r][c];
+				if(pegView !=null){
+					Animation animation1 =
+							AnimationUtils.loadAnimation(getContext(),R.anim.fade);
+					pegView.startAnimation(animation1);
+//					pegView.animate().scaleX(1.5f).setDuration(1000).start();
+				}
+			}
+		}
 	}
+
 
 	/**
 	 * Can't set height and width as device independent pixels, so have to convert

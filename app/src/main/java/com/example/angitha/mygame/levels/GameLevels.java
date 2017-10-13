@@ -15,11 +15,9 @@ public class GameLevels {
     private int totalNumberOfLevels = 12;
     private static final String KEY_LEVEL = "levelCrossed";
 
-
-
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
-    public boolean fromMenu;
+    public boolean fromMenu = false;
 
     /*
     0 invisible
@@ -211,7 +209,6 @@ public class GameLevels {
 
     //updating status of levels
     public void updateLevelStatus(Context mContext){
-        levelToPlay = levelToPlay+1;
         saveToPrefs(mContext,KEY_LEVEL,levelToPlay);
     }
 

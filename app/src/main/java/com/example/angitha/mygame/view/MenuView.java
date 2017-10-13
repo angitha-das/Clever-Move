@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
@@ -33,11 +36,17 @@ public class MenuView extends ConstraintLayout {
      * @param gameMenuController game menu controller instance
      */
     public void setListeners(GameMenuController gameMenuController) {
-
+        animate(findViewById(R.id.play));
         findViewById(R.id.play).setOnClickListener(gameMenuController);
         findViewById(R.id.levels).setOnClickListener(gameMenuController);
         findViewById(R.id.achievements).setOnClickListener(gameMenuController);
         findViewById(R.id.like).setOnClickListener(gameMenuController);
         findViewById(R.id.share).setOnClickListener(gameMenuController);
     }
+    public void animate(View view){
+        Animation animation1 =
+                AnimationUtils.loadAnimation(getContext(),R.anim.fade);
+        view.startAnimation(animation1);
+    }
+
 }
