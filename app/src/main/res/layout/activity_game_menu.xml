@@ -82,14 +82,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:src="@drawable/like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/share"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/theme"
-        app:layout_constraintTop_toBottomOf="@+id/play"
-        app:layout_constraintVertical_bias="0.963" />
+        app:layout_constraintStart_toEndOf="@+id/theme" />
 
     <ImageView
         android:id="@+id/share"

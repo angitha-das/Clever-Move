@@ -16,10 +16,12 @@
     <color name="peter_river_dark">#6bb5e7</color>
     <color name="peter_river_light">#d0edff</color>
     <color name="sun_flower">#f1c40f</color>
+    <color name="pumpkin_orange">#d35400</color>
     <color name="app_title">#2c3e50</color>
     <color name="dark_purple">#2c0b41</color>
     <color name="mid_purple">#6A1B9A</color>
     <color name="light_purple">#8E24AA</color>
     <color name="dark_orange">#6CC551</color>
-
+    <color name="light_blue">#22A7F0</color>
+    //ece7db icons
 </resources>

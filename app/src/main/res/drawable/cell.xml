@@ -9,7 +9,7 @@
                 </shape>
             </item>
             <!-- CONTENT LAYER -->
-            <item android:bottom="5dp" android:right="0dp">
+            <item android:bottom="2dp" android:right="0dp">
                 <shape>
                     <solid android:color="@color/pink_dark" />
                     <corners android:radius="5dp"/>
