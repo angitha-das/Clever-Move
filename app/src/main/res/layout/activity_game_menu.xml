@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
+    android:background="@color/colorPrimary"
     tools:context="com.example.angitha.mygame.activity.GameMenuActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -46,11 +46,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/levels"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/play"
+        app:layout_constraintTop_toTopOf="@+id/like"
+        app:layout_constraintVertical_bias="0.515" />
 
     <ImageView
         android:id="@+id/sound"
@@ -60,6 +61,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/music"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/theme"
         app:layout_constraintStart_toEndOf="@+id/levels" />
@@ -70,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:src="@drawable/theme"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/like"
         app:layout_constraintStart_toEndOf="@+id/sound"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,23 +84,25 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/share"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/theme" />
+        app:layout_constraintStart_toEndOf="@+id/levels"
+        app:layout_constraintTop_toBottomOf="@+id/play" />
 
     <ImageView
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/achievements" />
+        app:layout_constraintEnd_toEndOf="@+id/play"
+        app:layout_constraintTop_toTopOf="@+id/like"
+        app:layout_constraintVertical_bias="0.515" />
 
     <ImageView
         android:id="@+id/achievements"
@@ -107,6 +112,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/trophy"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
