@@ -30,6 +30,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private ImageView refresh;
     private ImageView previousLevel;
     private ImageView nextLevel;
+    private ImageView undo;
     Integer position;
 
     @Override
@@ -53,6 +54,7 @@ public class GamePlayActivity extends AppCompatActivity {
         refresh = (ImageView) findViewById(R.id.refresh);
         previousLevel = (ImageView) findViewById(R.id.previousLevel);
         nextLevel = (ImageView) findViewById(R.id.nextLevel);
+        undo = (ImageView) findViewById(R.id.undo);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,12 @@ public class GamePlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mGameController.restartGame();
+            }
+        });
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGameController.undoPreviousMove();
             }
         });
         previousLevel.setOnClickListener(new View.OnClickListener() {

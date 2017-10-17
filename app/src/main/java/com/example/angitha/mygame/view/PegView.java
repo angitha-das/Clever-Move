@@ -147,6 +147,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	}
 
 
+
 	public boolean anyMoreMovesPossible(int[][] inputArr) {
 		for (int i = 0; i < inputArr.length; i++) {
 			for (int j = 0; j < inputArr[i].length; j++) {

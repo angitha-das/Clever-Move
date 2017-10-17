@@ -144,6 +144,14 @@ public class GamePlayController{
         mBoardView.resetBoard();
     }
 
+    public void undoPreviousMove() {
+        initialize();
+        previousNextLevelSetup();
+        setScore(mTotalScore);
+        updateTextViewScore();
+        mBoardView.resetBoard();
+    }
+
     private void setScore(int s) {
         mScore = s;
     }
