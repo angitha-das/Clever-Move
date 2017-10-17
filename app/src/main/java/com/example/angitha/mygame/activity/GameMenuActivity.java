@@ -27,7 +27,6 @@ import com.example.angitha.mygame.view.PegLayout;
 
 public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener {
     GameLevels gameLevels = GameLevels.getInstance();
-    Animation play_animation;
     ImageView play_button;
 
     @Override
