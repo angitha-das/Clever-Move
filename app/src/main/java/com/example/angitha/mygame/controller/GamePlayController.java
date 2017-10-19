@@ -45,6 +45,8 @@ public class GamePlayController{
      * mGrid, contains 0 for empty cell or player ID
      */
     private final int[][] mGrid = new int[ROWS][COLS];
+
+    private final int[][] mGridCopy = new int[ROWS][COLS];
     /**
      * mScore, contains number of Pegs in the game level
      */
@@ -53,6 +55,8 @@ public class GamePlayController{
     private TextView mLevelIndicator;
     private ImageView mPreviousLevel;
     private ImageView mNextLevel;
+    private ImageView mUndoMove;
+    private boolean undo = false;
 
     /**
      * current status
@@ -68,12 +72,13 @@ public class GamePlayController{
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
-            , TextView levelIndicator, ImageView previousLevel,ImageView nextLevel) {
+            , TextView levelIndicator, ImageView previousLevel,ImageView nextLevel,ImageView undoMove) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mLevelIndicator = levelIndicator;
         this.mPreviousLevel = previousLevel;
         this.mNextLevel = nextLevel;
+        this.mUndoMove = undoMove;
         initialize();
         previousNextLevelSetup();
         setScore(mTotalScore);
@@ -97,6 +102,17 @@ public class GamePlayController{
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
+        if(undo){
+            mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
+            for (int r = 0; r < 9; r++) {
+                for (int c = 0; c < 9; c++) {
+                    mGrid[r][c] = mGridCopy[r][c];
+                    if (mGridCopy[r][c] == 1) {
+                        ++mTotalScore;
+                    }
+                }
+            }
+        }else{
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < 9; r++) {
@@ -107,6 +123,7 @@ public class GamePlayController{
                     }
                 }
             }
+        }
     }
 
     public void exitGame() {
@@ -114,6 +131,7 @@ public class GamePlayController{
     }
 
     public void playPreviousGameLevel() {
+        undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)-1);
         mGameLevels.fromMenu = false;
         initialize();
@@ -124,6 +142,7 @@ public class GamePlayController{
     }
 
     public void playNextGameLevel() {
+        undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
         mGameLevels.fromMenu = false;
         initialize();
@@ -137,6 +156,7 @@ public class GamePlayController{
      * restart game by resetting values and UI
      */
     public void restartGame() {
+        undo=false;
         initialize();
         previousNextLevelSetup();
         setScore(mTotalScore);
@@ -145,7 +165,12 @@ public class GamePlayController{
     }
 
     public void undoPreviousMove() {
+        undo=true;
         initialize();
+        if (undo) {
+            mUndoMove.setVisibility(View.GONE);
+            mUndoMove.setEnabled(false);
+        }
         previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -237,7 +262,7 @@ public class GamePlayController{
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
-                    if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
+                    if (view.move(oldSquare, newSquare, getSquares(),mGrid,mGridCopy)) {
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
@@ -248,11 +273,19 @@ public class GamePlayController{
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         }
                     }
+                    if(getScore() <mTotalScore && getScore()>3 && !undo){
+                            mUndoMove.setEnabled(true);
+                            mUndoMove.setVisibility(View.VISIBLE);
+                    }else{
+                        mUndoMove.setEnabled(false);
+                        mUndoMove.setVisibility(View.INVISIBLE);
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     view = (PegView) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
                     v.setBackgroundDrawable(defaultSquare);
+
                 default:
                     break;
             }

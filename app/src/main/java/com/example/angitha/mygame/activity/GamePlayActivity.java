@@ -68,6 +68,9 @@ public class GamePlayActivity extends AppCompatActivity {
                 mGameController.restartGame();
             }
         });
+
+        undo.setEnabled(false);
+        undo.setVisibility(View.GONE);
         undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +89,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 mGameController.playNextGameLevel();
             }
         });
-        mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel);
+        mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel,undo);
     }
 
     @Override

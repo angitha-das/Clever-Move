@@ -56,8 +56,6 @@ public class IntroActivity extends MaterialIntroActivity {
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.third_slide_background)
                         .buttonsColor(R.color.third_slide_buttons)
-                        .possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_SMS})
-                        .neededPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
                         .image(R.drawable.img_equipment)
                         .title("We provide best tools")
                         .description("ever")
@@ -81,11 +79,7 @@ public class IntroActivity extends MaterialIntroActivity {
     public void onFinish() {
         Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
         startActivity(i);
-
-        // close this activity
         finish();
-//        super.onFinish();
-//        Toast.makeText(this, "Try this library in your project! :)", Toast.LENGTH_SHORT).show();
     }
 
 

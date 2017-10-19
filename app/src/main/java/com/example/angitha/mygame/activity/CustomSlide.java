@@ -38,7 +38,8 @@ public class CustomSlide extends SlideFragment {
 
     @Override
     public boolean canMoveFurther() {
-        return checkBox.isChecked();
+        return true;
+        //return checkBox.isChecked();
     }
 
     @Override
