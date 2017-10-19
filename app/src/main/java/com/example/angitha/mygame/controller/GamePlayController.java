@@ -90,6 +90,8 @@ public class GamePlayController{
 
     private void previousNextLevelSetup(){
         //Initialize Previous and next level icon
+        mUndoMove.setEnabled(false);
+        mUndoMove.setVisibility(View.INVISIBLE);
         mPreviousLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) > 0)?View.VISIBLE:View.INVISIBLE);
         mNextLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getHighestLevelCrossed(mContext))?View.VISIBLE:View.INVISIBLE);
     }
@@ -273,7 +275,7 @@ public class GamePlayController{
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         }
                     }
-                    if(getScore() <mTotalScore && getScore()>3 && !undo){
+                    if(getScore() < mTotalScore && getScore()>3 && !undo && view.anyMoreMovesPossible(mGrid)){
                             mUndoMove.setEnabled(true);
                             mUndoMove.setVisibility(View.VISIBLE);
                     }else{
