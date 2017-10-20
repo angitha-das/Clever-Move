@@ -1,6 +1,5 @@
 package com.example.angitha.mygame.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.FloatRange;
