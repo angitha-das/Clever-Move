@@ -2,7 +2,11 @@ package com.example.angitha.mygame.controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -57,6 +61,7 @@ public class GamePlayController{
     private ImageView mNextLevel;
     private ImageView mUndoMove;
     private boolean undo = false;
+    private boolean undoAnim = true;
 
     /**
      * current status
@@ -88,6 +93,10 @@ public class GamePlayController{
         }
     }
 
+    public boolean hideAnimationInUndo(){
+        return undoAnim;
+    }
+
     private void previousNextLevelSetup(){
         //Initialize Previous and next level icon
         mUndoMove.setEnabled(false);
@@ -105,6 +114,7 @@ public class GamePlayController{
         mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
         if(undo){
+            undoAnim = false;
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
@@ -115,6 +125,7 @@ public class GamePlayController{
                 }
             }
         }else{
+            undoAnim = true;
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < 9; r++) {
@@ -169,10 +180,6 @@ public class GamePlayController{
     public void undoPreviousMove() {
         undo=true;
         initialize();
-        if (undo) {
-            mUndoMove.setVisibility(View.GONE);
-            mUndoMove.setEnabled(false);
-        }
         previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -219,14 +226,7 @@ public class GamePlayController{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
-                        if(msgId == R.string.next_level ){
-                            if(mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)){
-                                mGameLevels.updateLevelStatus(mContext);
-                            }else{
-                                mGameLevels.levelToPlay = mGameLevels.levelToPlay+1;
-                            }
-                            saveGameLevelCompleted();
-                        }else if(msgId == R.string.sorry_you_lost){
+                        if(msgId == R.string.sorry_you_lost){
                             restartGame();
                         }
                     }
@@ -275,7 +275,7 @@ public class GamePlayController{
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         }
                     }
-                    if(getScore() < mTotalScore && getScore()>3 && !undo && view.anyMoreMovesPossible(mGrid)){
+                    if(getScore() < mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
                             mUndoMove.setEnabled(true);
                             mUndoMove.setVisibility(View.VISIBLE);
                     }else{

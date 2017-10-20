@@ -2,7 +2,13 @@ package com.example.angitha.mygame.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -38,6 +44,7 @@ public class BoardView extends TableLayout {
 
 	private GamePlayController.SquareDragListener squareDragListener;
 	private GamePlayController.PegTouchListener pegTouchListener;
+	private LayerDrawable cellDrawable;
 
 	public BoardView(Context context) {
 		super(context);
@@ -53,8 +60,11 @@ public class BoardView extends TableLayout {
 
 
 	private void init() {
-		defaultSquare = getResources().getDrawable(R.drawable.square);
+//		defaultSquare = getResources().getDrawable(R.drawable.square);
 //		blankSquare =  getResources().getDrawable(R.color.peter_river);
+		defaultSquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
+		cellDrawable = createDrawable(dpToPixels(5), ContextCompat.getColor(mContext, R.color.pink_dark),ContextCompat.getColor(mContext, R.color.pink));
+
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
@@ -75,7 +85,7 @@ public class BoardView extends TableLayout {
 	private void buildCells() {
 		removeAllViewsInLayout();
 		int height = (((Activity) getContext()).getWindowManager()
-				.getDefaultDisplay().getHeight())/16;
+				.getDefaultDisplay().getWidth())/10;
 		int width = (((Activity) getContext()).getWindowManager()
 				.getDefaultDisplay().getWidth())/10;
 		for (int r = 0; r < Row; r++) {
@@ -88,7 +98,8 @@ public class BoardView extends TableLayout {
 					squares[r][c].setOnDragListener(squareDragListener);
 					if (mBoardMatrix[r][c] == 1) {
 						pieces[r][c] = new PegView(mContext, r, c);
-						pieces[r][c].setImageResource(R.drawable.cell);
+//						pieces[r][c].setImageResource(R.drawable.cell);
+						pieces[r][c].setBackgroundDrawable(cellDrawable);
 						pieces[r][c].setPadding(0,0,0,0);
 						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(width,height));
 						pieces[r][c].setOnTouchListener(pegTouchListener);
@@ -97,7 +108,7 @@ public class BoardView extends TableLayout {
 					row[r].addView(squares[r][c]);
 					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
 					params.column = c;
-					params.setMargins(0,0,5,5);
+					params.setMargins(2,2,2,2);
 					params.height = height;
 					params.width = width;
 					squares[r][c].setLayoutParams(params);
@@ -120,12 +131,40 @@ public class BoardView extends TableLayout {
 			for (int c = 0; c < Col; c++) {
 				PegView pegView = pieces[r][c];
 				if(pegView !=null){
-					Animation animation1 =
-							AnimationUtils.loadAnimation(getContext(),R.anim.cell_popup);
-					pegView.startAnimation(animation1);
+					if(gamePlayController.hideAnimationInUndo()){
+						Animation animation1 =
+								AnimationUtils.loadAnimation(getContext(),R.anim.cell_popup);
+						pegView.startAnimation(animation1);
+					}
 				}
 			}
 		}
+	}
+
+	public static Drawable createSquareDrawable( int strokeColor, float strokeWidthPx, float cornerRadiusPx) {
+		GradientDrawable fill = new GradientDrawable();
+		fill.setColor(Color.TRANSPARENT);
+		fill.setCornerRadius(cornerRadiusPx);
+		fill.setStroke((int) strokeWidthPx, strokeColor);
+		return fill;
+	}
+
+	private LayerDrawable createDrawable(int radius, int topColor, int bottomColor) {
+		float[] outerRadius = new float[] { radius, radius, radius, radius, radius, radius, radius, radius };
+		//Top
+		RoundRectShape topRoundRect = new RoundRectShape(outerRadius, null, null);
+		ShapeDrawable topShapeDrawable = new ShapeDrawable(topRoundRect);
+		topShapeDrawable.getPaint().setColor(topColor);
+		//Bottom
+		RoundRectShape roundRectShape = new RoundRectShape(outerRadius, null, null);
+		ShapeDrawable bottomShapeDrawable = new ShapeDrawable(roundRectShape);
+		bottomShapeDrawable.getPaint().setColor(bottomColor);
+		//Create array
+		Drawable[] drawArray = { bottomShapeDrawable, topShapeDrawable };
+		LayerDrawable layerDrawable = new LayerDrawable(drawArray);
+		layerDrawable.setLayerInset(1, 0, 0, 0, dpToPixels(3));  /*index, left, top, right, bottom*/
+
+		return layerDrawable;
 	}
 
 
