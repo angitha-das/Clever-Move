@@ -17,7 +17,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
+
+import java.util.Random;
 
 /**
  * Created by angitha on 1/7/17.
@@ -113,17 +116,6 @@ public class BoardView extends TableLayout {
 					params.width = width;
 					squares[r][c].setLayoutParams(params);
 				}
-//				else{
-//					squares[r][c] = new PegLayout(mContext, r, c);
-//					squares[r][c].setBackgroundDrawable(blankSquare);
-//					row[r].addView(squares[r][c]);
-//					TableRow.LayoutParams params = (TableRow.LayoutParams)squares[r][c].getLayoutParams();
-//					params.column = c;
-//					params.setMargins(0,0,3,3);
-//					params.height = height;
-//					params.width = width;
-//					squares[r][c].setLayoutParams(params);
-//				}
 			}
 			addView(row[r], new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		}

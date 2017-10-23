@@ -3,6 +3,7 @@ package com.example.angitha.mygame.activity;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
+
+import java.util.Random;
 
 /**
  * Created by angitha on 1/7/17.
@@ -25,6 +29,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private GamePlayController mGameController;
     private final GameRules mGameRules = new GameRules();
 
+    private ConstraintLayout gameBackground;
     private BoardView boardView;
     private TextView levelIndicator;
     private ImageView close;
@@ -49,6 +54,7 @@ public class GamePlayActivity extends AppCompatActivity {
         if (extras != null) {
             position = extras.getInt("Position");
         }
+        gameBackground = (ConstraintLayout) findViewById(R.id.game_background);
         boardView = (BoardView) findViewById(R.id.game_table_layout);
         levelIndicator = (TextView) findViewById(R.id.level);
         close = (ImageView) findViewById(R.id.close);
@@ -56,6 +62,8 @@ public class GamePlayActivity extends AppCompatActivity {
         previousLevel = (ImageView) findViewById(R.id.previousLevel);
         nextLevel = (ImageView) findViewById(R.id.nextLevel);
         undo = (ImageView) findViewById(R.id.undo);
+
+
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +98,8 @@ public class GamePlayActivity extends AppCompatActivity {
                 mGameController.playNextGameLevel();
             }
         });
-        mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel,undo);
+
+        mGameController = new GamePlayController(this, boardView,levelIndicator,previousLevel,nextLevel,undo,gameBackground);
     }
 
     @Override

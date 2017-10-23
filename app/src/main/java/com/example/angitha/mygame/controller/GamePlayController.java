@@ -8,6 +8,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.DragEvent;
@@ -18,12 +20,15 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.board.BoardLogic;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
+
+import java.util.Random;
 
 import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
 
@@ -60,6 +65,7 @@ public class GamePlayController{
     private ImageView mPreviousLevel;
     private ImageView mNextLevel;
     private ImageView mUndoMove;
+    private ConstraintLayout mGameBackground;
     private boolean undo = false;
     private boolean undoAnim = true;
 
@@ -77,13 +83,21 @@ public class GamePlayController{
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
-            , TextView levelIndicator, ImageView previousLevel,ImageView nextLevel,ImageView undoMove) {
+            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove, ConstraintLayout gameBackground) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mLevelIndicator = levelIndicator;
         this.mPreviousLevel = previousLevel;
         this.mNextLevel = nextLevel;
         this.mUndoMove = undoMove;
+        this.mGameBackground = gameBackground;
+
+        Random rand = new Random();
+        int themeId = rand.nextInt(3) + 1;
+        ThemePak themePak = new ThemePak();
+        mGameBackground.setBackgroundColor(themePak.getBackground(themeId));
+
+
         initialize();
         previousNextLevelSetup();
         setScore(mTotalScore);
@@ -255,6 +269,7 @@ public class GamePlayController{
                     v.setBackgroundDrawable(hoverSquare);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
+
                     v.setBackgroundDrawable(defaultSquare);
                     break;
                 case DragEvent.ACTION_DROP:
