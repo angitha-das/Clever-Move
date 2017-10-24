@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
 
 /**
@@ -33,17 +34,18 @@ public class BoardView extends TableLayout {
 	private TableRow[] row  = new TableRow[9];
 	private PegLayout[][] squares;
 	private PegView[][] pieces = new PegView[9][9];
+
 	private Drawable emptySquare;
+	private LayerDrawable cellDrawable;
 
 	private Context mContext;
 
 	private int[][] mBoardMatrix;
-
 	private GamePlayController gamePlayController;
 
 	private GamePlayController.SquareDragListener squareDragListener;
 	private GamePlayController.PegTouchListener pegTouchListener;
-	private LayerDrawable cellDrawable;
+
 
 	public BoardView(Context context) {
 		super(context);
@@ -59,8 +61,10 @@ public class BoardView extends TableLayout {
 
 
 	private void init() {
-		emptySquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
-		cellDrawable = createDrawable(dpToPixels(5), ContextCompat.getColor(mContext, R.color.pink_dark),ContextCompat.getColor(mContext, R.color.pink));
+
+		ThemePak mPak = ThemePak.getInstance();
+		emptySquare = mPak.getSquareDrawable();
+		cellDrawable = (LayerDrawable) mPak.getCellDrawable();
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
@@ -124,33 +128,6 @@ public class BoardView extends TableLayout {
 			}
 		}
 	}
-
-	public static Drawable createSquareDrawable( int strokeColor, float strokeWidthPx, float cornerRadiusPx) {
-		GradientDrawable fill = new GradientDrawable();
-		fill.setColor(Color.TRANSPARENT);
-		fill.setCornerRadius(cornerRadiusPx);
-		fill.setStroke((int) strokeWidthPx, strokeColor);
-		return fill;
-	}
-
-	private LayerDrawable createDrawable(int radius, int topColor, int bottomColor) {
-		float[] outerRadius = new float[] { radius, radius, radius, radius, radius, radius, radius, radius };
-		//Top
-		RoundRectShape topRoundRect = new RoundRectShape(outerRadius, null, null);
-		ShapeDrawable topShapeDrawable = new ShapeDrawable(topRoundRect);
-		topShapeDrawable.getPaint().setColor(topColor);
-		//Bottom
-		RoundRectShape roundRectShape = new RoundRectShape(outerRadius, null, null);
-		ShapeDrawable bottomShapeDrawable = new ShapeDrawable(roundRectShape);
-		bottomShapeDrawable.getPaint().setColor(bottomColor);
-		//Create array
-		Drawable[] drawArray = { bottomShapeDrawable, topShapeDrawable };
-		LayerDrawable layerDrawable = new LayerDrawable(drawArray);
-		layerDrawable.setLayerInset(1, 0, 0, 0, dpToPixels(3));  /*index, left, top, right, bottom*/
-
-		return layerDrawable;
-	}
-
 
 	/**
 	 * Can't set height and width as device independent pixels, so have to convert

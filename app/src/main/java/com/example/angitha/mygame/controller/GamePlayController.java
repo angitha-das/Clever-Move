@@ -3,6 +3,7 @@ package com.example.angitha.mygame.controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
@@ -59,6 +61,9 @@ public class GamePlayController{
     private ConstraintLayout mGameBackground;
     private boolean undo = false;
     private boolean undoAnim = true;
+    private Drawable emptySquare;
+    private Drawable hoverSquare;
+
 
     /**
      * current status
@@ -81,6 +86,7 @@ public class GamePlayController{
         this.mGameBackground = gameBackground;
 
         initialize();
+        applyGameTheme();
         previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -102,13 +108,21 @@ public class GamePlayController{
     }
 
     /**
+     * Can't set height and width as device independent pixels, so have to convert
+     *
+     * @param dps
+     * @return pixels
+     */
+    public int dpToPixels(int dps) {
+        float scale = mContext.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
+    }
+
+    /**
      * initialize game board with default values and player turn
      */
     private void initialize() {
-        Random rand = new Random();
-        final int themeId = rand.nextInt(3) + 1;
-        mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
-
         // unfinished the game
         mTotalScore = 0;
         // initialize board as per level
@@ -136,6 +150,17 @@ public class GamePlayController{
                 }
             }
         }
+    }
+
+    private void applyGameTheme() {
+        Random rand = new Random();
+        int themeId = rand.nextInt(2);
+        ThemePak mPak = ThemePak.getInstance();
+        mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, mPak.getBackground(themeId)));
+        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, mPak.getEmptyCellColor(themeId)),dpToPixels(2),dpToPixels(5));
+        hoverSquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext,mPak.getHoverCellColor(themeId)),dpToPixels(2),dpToPixels(5));
+        mPak.createDrawable(mContext,dpToPixels(5), ContextCompat.getColor(mContext, mPak.getPrimaryCellColor(themeId)),ContextCompat.getColor(mContext,  mPak.getSecondaryCellColor(themeId)));
+
     }
 
     public void exitGame() {
@@ -239,9 +264,6 @@ public class GamePlayController{
      *
      */
     public class SquareDragListener implements View.OnDragListener {
-        //Drawable emptySquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
-        Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.square);
-        Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
@@ -255,7 +277,7 @@ public class GamePlayController{
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
 
-                    v.setBackgroundDrawable(defaultSquare);
+                    v.setBackgroundDrawable(emptySquare);
                     break;
                 case DragEvent.ACTION_DROP:
 				/*
@@ -286,7 +308,7 @@ public class GamePlayController{
                 case DragEvent.ACTION_DRAG_ENDED:
                     view = (PegView) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
-                    v.setBackgroundDrawable(defaultSquare);
+                    v.setBackgroundDrawable(emptySquare);
 
                 default:
                     break;
@@ -305,7 +327,7 @@ public class GamePlayController{
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == event.ACTION_DOWN) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(null, shadowBuilder, v, 0);
                 v.setVisibility(View.INVISIBLE);
