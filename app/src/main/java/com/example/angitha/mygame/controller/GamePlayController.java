@@ -81,6 +81,7 @@ public class GamePlayController{
     private PegLayout[][] squares = new PegLayout[9][9] ;
 
     private GameLevels mGameLevels = GameLevels.getInstance();
+    private ThemePak themePak = new ThemePak();
 
     public GamePlayController(Context context, BoardView boardView
             , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove, ConstraintLayout gameBackground) {
@@ -91,12 +92,6 @@ public class GamePlayController{
         this.mNextLevel = nextLevel;
         this.mUndoMove = undoMove;
         this.mGameBackground = gameBackground;
-
-        Random rand = new Random();
-        int themeId = rand.nextInt(3) + 1;
-        ThemePak themePak = new ThemePak();
-        mGameBackground.setBackgroundColor(themePak.getBackground(themeId));
-
 
         initialize();
         previousNextLevelSetup();
@@ -123,6 +118,11 @@ public class GamePlayController{
      * initialize game board with default values and player turn
      */
     private void initialize() {
+        Random rand = new Random();
+        final int themeId = rand.nextInt(3) + 1;
+
+        mGameBackground.setBackgroundColor(themePak.getBackground(themeId));
+
         // unfinished the game
         mTotalScore = 0;
         mOutcome = BoardLogic.Outcome.NOTHING;
@@ -254,7 +254,7 @@ public class GamePlayController{
      *
      */
     public class SquareDragListener implements View.OnDragListener {
-
+        //Drawable emptySquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
         Drawable defaultSquare = mContext.getResources().getDrawable(R.drawable.square);
         Drawable hoverSquare = mContext.getResources().getDrawable(R.drawable.square_hover);
 

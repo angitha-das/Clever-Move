@@ -17,10 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
-
-import java.util.Random;
 
 /**
  * Created by angitha on 1/7/17.
@@ -36,8 +33,7 @@ public class BoardView extends TableLayout {
 	private TableRow[] row  = new TableRow[9];
 	private PegLayout[][] squares;
 	private PegView[][] pieces = new PegView[9][9];
-	private Drawable defaultSquare;
-//	private Drawable blankSquare;
+	private Drawable emptySquare;
 
 	private Context mContext;
 
@@ -63,11 +59,8 @@ public class BoardView extends TableLayout {
 
 
 	private void init() {
-//		defaultSquare = getResources().getDrawable(R.drawable.square);
-//		blankSquare =  getResources().getDrawable(R.color.peter_river);
-		defaultSquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
+		emptySquare = createSquareDrawable(ContextCompat.getColor(mContext, R.color.colorWhite),dpToPixels(2),dpToPixels(5));
 		cellDrawable = createDrawable(dpToPixels(5), ContextCompat.getColor(mContext, R.color.pink_dark),ContextCompat.getColor(mContext, R.color.pink));
-
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
@@ -96,12 +89,11 @@ public class BoardView extends TableLayout {
 			for (int c = 0; c < Col; c++) {
 				if (!(mBoardMatrix[r][c] == 0)) {
 					squares[r][c] = new PegLayout(mContext, r, c);
-					squares[r][c].setBackgroundDrawable(defaultSquare);
+					squares[r][c].setBackgroundDrawable(emptySquare);
 					squares[r][c].setPadding(0,0,0,0);
 					squares[r][c].setOnDragListener(squareDragListener);
 					if (mBoardMatrix[r][c] == 1) {
 						pieces[r][c] = new PegView(mContext, r, c);
-//						pieces[r][c].setImageResource(R.drawable.cell);
 						pieces[r][c].setBackgroundDrawable(cellDrawable);
 						pieces[r][c].setPadding(0,0,0,0);
 						pieces[r][c].setLayoutParams(new ViewGroup.LayoutParams(width,height));

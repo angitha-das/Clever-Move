@@ -7,20 +7,3 @@
             android:width="2dp" />
 </shape>
 
-<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
-    <!--&lt;!&ndash; CONTENT LAYER &ndash;&gt;-->
-    <!--<item android:bottom="0dp" android:right="0dp">-->
-        <!--<shape>-->
-            <!--<solid android:color="@color/peter_river_dark" />-->
-            <!--<corners android:radius="5dp"/>-->
-        <!--</shape>-->
-    <!--</item>-->
-    <!--&lt;!&ndash; SHADOW LAYER &ndash;&gt;-->
-    <!--<item android:left="0dp" android:top="5dp">-->
-        <!--<shape>-->
-            <!--<solid android:color="@color/peter_river" />-->
-            <!--<corners android:radius="5dp"/>-->
-        <!--</shape>-->
-    <!--</item>-->
-
-<!--</layer-list>-->
