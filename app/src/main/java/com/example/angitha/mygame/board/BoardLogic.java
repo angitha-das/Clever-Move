@@ -13,13 +13,6 @@ public class BoardLogic {
     private static final String TAG = GamePlayController.class.getName();
 
     /**
-     * Possible outcomes
-     */
-    public enum Outcome {
-        NOTHING,WIN,LOSE
-    }
-
-    /**
      * number of columns in the mGrid
      */
     public final int numCols;

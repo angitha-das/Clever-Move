@@ -2,27 +2,18 @@ package com.example.angitha.mygame.controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.angitha.mygame.BuildConfig;
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
-import com.example.angitha.mygame.board.BoardLogic;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
@@ -72,16 +63,12 @@ public class GamePlayController{
     /**
      * current status
      */
-    @NonNull
-    private BoardLogic.Outcome mOutcome = BoardLogic.Outcome.NOTHING;
-
     private final Context mContext;
     private final BoardView mBoardView;
 
     private PegLayout[][] squares = new PegLayout[9][9] ;
 
     private GameLevels mGameLevels = GameLevels.getInstance();
-    private ThemePak themePak = new ThemePak();
 
     public GamePlayController(Context context, BoardView boardView
             , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove, ConstraintLayout gameBackground) {
@@ -120,12 +107,10 @@ public class GamePlayController{
     private void initialize() {
         Random rand = new Random();
         final int themeId = rand.nextInt(3) + 1;
-
-        mGameBackground.setBackgroundColor(themePak.getBackground(themeId));
+        mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
 
         // unfinished the game
         mTotalScore = 0;
-        mOutcome = BoardLogic.Outcome.NOTHING;
         // initialize board as per level
         if(undo){
             undoAnim = false;
@@ -321,7 +306,6 @@ public class GamePlayController{
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == event.ACTION_DOWN) {
-                //ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(null, shadowBuilder, v, 0);
                 v.setVisibility(View.INVISIBLE);

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.activity.GamePlayActivity;
@@ -38,8 +37,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
     @Override
     public LevelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_levels, parent, false);
-        LevelViewHolder viewHolder = new LevelViewHolder(v);
-        return viewHolder;
+        return new LevelViewHolder(v);
     }
 
     @Override

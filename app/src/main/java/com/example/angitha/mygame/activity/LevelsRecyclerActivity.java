@@ -29,8 +29,8 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_levels_recycler);
 
-        recyclerViewLevels = (RecyclerView) findViewById(R.id.recyclerViewLevels);
-        levelPicker = (LinearLayout) findViewById(R.id.levelPicker);
+        recyclerViewLevels = findViewById(R.id.recyclerViewLevels);
+        levelPicker = findViewById(R.id.levelPicker);
         totalNumberOfLevels= mGameLevels.getTotalNumberOfLevels();
     }
 

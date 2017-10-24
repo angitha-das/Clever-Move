@@ -16,13 +16,12 @@ import agency.tango.materialintroscreen.SlideFragment;
  */
 
 public class CustomSlide extends SlideFragment {
-    private CheckBox checkBox;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_custom_slide, container, false);
-        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        CheckBox checkBox = view.findViewById(R.id.checkBox);
         return view;
     }
 

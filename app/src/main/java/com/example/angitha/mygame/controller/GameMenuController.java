@@ -4,19 +4,16 @@ import android.view.View;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.rules.GameRules;
-import com.example.angitha.mygame.view.MenuView;
 
 /**
  * Created by angitha on 1/7/17.
  */
 
 public class GameMenuController implements View.OnClickListener{
-    private final MenuView mMenuView;
     private final MenuControllerListener mListener;
     private final GameRules mGameRules = new GameRules();
 
-    public GameMenuController(MenuControllerListener mListener, MenuView mMenuView) {
-        this.mMenuView = mMenuView;
+    public GameMenuController(MenuControllerListener mListener) {
         this.mListener = mListener;
     }
 

@@ -2,14 +2,12 @@ package com.example.angitha.mygame.activity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +17,6 @@ import com.example.angitha.mygame.controller.GameMenuController;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
-import com.example.angitha.mygame.view.PegLayout;
 
 /**
  * Created by angitha on 1/7/17.
@@ -37,10 +34,10 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game_menu);
-        MenuView menuView = (MenuView) findViewById(R.id.menuView);
+        MenuView menuView = findViewById(R.id.menuView);
 
-        TextView title = (TextView) findViewById(R.id.app_name);
-        play_button = (ImageView) findViewById(R.id.play);
+        TextView title = findViewById(R.id.app_name);
+        play_button =  findViewById(R.id.play);
 
         ScaleAnimation scaleIn = new ScaleAnimation(0.6f, 0.9f, 0.6f, 0.9f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
@@ -52,7 +49,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "font/pacifico_regular.ttf");
         title.setTypeface(custom_font);
-        GameMenuController gameMenuController = new GameMenuController(this, menuView);
+        GameMenuController gameMenuController = new GameMenuController(this);
         menuView.setListeners(gameMenuController);
     }
 
