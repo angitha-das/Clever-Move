@@ -50,18 +50,15 @@ public class BoardView extends TableLayout {
 	public BoardView(Context context) {
 		super(context);
 		this.mContext = context;
-		init();
 	}
 
 	public BoardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.mContext = context;
-		init();
 	}
 
 
 	private void init() {
-
 		ThemePak mPak = ThemePak.getInstance();
 		emptySquare = mPak.getSquareDrawable();
 		cellDrawable = (LayerDrawable) mPak.getCellDrawable();
@@ -83,6 +80,7 @@ public class BoardView extends TableLayout {
 	*/
 
 	private void buildCells() {
+		init();
 		removeAllViewsInLayout();
 		int height = (((Activity) getContext()).getWindowManager()
 				.getDefaultDisplay().getWidth())/10;

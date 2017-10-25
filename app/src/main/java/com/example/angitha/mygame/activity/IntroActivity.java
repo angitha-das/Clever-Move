@@ -31,7 +31,7 @@ public class IntroActivity extends MaterialIntroActivity {
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.first_slide_background)
                         .buttonsColor(R.color.first_slide_buttons)
-                        .image(R.drawable.img_office)
+                        .image(R.drawable.logo)
                         .title("Brainvita")
                         .description("A solo strategy game for age group 5" +
                                 " and above and an ideal game for adults too")
@@ -50,7 +50,6 @@ public class IntroActivity extends MaterialIntroActivity {
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.third_slide_background)
                         .buttonsColor(R.color.third_slide_buttons)
-                        .image(R.drawable.img_equipment)
                         .title("We provide best tools")
                         .description("ever")
                         .build(),
