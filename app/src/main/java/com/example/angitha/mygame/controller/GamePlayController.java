@@ -86,7 +86,6 @@ public class GamePlayController{
         this.mGameBackground = gameBackground;
 
         initialize();
-        applyGameTheme();
         previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
@@ -138,6 +137,7 @@ public class GamePlayController{
                 }
             }
         }else{
+            applyGameTheme();
             undoAnim = true;
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
