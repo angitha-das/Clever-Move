@@ -2,12 +2,17 @@ package com.example.angitha.mygame.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.controller.GamePlayController;
+import com.example.angitha.mygame.levels.GameLevels;
+import com.example.angitha.mygame.view.BoardView;
 
 import agency.tango.materialintroscreen.SlideFragment;
 
@@ -16,12 +21,19 @@ import agency.tango.materialintroscreen.SlideFragment;
  */
 
 public class CustomSlide extends SlideFragment {
-
+    private GamePlayController mGameController;
+    GameLevels gameLevels = GameLevels.getInstance();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_custom_slide, container, false);
-        CheckBox checkBox = view.findViewById(R.id.checkBox);
+        BoardView boardView = view.findViewById(R.id.game_tour_table_layout);
+        ConstraintLayout gameBackground = view.findViewById(R.id.game_background);
+        ImageView step1 = view.findViewById(R.id.step1_img);
+        ImageView step2 = view.findViewById(R.id.step2_img);
+        ImageView step3 = view.findViewById(R.id.step3_img);
+        gameLevels.gameTour = true;
+        mGameController = new GamePlayController(getContext(), boardView,step1,step2,step3,gameBackground);
         return view;
     }
 
@@ -38,11 +50,10 @@ public class CustomSlide extends SlideFragment {
     @Override
     public boolean canMoveFurther() {
         return true;
-        //return checkBox.isChecked();
     }
 
-    @Override
-    public String cantMoveFurtherErrorMessage() {
-        return getString(R.string.error_message);
-    }
+//    @Override
+//    public String cantMoveFurtherErrorMessage() {
+//        return getString(R.string.error_message);
+//    }
 }

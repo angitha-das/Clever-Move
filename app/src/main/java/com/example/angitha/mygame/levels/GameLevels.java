@@ -18,6 +18,7 @@ public class GameLevels {
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
     public boolean fromMenu = false;
+    public boolean gameTour = true;
 
     /*
     0 invisible
@@ -215,6 +216,8 @@ public class GameLevels {
     public int getGameLevelToPlay(Context mContext){
         if(fromMenu) {
             levelToPlay = getHighestLevelCrossed(mContext) ;
+        }else if(gameTour){
+            levelToPlay = 1;
         }
         return levelToPlay;
     }

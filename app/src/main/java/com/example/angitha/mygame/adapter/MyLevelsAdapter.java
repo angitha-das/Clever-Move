@@ -49,6 +49,7 @@ public class MyLevelsAdapter extends RecyclerView.Adapter<LevelViewHolder> {
                 @Override
                 public void onClick(View v) {
                     mGameLevels.fromMenu = false;
+                    mGameLevels.gameTour = false;
                     mGameLevels.levelToPlay = position;
                     Intent gamePlayIntent = new Intent(mContext,GamePlayActivity.class);
                     gamePlayIntent.putExtras(gameRules.exportTo(new Bundle()));

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
+import com.example.angitha.mygame.activity.CustomSlide;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
@@ -59,6 +60,9 @@ public class GamePlayController{
     private ImageView mNextLevel;
     private ImageView mUndoMove;
     private ConstraintLayout mGameBackground;
+    private  ImageView step1;
+    private  ImageView step2;
+    private  ImageView step3;
     private boolean undo = false;
     private boolean undoAnim = true;
     private Drawable emptySquare;
@@ -90,6 +94,20 @@ public class GamePlayController{
         previousNextLevelSetup();
         setScore(mTotalScore);
         updateTextViewScore();
+        if (mBoardView != null) {
+            mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
+        }
+    }
+
+    public GamePlayController(Context context, BoardView boardView,ImageView step1, ImageView step2, ImageView step3,ConstraintLayout gameBackground) {
+        this.mContext = context;
+        this.mBoardView = boardView;
+        this.mGameBackground = gameBackground;
+        this.step1 = step1;
+        this.step2 = step2;
+        this.step3 = step3;
+        initialize();
+        setScore(mTotalScore);
         if (mBoardView != null) {
             mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
         }
@@ -141,7 +159,9 @@ public class GamePlayController{
             applyGameTheme();
             undoAnim = true;
             int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-            mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
+            if(!mGameLevels.gameTour){
+                mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
+            }
             for (int r = 0; r < 9; r++) {
                 for (int c = 0; c < 9; c++) {
                     mGrid[r][c] = mLevelGrid[r][c];
@@ -298,12 +318,16 @@ public class GamePlayController{
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         }
                     }
-                    if(getScore() < mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
+                    if(!mGameLevels.gameTour){
+                        if(getScore() < mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
                             mUndoMove.setEnabled(true);
                             mUndoMove.setVisibility(View.VISIBLE);
+                        }else{
+                            mUndoMove.setEnabled(false);
+                            mUndoMove.setVisibility(View.INVISIBLE);
+                        }
                     }else{
-                        mUndoMove.setEnabled(false);
-                        mUndoMove.setVisibility(View.INVISIBLE);
+
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
