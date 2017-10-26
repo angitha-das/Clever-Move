@@ -31,6 +31,9 @@ public class GameMenuController implements View.OnClickListener{
                 break;
             case R.id.share:
                 break;
+            case R.id.sound:
+                break;
+            case R.id.gameTour:mListener.gameTour();
            default:break;
         }
     }
@@ -42,5 +45,6 @@ public class GameMenuController implements View.OnClickListener{
          */
         void onPlay(GameRules gameRules);
         void showAllLevels();
+        void gameTour();
     }
 }

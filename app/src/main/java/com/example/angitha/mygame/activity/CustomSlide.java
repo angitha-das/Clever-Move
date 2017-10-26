@@ -49,7 +49,11 @@ public class CustomSlide extends SlideFragment {
 
     @Override
     public boolean canMoveFurther() {
-        return true;
+        if(mGameController.getScore() == 1){
+            gameLevels.gameTour=false;
+            return true;
+        }
+        return false;
     }
 
 //    @Override

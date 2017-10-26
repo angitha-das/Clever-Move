@@ -67,4 +67,11 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         startActivity(gameLevelsIntent);
     }
 
+    @Override
+    public void gameTour() {
+        gameLevels.gameTour = true;
+        Intent gameTourIntent = new Intent(this, IntroActivity.class);
+        startActivity(gameTourIntent);
+    }
+
 }

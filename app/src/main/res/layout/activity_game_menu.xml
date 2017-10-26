@@ -45,13 +45,11 @@
         android:id="@+id/levels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/levels"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/play"
-        app:layout_constraintTop_toTopOf="@+id/like"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintTop_toBottomOf="@+id/play" />
 
     <ImageView
         android:id="@+id/sound"
@@ -67,42 +65,26 @@
         app:layout_constraintStart_toEndOf="@+id/levels" />
 
     <ImageView
-        android:id="@+id/theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/theme"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/like"
-        app:layout_constraintStart_toEndOf="@+id/sound"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="160dp" />
-
-    <ImageView
         android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/like"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/share"
-        app:layout_constraintStart_toEndOf="@+id/levels"
-        app:layout_constraintTop_toBottomOf="@+id/play" />
+        app:layout_constraintEnd_toStartOf="@+id/levels"
+        app:layout_constraintTop_toBottomOf="@+id/levels" />
 
     <ImageView
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/play"
-        app:layout_constraintTop_toTopOf="@+id/like"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintStart_toEndOf="@+id/gameTour"
+        app:layout_constraintTop_toBottomOf="@+id/gameTour" />
 
     <ImageView
         android:id="@+id/achievements"
@@ -115,5 +97,15 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/gameTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/theme"
+        app:layout_constraintEnd_toEndOf="@+id/play"
+        app:layout_constraintTop_toBottomOf="@+id/play" />
 
 </com.example.angitha.mygame.view.MenuView>

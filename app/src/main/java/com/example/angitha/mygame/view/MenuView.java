@@ -35,9 +35,10 @@ public class MenuView extends ConstraintLayout {
     public void setListeners(GameMenuController gameMenuController) {
         findViewById(R.id.play).setOnClickListener(gameMenuController);
         findViewById(R.id.levels).setOnClickListener(gameMenuController);
-        findViewById(R.id.achievements).setOnClickListener(gameMenuController);
+        findViewById(R.id.gameTour).setOnClickListener(gameMenuController);
         findViewById(R.id.like).setOnClickListener(gameMenuController);
         findViewById(R.id.share).setOnClickListener(gameMenuController);
+        findViewById(R.id.achievements).setOnClickListener(gameMenuController);
     }
 
 }

@@ -236,7 +236,7 @@ public class GamePlayController{
         mScore = s;
     }
 
-    private int getScore() {
+    public int getScore() {
         return mScore;
     }
 
@@ -245,16 +245,18 @@ public class GamePlayController{
      *
      */
     private void updateTextViewScore() {
-            if(getScore() == 1){
-                if(mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)){
-                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
+        if(!mGameLevels.gameTour) {
+            if (getScore() == 1) {
+                if (mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)) {
+                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
                     mGameLevels.updateLevelStatus(mContext);
-                }else{
-                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
+                } else {
+                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
                     mGameLevels.levelToPlay = mGameLevels.getGameLevelToPlay(mContext);
                 }
                 saveGameLevelCompleted();
             }
+        }
     }
     private void saveGameLevelCompleted(){
         initialize();
@@ -326,8 +328,20 @@ public class GamePlayController{
                             mUndoMove.setEnabled(false);
                             mUndoMove.setVisibility(View.INVISIBLE);
                         }
-                    }else{
-
+                    }else {
+                        if (getScore() == 3) {
+                            step1.setVisibility(View.INVISIBLE);
+                            step2.setVisibility(View.VISIBLE);
+                        } else if (getScore() == 2) {
+                            step1.setVisibility(View.INVISIBLE);
+                            step2.setVisibility(View.INVISIBLE);
+                            step3.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            step1.setVisibility(View.INVISIBLE);
+                            step2.setVisibility(View.INVISIBLE);
+                            step3.setVisibility(View.INVISIBLE);
+                        }
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
