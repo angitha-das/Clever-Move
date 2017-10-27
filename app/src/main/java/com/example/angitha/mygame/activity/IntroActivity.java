@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.controller.GamePlayController;
+import com.example.angitha.mygame.levels.GameLevels;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
 import agency.tango.materialintroscreen.MessageButtonBehaviour;
@@ -18,6 +20,8 @@ public class IntroActivity extends MaterialIntroActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GameLevels.getInstance().fromMenu=false;
+        GameLevels.getInstance().gameTour=true;
         enableLastSlideAlphaExitTransition(false);
 
         getBackButtonTranslationWrapper()
@@ -71,10 +75,15 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onFinish() {
+        GameLevels.getInstance().fromMenu=true;
+        GameLevels.getInstance().gameTour=false;
         Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
         startActivity(i);
         finish();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

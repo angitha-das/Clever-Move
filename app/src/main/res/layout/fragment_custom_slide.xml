@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:background="@color/colorPrimary"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:layout_editor_absoluteY="25dp">
 
     <ImageView
         android:id="@+id/step1_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/move_cell"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/game_tour_table_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,44 +28,31 @@
         android:id="@+id/step2_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="70dp"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="70dp"
         android:rotation="270"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/step3_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step1_img"
-        app:layout_constraintVertical_bias="0.454" />
+        app:layout_constraintEnd_toStartOf="@+id/game_tour_table_layout"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/step3_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:rotation="180"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/step2_img" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/share"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/step3_img"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step1_img"
-        app:layout_constraintVertical_bias="0.492" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_tour_table_layout" />
+
 
     <com.example.angitha.mygame.view.BoardView
         android:id="@+id/game_tour_table_layout"
@@ -74,10 +63,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/step3_img"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/step2_img"
-        app:layout_constraintTop_toBottomOf="@+id/step1_img" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

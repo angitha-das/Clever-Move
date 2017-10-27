@@ -217,7 +217,7 @@ public class GameLevels {
         if(fromMenu) {
             levelToPlay = getHighestLevelCrossed(mContext) ;
         }else if(gameTour){
-            levelToPlay = 1;
+            return 1;
         }
         return levelToPlay;
     }

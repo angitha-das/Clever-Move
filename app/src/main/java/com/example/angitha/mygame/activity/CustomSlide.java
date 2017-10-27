@@ -55,9 +55,4 @@ public class CustomSlide extends SlideFragment {
         }
         return false;
     }
-
-//    @Override
-//    public String cantMoveFurtherErrorMessage() {
-//        return getString(R.string.error_message);
-//    }
 }

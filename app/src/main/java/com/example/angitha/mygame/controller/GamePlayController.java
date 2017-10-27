@@ -155,21 +155,21 @@ public class GamePlayController{
                     }
                 }
             }
-        }else{
-            applyGameTheme();
-            undoAnim = true;
-            int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-            if(!mGameLevels.gameTour){
-                mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
-            }
-            for (int r = 0; r < 9; r++) {
-                for (int c = 0; c < 9; c++) {
-                    mGrid[r][c] = mLevelGrid[r][c];
-                    if (mLevelGrid[r][c] == 1) {
-                        ++mTotalScore;
+        }else {
+                applyGameTheme();
+                undoAnim = true;
+                int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
+                for (int r = 0; r < 9; r++) {
+                    for (int c = 0; c < 9; c++) {
+                        mGrid[r][c] = mLevelGrid[r][c];
+                        if (mLevelGrid[r][c] == 1) {
+                            ++mTotalScore;
+                        }
                     }
                 }
-            }
+                if (!mGameLevels.gameTour) {
+                    mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
+                }
         }
     }
 
@@ -248,8 +248,10 @@ public class GamePlayController{
         if(!mGameLevels.gameTour) {
             if (getScore() == 1) {
                 if (mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)) {
-                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
-                    mGameLevels.updateLevelStatus(mContext);
+                    if (mGameLevels.getGameLevelToPlay(mContext) < 12) {
+                        mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
+                        mGameLevels.updateLevelStatus(mContext);
+                    }
                 } else {
                     mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
                     mGameLevels.levelToPlay = mGameLevels.getGameLevelToPlay(mContext);
@@ -313,6 +315,20 @@ public class GamePlayController{
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
+                        if(mGameLevels.gameTour) {
+                            if (getScore() == 3) {
+                                step1.setVisibility(View.INVISIBLE);
+                                step2.setVisibility(View.VISIBLE);
+                            } else if (getScore() == 2) {
+                                step1.setVisibility(View.INVISIBLE);
+                                step2.setVisibility(View.INVISIBLE);
+                                step3.setVisibility(View.VISIBLE);
+                            } else {
+                                step1.setVisibility(View.INVISIBLE);
+                                step2.setVisibility(View.INVISIBLE);
+                                step3.setVisibility(View.INVISIBLE);
+                            }
+                        }
                         updateTextViewScore();
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
@@ -327,20 +343,6 @@ public class GamePlayController{
                         }else{
                             mUndoMove.setEnabled(false);
                             mUndoMove.setVisibility(View.INVISIBLE);
-                        }
-                    }else {
-                        if (getScore() == 3) {
-                            step1.setVisibility(View.INVISIBLE);
-                            step2.setVisibility(View.VISIBLE);
-                        } else if (getScore() == 2) {
-                            step1.setVisibility(View.INVISIBLE);
-                            step2.setVisibility(View.INVISIBLE);
-                            step3.setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            step1.setVisibility(View.INVISIBLE);
-                            step2.setVisibility(View.INVISIBLE);
-                            step3.setVisibility(View.INVISIBLE);
                         }
                     }
                     break;
