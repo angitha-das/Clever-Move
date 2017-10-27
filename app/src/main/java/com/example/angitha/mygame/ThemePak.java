@@ -28,11 +28,11 @@ public class ThemePak {
         return themePakObj;
     }
 
-    private int[] game_background = {R.color.colorPrimary,R.color.mid_purple,R.color.pink_dark};
-    private int[] empty_cell_color = {R.color.belize_hole,R.color.light_purple,R.color.pink};
-    private int[] hover_cell_color = {R.color.colorWhite,R.color.colorAccent,R.color.colorPrimary};
-    private int[] primary_cell_color = {R.color.pink_dark,R.color.colorPrimary,R.color.belize_hole_dark};
-    private int[] secondary_cell_color = {R.color.pink,R.color.belize_hole,R.color.belize_hole};
+    private int[] game_background = {R.color.colorPrimary,R.color.mid_purple,R.color.colorPrimary};
+    private int[] empty_cell_color = {R.color.belize_hole,R.color.light_purple,R.color.belize_hole_dark};
+    private int[] hover_cell_color = {R.color.colorWhite,R.color.colorAccent,R.color.colorWhite};
+    private int[] primary_cell_color = {R.color.pink_dark,R.color.colorPrimary,R.color.mid_purple};
+    private int[] secondary_cell_color = {R.color.pink,R.color.belize_hole,R.color.light_purple};
 
 
     public int[] getThemeSet(int theme_id){

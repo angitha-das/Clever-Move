@@ -22,8 +22,9 @@
     <color name="dark_purple">#2c0b41</color>
     <color name="mid_purple">#6A1B9A</color>
     <color name="light_purple">#8E24AA</color>
-    <color name="dark_orange">#6CC551</color>
-    <color name="light_blue">#22A7F0</color>
+    <color name="yellow">#f2b809</color>
+    <color name="light_orange">#f37402</color>
+    <color name="dark_orange">#d2450f</color>
     //ece7db icons
 
     <color name="first_slide_background">#E91E63</color>
@@ -40,6 +41,8 @@
 
     <color name="custom_slide_background">#3F51B5</color>
     <color name="custom_slide_buttons">#1A237E</color>
+
+
 
     <!--Splash Screen-->
     <item name="splash_background" type="color">@color/colorPrimary</item>

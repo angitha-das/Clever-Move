@@ -13,13 +13,11 @@
         android:id="@+id/step1_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="180dp"
         android:src="@drawable/move_cell"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/game_tour_table_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,30 +26,31 @@
         android:id="@+id/step2_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="70dp"
         android:rotation="270"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/step3_img"
         app:layout_constraintEnd_toStartOf="@+id/game_tour_table_layout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step1_img" />
 
     <ImageView
         android:id="@+id/step3_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="180dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:rotation="180"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_tour_table_layout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.example.angitha.mygame.view.BoardView
@@ -63,10 +62,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/step3_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/step1_img" />
 
 </android.support.constraint.ConstraintLayout>
 
