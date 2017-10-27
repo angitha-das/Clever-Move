@@ -246,13 +246,11 @@ public class GamePlayController{
      *
      */
     private void updateTextViewScore() {
-        if(!mGameLevels.gameTour) {
+        if (!mGameLevels.gameTour) {
             if (getScore() == 1) {
                 if (mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext)) {
-                    if (mGameLevels.getGameLevelToPlay(mContext) < 12) {
-                        mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
-                        mGameLevels.updateLevelStatus(mContext);
-                    }
+                    mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
+                    mGameLevels.updateLevelStatus(mContext);
                 } else {
                     mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
                     mGameLevels.levelToPlay = mGameLevels.getGameLevelToPlay(mContext);
@@ -262,6 +260,7 @@ public class GamePlayController{
         }
     }
     private void saveGameLevelCompleted(){
+        undo = false;
         initialize();
         previousNextLevelSetup();
         setScore(mTotalScore);
@@ -330,20 +329,20 @@ public class GamePlayController{
                                 step3.setVisibility(View.INVISIBLE);
                             }
                         }
+                        if(!mGameLevels.gameTour && mUndoMove !=null){
+                            if(getScore() <= mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
+                                mUndoMove.setEnabled(true);
+                                mUndoMove.setVisibility(View.VISIBLE);
+                            }else{
+                                mUndoMove.setEnabled(false);
+                                mUndoMove.setVisibility(View.INVISIBLE);
+                            }
+                        }
                         updateTextViewScore();
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
-                        }
-                    }
-                    if(!mGameLevels.gameTour && mUndoMove !=null){
-                        if(getScore() < mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
-                            mUndoMove.setEnabled(true);
-                            mUndoMove.setVisibility(View.VISIBLE);
-                        }else{
-                            mUndoMove.setEnabled(false);
-                            mUndoMove.setVisibility(View.INVISIBLE);
                         }
                     }
                     break;
