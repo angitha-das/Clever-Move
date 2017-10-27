@@ -159,6 +159,9 @@ public class GamePlayController{
                 applyGameTheme();
                 undoAnim = true;
                 int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
+                if (!mGameLevels.gameTour) {
+                    mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
+                }
                 for (int r = 0; r < 9; r++) {
                     for (int c = 0; c < 9; c++) {
                         mGrid[r][c] = mLevelGrid[r][c];
@@ -167,9 +170,7 @@ public class GamePlayController{
                         }
                     }
                 }
-                if (!mGameLevels.gameTour) {
-                    mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
-                }
+
         }
     }
 
@@ -336,7 +337,7 @@ public class GamePlayController{
                             alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
                         }
                     }
-                    if(!mGameLevels.gameTour){
+                    if(!mGameLevels.gameTour && mUndoMove !=null){
                         if(getScore() < mTotalScore && getScore()>=2 && view.anyMoreMovesPossible(mGrid)){
                             mUndoMove.setEnabled(true);
                             mUndoMove.setVisibility(View.VISIBLE);

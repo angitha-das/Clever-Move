@@ -71,7 +71,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     public void gameTour() {
         Intent gameTourIntent = new Intent(this, IntroActivity.class);
         startActivity(gameTourIntent);
-        finish();
     }
 
 }

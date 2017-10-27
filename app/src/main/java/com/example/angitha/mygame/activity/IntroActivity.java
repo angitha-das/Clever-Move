@@ -81,9 +81,4 @@ public class IntroActivity extends MaterialIntroActivity {
         startActivity(i);
         finish();
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

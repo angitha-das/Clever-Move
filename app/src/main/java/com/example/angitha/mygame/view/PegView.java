@@ -117,19 +117,19 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		if (newSquare.isEmpty()) {
 			if (((Math.abs(newRow - oldRow) == 2) && (newCol == oldCol)) ||
 					(Math.abs(newCol - oldCol) == 2) && (newRow == oldRow)) {
-				if ((oldCol - newCol == -2) && (!squares[newRow][newCol - 1].isEmpty())) {
+				if ((oldCol - newCol == -2) && (squares[newRow][newCol - 1])!=null && (!squares[newRow][newCol - 1].isEmpty()) ) {
 					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
 					squares[newRow][newCol - 1].removeAllViews();
 					mGrid[newRow][newCol - 1] = 2;
-				} else if ((oldCol - newCol == 2) && (!squares[newRow][newCol + 1].isEmpty())) {
+				} else if ((oldCol - newCol == 2) && (squares[newRow][newCol + 1])!=null && (!squares[newRow][newCol + 1].isEmpty())) {
 					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
 					squares[newRow][newCol + 1].removeAllViews();
 					mGrid[newRow][newCol + 1] = 2;
-				} else if ((oldRow - newRow == -2) && (!squares[newRow - 1][newCol].isEmpty())) {
+				} else if ((oldRow - newRow == -2)  && (squares[newRow - 1][newCol])!=null && (!squares[newRow - 1][newCol].isEmpty())) {
 					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
 					squares[newRow - 1][newCol].removeAllViews();
 					mGrid[newRow - 1][newCol] = 2;
-				} else if ((oldRow - newRow == 2) && (!squares[newRow + 1][newCol].isEmpty())) {
+				} else if ((oldRow - newRow == 2) && (squares[newRow + 1][newCol])!=null && (!squares[newRow + 1][newCol].isEmpty())) {
 					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
 					squares[newRow + 1][newCol].removeAllViews();
 					mGrid[newRow + 1][newCol] = 2;
