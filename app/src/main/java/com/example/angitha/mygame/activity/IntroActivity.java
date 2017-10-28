@@ -1,7 +1,9 @@
 package com.example.angitha.mygame.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,8 +23,7 @@ public class IntroActivity extends MaterialIntroActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GameLevels.getInstance().fromMenu=false;
-        GameLevels.getInstance().gameTour=true;
+
         enableLastSlideAlphaExitTransition(false);
 
         getBackButtonTranslationWrapper()
@@ -32,40 +33,45 @@ public class IntroActivity extends MaterialIntroActivity {
                         view.setAlpha(percentage);
                     }
                 });
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!prefs.getBoolean("first_time", false) || GameLevels.getInstance().fromMenu) {
 
-        addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.first_slide_background)
-                        .buttonsColor(R.color.first_slide_buttons)
-                        .image(R.drawable.logo)
-                        .title("Brainvita")
-                        .description("A solo strategy game for age group 5" +
-                                " and above and an ideal game for adults too")
-                        .build());
+            GameLevels.getInstance().fromMenu = false;
+            GameLevels.getInstance().gameTour = true;
 
-        addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.second_slide_background)
-                .buttonsColor(R.color.second_slide_buttons)
-                .title("How To Play?")
-                .description("Start by jumping the grids either horizontally or vertically " +
-                        "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
-                .build());
+            addSlide(new SlideFragmentBuilder()
+                    .backgroundColor(R.color.first_slide_background)
+                    .buttonsColor(R.color.first_slide_buttons)
+                    .image(R.drawable.logo)
+                    .title("Brainvita")
+                    .description("A solo strategy game for age group 5" +
+                            " and above and an ideal game for adults too")
+                    .build());
 
-        addSlide(new CustomSlide());
+            addSlide(new SlideFragmentBuilder()
+                    .backgroundColor(R.color.second_slide_background)
+                    .buttonsColor(R.color.second_slide_buttons)
+                    .title("How To Play?")
+                    .description("Start by jumping the grids either horizontally or vertically " +
+                            "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
+                    .build());
 
-        addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.third_slide_background)
-                        .buttonsColor(R.color.third_slide_buttons)
-                        .title("We provide best tools")
-                        .description("ever")
-                        .build());
+            addSlide(new SlideFragmentBuilder()
+                    .backgroundColor(R.color.fourth_slide_background)
+                    .buttonsColor(R.color.fourth_slide_buttons)
+                    .title("That's it")
+                    .description("Would you join us?")
+                    .build());
 
-        addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.fourth_slide_background)
-                .buttonsColor(R.color.fourth_slide_buttons)
-                .title("That's it")
-                .description("Would you join us?")
-                .build());
+            addSlide(new CustomSlide());
 
+        }else{
+            GameLevels.getInstance().fromMenu=true;
+            GameLevels.getInstance().gameTour=false;
+            Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
     @Override
@@ -75,5 +81,13 @@ public class IntroActivity extends MaterialIntroActivity {
         Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
         startActivity(i);
         finish();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("first_time", true);
+        editor.apply();
     }
 }

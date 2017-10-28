@@ -43,7 +43,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         ScaleAnimation scaleIn = new ScaleAnimation(0.6f, 0.9f, 0.6f, 0.9f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
-        scaleIn.setDuration(500);
+        scaleIn.setDuration(700);
         scaleIn.setRepeatCount(Animation.INFINITE);
         scaleIn.setRepeatMode(Animation.REVERSE);
         play_button.startAnimation(scaleIn);
@@ -72,7 +72,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     public void gameTour() {
         Intent gameTourIntent = new Intent(this, IntroActivity.class);
         startActivity(gameTourIntent);
+        gameLevels.fromMenu = true;
         finish();
     }
-
 }

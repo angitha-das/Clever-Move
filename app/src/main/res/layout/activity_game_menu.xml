@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.angitha.mygame.view.MenuView android:id="@+id/menuView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.angitha.mygame.view.MenuView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     tools:context="com.example.angitha.mygame.activity.GameMenuActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:layout_editor_absoluteY="25dp">
 
     <TextView
         android:id="@+id/app_name"
@@ -35,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/play"
-        app:layout_constraintBottom_toTopOf="@+id/sound"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_name" />
@@ -45,67 +46,78 @@
         android:id="@+id/levels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:src="@drawable/levels"
-        app:layout_constraintStart_toStartOf="@+id/play"
-        app:layout_constraintTop_toBottomOf="@+id/play" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/info" />
     <ImageView
-        android:id="@+id/sound"
+        android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/music"
-        android:visibility="gone"
+        android:src="@drawable/info"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/theme"
-        app:layout_constraintStart_toEndOf="@+id/levels" />
+        app:layout_constraintEnd_toStartOf="@+id/gameTour"
+        app:layout_constraintStart_toEndOf="@+id/levels"
+        app:layout_constraintTop_toTopOf="@+id/gameTour" />
+
+    <ImageView
+        android:id="@+id/gameTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/tour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/like"
+        app:layout_constraintStart_toEndOf="@+id/info" />
+
 
     <ImageView
         android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:src="@drawable/like"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/levels"
-        app:layout_constraintTop_toBottomOf="@+id/levels" />
+        app:layout_constraintEnd_toStartOf="@+id/share"
+        app:layout_constraintStart_toEndOf="@+id/gameTour"
+        app:layout_constraintTop_toTopOf="@+id/gameTour" />
 
     <ImageView
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:src="@drawable/share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gameTour"
-        app:layout_constraintTop_toBottomOf="@+id/gameTour" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/like"
+        app:layout_constraintTop_toTopOf="@+id/like" />
+
+    <ImageView
+        android:id="@+id/sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/music"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/achievements"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:src="@drawable/trophy"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/gameTour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/info"
-        app:layout_constraintEnd_toEndOf="@+id/play"
-        app:layout_constraintTop_toBottomOf="@+id/play" />
+        android:visibility="gone" />
 
 </com.example.angitha.mygame.view.MenuView>

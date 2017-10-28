@@ -63,6 +63,7 @@ public class GamePlayController{
     private  ImageView step1;
     private  ImageView step2;
     private  ImageView step3;
+    private TextView textView;
     private boolean undo = false;
     private boolean undoAnim = true;
     private Drawable emptySquare;
@@ -81,7 +82,7 @@ public class GamePlayController{
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
-            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove, ConstraintLayout gameBackground) {
+            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove,ConstraintLayout gameBackground) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mLevelIndicator = levelIndicator;
@@ -99,13 +100,14 @@ public class GamePlayController{
         }
     }
 
-    public GamePlayController(Context context, BoardView boardView,ImageView step1, ImageView step2, ImageView step3,ConstraintLayout gameBackground) {
+    public GamePlayController(Context context, BoardView boardView,ImageView step1, ImageView step2, ImageView step3,TextView textView,ConstraintLayout gameBackground) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mGameBackground = gameBackground;
         this.step1 = step1;
         this.step2 = step2;
         this.step3 = step3;
+        this.textView = textView;
         initialize();
         setScore(mTotalScore);
         if (mBoardView != null) {
@@ -327,6 +329,7 @@ public class GamePlayController{
                                 step1.setVisibility(View.INVISIBLE);
                                 step2.setVisibility(View.INVISIBLE);
                                 step3.setVisibility(View.INVISIBLE);
+                                textView.setVisibility(View.VISIBLE);
                             }
                         }
                         if(!mGameLevels.gameTour && mUndoMove !=null){

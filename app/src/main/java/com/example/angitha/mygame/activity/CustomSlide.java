@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.activity;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
@@ -23,6 +25,7 @@ import agency.tango.materialintroscreen.SlideFragment;
 public class CustomSlide extends SlideFragment {
     private GamePlayController mGameController;
     GameLevels gameLevels = GameLevels.getInstance();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,8 +35,11 @@ public class CustomSlide extends SlideFragment {
         ImageView step1 = view.findViewById(R.id.step1_img);
         ImageView step2 = view.findViewById(R.id.step2_img);
         ImageView step3 = view.findViewById(R.id.step3_img);
+        TextView textView = view.findViewById(R.id.tour_completed);
+
+
         gameLevels.gameTour = true;
-        mGameController = new GamePlayController(getContext(), boardView,step1,step2,step3,gameBackground);
+        mGameController = new GamePlayController(getContext(), boardView,step1,step2,step3,textView,gameBackground);
         return view;
     }
 

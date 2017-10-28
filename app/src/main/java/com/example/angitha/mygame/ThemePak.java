@@ -50,7 +50,7 @@ public class ThemePak {
     }
 
     public int getHoverCellColor(int theme_id){
-        return empty_cell_color[theme_id];
+        return hover_cell_color[theme_id];
     }
 
     public int getPrimaryCellColor(int theme_id){

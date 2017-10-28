@@ -21,5 +21,6 @@
 
 
     <string name="error_message">Complete the game and move forward.</string>
+    <string name="tour_completed">Awesome!\nThat\'s it!</string>
 
 </resources>

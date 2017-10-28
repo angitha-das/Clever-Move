@@ -1,11 +1,13 @@
 package com.example.angitha.mygame.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -54,5 +56,9 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
         MyLevelsAdapter adapter = new MyLevelsAdapter(getApplicationContext(),levelList, logos);
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(LevelsRecyclerActivity.this, 3));
         recyclerViewLevels.setAdapter(adapter);
+    }
+
+    public void pressBack(View view) {
+        finish();
     }
 }
