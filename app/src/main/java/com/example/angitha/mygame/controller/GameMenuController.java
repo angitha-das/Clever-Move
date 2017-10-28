@@ -25,6 +25,8 @@ public class GameMenuController implements View.OnClickListener{
                 break;
             case R.id.levels:mListener.showAllLevels();
                 break;
+            case R.id.info:mListener.aboutInfo();
+                break;
             case R.id.gameTour:mListener.gameTour();
                  break;
             case R.id.achievements:
@@ -47,5 +49,7 @@ public class GameMenuController implements View.OnClickListener{
         void onPlay(GameRules gameRules);
         void showAllLevels();
         void gameTour();
+        void aboutInfo();
+
     }
 }

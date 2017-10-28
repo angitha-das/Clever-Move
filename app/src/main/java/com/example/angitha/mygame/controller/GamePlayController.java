@@ -182,8 +182,8 @@ public class GamePlayController{
         ThemePak mPak = ThemePak.getInstance();
 
         mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, mPak.getBackground(themeId)));
-        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, mPak.getEmptyCellColor(themeId)),dpToPixels(2),dpToPixels(5));
         hoverSquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext,mPak.getHoverCellColor(themeId)),dpToPixels(2),dpToPixels(5));
+        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, mPak.getEmptyCellColor(themeId)),dpToPixels(2),dpToPixels(5));
         cellDrawable =mPak.createDrawable(mContext,dpToPixels(5), ContextCompat.getColor(mContext, mPak.getPrimaryCellColor(themeId)),ContextCompat.getColor(mContext,  mPak.getSecondaryCellColor(themeId)));
 
     }

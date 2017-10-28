@@ -75,4 +75,13 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         gameLevels.fromMenu = true;
         finish();
     }
+
+    @Override
+    public void aboutInfo() {
+        Intent aboutInfoIntent = new Intent(this, About.class);
+        startActivity(aboutInfoIntent);
+        gameLevels.fromMenu = true;
+        finish();
+    }
+
 }
