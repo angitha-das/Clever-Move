@@ -13,8 +13,8 @@
         android:icon="@mipmap/ic_launcher_s"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_r"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".SplashActivity"
@@ -28,18 +28,16 @@
         <activity
             android:name=".activity.IntroActivity"
             android:theme="@style/Theme.Intro" />
-        <activity
-            android:name=".activity.GameMenuActivity"/>
-        <activity
-            android:name=".activity.GamePlayActivity" />
-        <activity
-            android:name=".activity.LevelsRecyclerActivity" />
+        <activity android:name=".activity.GameMenuActivity" />
+        <activity android:name=".activity.GamePlayActivity" />
+        <activity android:name=".activity.LevelsRecyclerActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".activity.About"></activity>
+        <activity android:name=".activity.About" />
+        <activity android:name=".activity.GameCompleted"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import agency.tango.materialintroscreen.animations.IViewTranslation;
 
 public class IntroActivity extends MaterialIntroActivity {
 
+    String value = "notFromMenu";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +34,16 @@ public class IntroActivity extends MaterialIntroActivity {
                         view.setAlpha(percentage);
                     }
                 });
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!prefs.getBoolean("first_time", false) || GameLevels.getInstance().fromMenu) {
 
-            GameLevels.getInstance().fromMenu = false;
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            value = extras.getString("isFromMenu");
+        }
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!prefs.getBoolean("first_time", false) || value.equalsIgnoreCase("yesFromMenu")) {
+
             GameLevels.getInstance().gameTour = true;
 
             addSlide(new SlideFragmentBuilder()
@@ -66,7 +73,6 @@ public class IntroActivity extends MaterialIntroActivity {
             addSlide(new CustomSlide());
 
         }else{
-            GameLevels.getInstance().fromMenu=true;
             GameLevels.getInstance().gameTour=false;
             Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
             startActivity(i);
@@ -76,7 +82,6 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onFinish() {
-        GameLevels.getInstance().fromMenu=true;
         GameLevels.getInstance().gameTour=false;
         Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
         startActivity(i);
@@ -85,9 +90,19 @@ public class IntroActivity extends MaterialIntroActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        GameLevels.getInstance().gameTour=false;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("first_time", true);
         editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(value.equalsIgnoreCase("yesFromMenu")){
+            Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
+            startActivity(i);
+        }
+        finish();
     }
 }

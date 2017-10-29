@@ -47,8 +47,6 @@ public class GamePlayActivity extends AppCompatActivity {
         ImageView nextLevel = findViewById(R.id.nextLevel);
         ImageView undo = findViewById(R.id.undo);
 
-
-
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

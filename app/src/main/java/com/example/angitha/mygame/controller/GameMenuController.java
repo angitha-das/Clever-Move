@@ -50,6 +50,5 @@ public class GameMenuController implements View.OnClickListener{
         void showAllLevels();
         void gameTour();
         void aboutInfo();
-
     }
 }

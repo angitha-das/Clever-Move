@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GameMenuController;
+import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
@@ -26,6 +27,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     GameLevels gameLevels = GameLevels.getInstance();
     ImageView play_button;
     Intent gamePlayIntent;
+    private GamePlayController mGameController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game_menu);
+
         MenuView menuView = findViewById(R.id.menuView);
 
         TextView title = findViewById(R.id.app_name);
@@ -71,8 +74,8 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     @Override
     public void gameTour() {
         Intent gameTourIntent = new Intent(this, IntroActivity.class);
+        gameTourIntent.putExtra("isFromMenu", "yesFromMenu");
         startActivity(gameTourIntent);
-        gameLevels.fromMenu = true;
         finish();
     }
 
@@ -80,8 +83,11 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     public void aboutInfo() {
         Intent aboutInfoIntent = new Intent(this, About.class);
         startActivity(aboutInfoIntent);
-        gameLevels.fromMenu = true;
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        mGameController.exitGame();
+    }
 }

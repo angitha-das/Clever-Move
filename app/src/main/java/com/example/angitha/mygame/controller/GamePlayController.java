@@ -2,6 +2,7 @@ package com.example.angitha.mygame.controller;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.CustomSlide;
+import com.example.angitha.mygame.activity.GameCompleted;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
@@ -91,12 +93,16 @@ public class GamePlayController{
         this.mUndoMove = undoMove;
         this.mGameBackground = gameBackground;
 
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        if (mBoardView != null) {
-            mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            if (mBoardView != null) {
+                mBoardView.initialize(this, mGrid, new SquareDragListener(), new PegTouchListener());
+            }
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
         }
     }
 
@@ -108,11 +114,17 @@ public class GamePlayController{
         this.step2 = step2;
         this.step3 = step3;
         this.textView = textView;
-        initialize();
-        setScore(mTotalScore);
-        if (mBoardView != null) {
-            mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
+
+        if(initialize()){
+            setScore(mTotalScore);
+            if (mBoardView != null) {
+                mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
+            }
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
         }
+
     }
 
     public boolean hideAnimationInUndo(){
@@ -142,7 +154,7 @@ public class GamePlayController{
     /**
      * initialize game board with default values and player turn
      */
-    private void initialize() {
+    private boolean initialize() {
         // unfinished the game
         mTotalScore = 0;
         // initialize board as per level
@@ -158,8 +170,9 @@ public class GamePlayController{
                 }
             }
         }else {
-                applyGameTheme();
-                undoAnim = true;
+            applyGameTheme();
+            undoAnim = true;
+            if (mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getLastLevel()) {
                 int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
                 if (!mGameLevels.gameTour) {
                     mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
@@ -172,8 +185,12 @@ public class GamePlayController{
                         }
                     }
                 }
-
+            }else{
+                mGameLevels.fromMenu=false;
+                return false;
+            }
         }
+        return true;
     }
 
     private void applyGameTheme() {
@@ -196,22 +213,30 @@ public class GamePlayController{
         undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)-1);
         mGameLevels.fromMenu = false;
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            mBoardView.resetBoard();
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
+        }
     }
 
     public void playNextGameLevel() {
         undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
         mGameLevels.fromMenu = false;
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            mBoardView.resetBoard();
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
+        }
     }
 
     /**
@@ -219,20 +244,28 @@ public class GamePlayController{
      */
     public void restartGame() {
         undo=false;
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            mBoardView.resetBoard();
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
+        }
     }
 
     public void undoPreviousMove() {
         undo=true;
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            mBoardView.resetBoard();
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
+        }
     }
 
     private void setScore(int s) {
@@ -263,11 +296,15 @@ public class GamePlayController{
     }
     private void saveGameLevelCompleted(){
         undo = false;
-        initialize();
-        previousNextLevelSetup();
-        setScore(mTotalScore);
-        updateTextViewScore();
-        mBoardView.resetBoard();
+        if(initialize()) {
+            previousNextLevelSetup();
+            setScore(mTotalScore);
+            updateTextViewScore();
+            mBoardView.resetBoard();
+        }else{
+            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+            exitGame();
+        }
     }
 
     private void alertProceedToNextLevel(final int msgId, final int nowWhat) {
@@ -312,6 +349,7 @@ public class GamePlayController{
 				 */
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
+                    //if(view.getparent()!=null){}
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares(),mGrid,mGridCopy)) {
                         mScore = getScore();
@@ -359,7 +397,6 @@ public class GamePlayController{
             }
             return true;
         }
-
     }
 
     /**
@@ -390,6 +427,4 @@ public class GamePlayController{
     public PegLayout[][] getSquares() {
         return squares;
     }
-
-
 }

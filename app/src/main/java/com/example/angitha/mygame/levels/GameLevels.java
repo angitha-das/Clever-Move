@@ -12,13 +12,13 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
  */
 
 public class GameLevels {
-    private int totalNumberOfLevels = 12;
+    private int totalNumberOfLevels = 5;
     private static final String KEY_LEVEL = "levelCrossed";
 
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
     public boolean fromMenu = false;
-    public boolean gameTour = true;
+    public boolean gameTour = false;
 
     /*
     0 invisible
@@ -192,13 +192,13 @@ public class GameLevels {
             case GameRules.Level.LEVEL3:return gridForLevel3;
             case GameRules.Level.LEVEL4:return gridForLevel4;
             case GameRules.Level.LEVEL5:return gridForLevel5;
-            case GameRules.Level.LEVEL6:return gridForLevel6;
-            case GameRules.Level.LEVEL7:return gridForLevel7;
-            case GameRules.Level.LEVEL8:return gridForLevel8;
-            case GameRules.Level.LEVEL9:return gridForLevel9;
-            case GameRules.Level.LEVEL10:return gridForLevel10;
-            case GameRules.Level.LEVEL11:return gridForLevel11;
-            case GameRules.Level.LEVEL12:return gridForLevel12;
+//            case GameRules.Level.LEVEL6:return gridForLevel6;
+//            case GameRules.Level.LEVEL7:return gridForLevel7;
+//            case GameRules.Level.LEVEL8:return gridForLevel8;
+//            case GameRules.Level.LEVEL9:return gridForLevel9;
+//            case GameRules.Level.LEVEL10:return gridForLevel10;
+//            case GameRules.Level.LEVEL11:return gridForLevel11;
+//            case GameRules.Level.LEVEL12:return gridForLevel12;
             default:break;
         }
         return new int[0][];
@@ -223,10 +223,14 @@ public class GameLevels {
     }
 
     public void setGameLevelToPlay(int level){
-        levelToPlay = level;
+            levelToPlay = level;
     }
 
     public int getHighestLevelCrossed(Context mContext){
       return getFromPrefs(mContext, KEY_LEVEL, 0);
+    }
+
+    public int getLastLevel(){
+        return 5;
     }
 }
