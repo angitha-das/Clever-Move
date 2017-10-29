@@ -85,9 +85,4 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         startActivity(aboutInfoIntent);
         finish();
     }
-
-    @Override
-    public void onBackPressed() {
-        mGameController.exitGame();
-    }
 }
