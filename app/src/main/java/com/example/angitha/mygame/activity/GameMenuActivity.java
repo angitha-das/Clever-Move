@@ -81,6 +81,5 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     public void aboutInfo() {
         Intent aboutInfoIntent = new Intent(this, About.class);
         startActivity(aboutInfoIntent);
-        finish();
     }
 }

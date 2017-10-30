@@ -16,8 +16,4 @@ class GameCompleted : AppCompatActivity() {
 
         setContentView(R.layout.activity_game_completed)
     }
-
-    override fun onBackPressed() {
-        finish()
-    }
 }

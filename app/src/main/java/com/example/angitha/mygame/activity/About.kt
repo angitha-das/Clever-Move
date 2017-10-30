@@ -1,6 +1,5 @@
 package com.example.angitha.mygame.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
@@ -16,11 +15,5 @@ class About : AppCompatActivity() {
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         setContentView(R.layout.activity_about)
-    }
-
-    override fun onBackPressed() {
-        val i = Intent(this, GameMenuActivity::class.java)
-        startActivity(i)
-        finish()
     }
 }
