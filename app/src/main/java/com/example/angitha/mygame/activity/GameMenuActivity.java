@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GameMenuController;
-import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.MenuView;
@@ -27,7 +26,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     GameLevels gameLevels = GameLevels.getInstance();
     ImageView play_button;
     Intent gamePlayIntent;
-    private GamePlayController mGameController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
