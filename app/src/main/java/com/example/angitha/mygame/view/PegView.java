@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.example.angitha.mygame.Pair;
+
 
 /**
  * PegView is a subclassed ImageView for storing the Pegs
@@ -15,6 +17,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
     public boolean youHaveLost;
 	private int row;
 	private int col;
+	Pair[] predictMoves = new Pair[4];
 
 	/**
 	 * Takes row and column as well as superclass constructor
@@ -174,4 +177,68 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return false;
 	}
 
+	public Pair[] predict(PegLayout chosenSquare, int[][] mGrid) {
+
+		if (!chosenSquare.isEmpty()) {
+			if(checkLeftMovePossibility(chosenSquare,mGrid)!=null){
+			predictMoves[0]=checkLeftMovePossibility(chosenSquare,mGrid);
+			}
+			if(checkRightMovePossibility(chosenSquare,mGrid)!=null){
+				predictMoves[1]=checkRightMovePossibility(chosenSquare,mGrid);
+			}
+			if(checkTopMovePossibility(chosenSquare,mGrid)!=null){
+				predictMoves[2]=checkTopMovePossibility(chosenSquare,mGrid);
+			}
+			if(checkBottomMovePossibility(chosenSquare,mGrid)!=null){
+				predictMoves[3]=checkBottomMovePossibility(chosenSquare,mGrid);
+			}
+		}
+		return predictMoves;
+	}
+
+	private Pair checkBottomMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+		int i = chosenSquare.getRow();
+		int j = chosenSquare.getColumn();
+				if (mGrid[i][j] == 1) {
+					if(((j-1)>0 && (j-1)<mGrid[i].length && (j-2)>0 && (j-2)<mGrid[i].length && (mGrid[i][j - 1] == 1 && mGrid[i][j - 2] == 2))){
+						return new Pair(i,j-2);
+					}
+				}
+				return null;
+			}
+
+
+	private Pair checkTopMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+		int i = chosenSquare.getRow();
+		int j = chosenSquare.getColumn();
+		if (mGrid[i][j] == 1) {
+			if(((j+1)>0 && (j+1)<mGrid[i].length && (j+2)>0 && (j+2)<mGrid[i].length && (mGrid[i][j + 1] == 1 && mGrid[i][j + 2] == 2))){
+				return new Pair(i,j+2);
+			}
+		}
+		return null;
+
+	}
+
+	private Pair checkRightMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+		int i = chosenSquare.getRow();
+		int j = chosenSquare.getColumn();
+		if (mGrid[i][j] == 1) {
+			if(((i+1)>0 && (i+1)<mGrid[i].length && (i+2)>0 && (i+2)<mGrid[i].length && (mGrid[i + 1][j] == 1 && mGrid[i + 2][j] == 2))){
+				return new Pair(i+2,j);
+			}
+		}
+		return null;
+	}
+
+	private Pair checkLeftMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+		int i = chosenSquare.getRow();
+		int j = chosenSquare.getColumn();
+		if (mGrid[i][j] == 1) {
+			if(((i-1)>0 && (i-1)<mGrid[i].length && (i-2)>0 && (i-2)<mGrid[i].length && (mGrid[i - 1][j] == 1 && mGrid[i - 2][j] == 2))){
+				return new Pair(i-2,j);
+			}
+		}
+		return null;
+	}
 }

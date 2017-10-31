@@ -83,9 +83,9 @@ public class BoardView extends TableLayout {
 		init();
 		removeAllViewsInLayout();
 		int height = (((Activity) getContext()).getWindowManager()
-				.getDefaultDisplay().getWidth())/10;
+				.getDefaultDisplay().getWidth())/9;
 		int width = (((Activity) getContext()).getWindowManager()
-				.getDefaultDisplay().getWidth())/10;
+				.getDefaultDisplay().getWidth())/9;
 		for (int r = 0; r < Row; r++) {
 			row[r] = new TableRow(mContext);
 			for (int c = 0; c < Col; c++) {

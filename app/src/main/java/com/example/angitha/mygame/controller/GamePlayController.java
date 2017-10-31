@@ -3,6 +3,8 @@ package com.example.angitha.mygame.controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
@@ -14,9 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.angitha.mygame.Pair;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
-import com.example.angitha.mygame.activity.CustomSlide;
 import com.example.angitha.mygame.activity.GameCompleted;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
@@ -338,6 +340,20 @@ public class GamePlayController{
                 case DragEvent.ACTION_DRAG_STARTED:
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
+
+                    view = (PegView) event.getLocalState();
+                    PegLayout chosenSquare = (PegLayout) v;
+                    PegLayout[][] squares = getSquares();
+                    Pair[] allPredictions;
+                    allPredictions  = view.predict(chosenSquare, mGrid);
+                    for (Pair allPrediction : allPredictions) {
+                        if (allPrediction != null) {
+                            int x = allPrediction.getI();
+                            int y = allPrediction.getJ();
+                            squares[x][y].setBackgroundColor(Color.CYAN);
+                        }
+                    }
+
                     v.setBackgroundDrawable(hoverSquare);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
