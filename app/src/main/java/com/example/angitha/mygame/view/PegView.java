@@ -18,6 +18,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	private int row;
 	private int col;
 
+	private final int[][] mGridCopy;
 	/**
 	 * Takes row and column as well as superclass constructor
 	 *
@@ -152,6 +153,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	}
 
 	private void copyBoardStatusBeforeNextMove(int[][]mGridCopy,int[][] mGrid) {
+		mGridCopy = new int[mGrid.length][mGrid[0].length];
 		for (int r = 0; r < mGridCopy.length; r++) {
 			for (int c = 0; c < mGridCopy[0].length; c++) {
 				mGridCopy[r][c] = mGrid[r][c];

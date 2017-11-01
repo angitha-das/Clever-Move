@@ -51,7 +51,6 @@ public class GamePlayController{
      */
     private int[][] mGrid;
 
-    private final int[][] mGridCopy = new int[ROWS][COLS];
     /**
      * mScore, contains number of Pegs in the game level
      */
