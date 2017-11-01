@@ -17,7 +17,6 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
     public boolean youHaveLost;
 	private int row;
 	private int col;
-	Pair[] predictMoves = new Pair[4];
 
 	/**
 	 * Takes row and column as well as superclass constructor
@@ -178,7 +177,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	}
 
 	public Pair[] predict(PegLayout chosenSquare, int[][] mGrid) {
-
+		Pair[] predictMoves = new Pair[4];
 		if (!chosenSquare.isEmpty()) {
 			if(checkLeftMovePossibility(chosenSquare,mGrid)!=null){
 			predictMoves[0]=checkLeftMovePossibility(chosenSquare,mGrid);

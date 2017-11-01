@@ -338,14 +338,11 @@ public class GamePlayController{
             PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-
                     view = (PegView) event.getLocalState();
                     PegLayout chosenSquare = (PegLayout) v;
                     PegLayout[][] squares = getSquares();
-                    Pair[] allPredictions;
-                    allPredictions  = view.predict(chosenSquare, mGrid);
+
+                    Pair[] allPredictions  = view.predict(chosenSquare, mGrid);
                     for (Pair allPrediction : allPredictions) {
                         if (allPrediction != null) {
                             int x = allPrediction.getI();
@@ -353,7 +350,8 @@ public class GamePlayController{
                             squares[x][y].setBackgroundColor(Color.CYAN);
                         }
                     }
-
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
                     v.setBackgroundDrawable(hoverSquare);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
