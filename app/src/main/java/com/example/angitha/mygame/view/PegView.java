@@ -152,8 +152,8 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	}
 
 	private void copyBoardStatusBeforeNextMove(int[][]mGridCopy,int[][] mGrid) {
-		for (int r = 0; r < 9; r++) {
-			for (int c = 0; c < 9; c++) {
+		for (int r = 0; r < mGridCopy.length; r++) {
+			for (int c = 0; c < mGridCopy[0].length; c++) {
 				mGridCopy[r][c] = mGrid[r][c];
 			}
 		}
@@ -176,9 +176,10 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return false;
 	}
 
-	public Pair[] predict(PegLayout chosenSquare, int[][] mGrid) {
+	public Pair[] predict(PegView chosenSquare, int[][] mGrid) {
 		Pair[] predictMoves = new Pair[4];
-		if (!chosenSquare.isEmpty()) {
+		//if (!chosenSquare.isEmpty())
+		{
 			if(checkLeftMovePossibility(chosenSquare,mGrid)!=null){
 			predictMoves[0]=checkLeftMovePossibility(chosenSquare,mGrid);
 			}
@@ -195,7 +196,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return predictMoves;
 	}
 
-	private Pair checkBottomMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+	private Pair checkBottomMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 				if (mGrid[i][j] == 1) {
@@ -207,7 +208,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 			}
 
 
-	private Pair checkTopMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+	private Pair checkTopMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {
@@ -219,7 +220,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 
 	}
 
-	private Pair checkRightMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+	private Pair checkRightMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {
@@ -230,7 +231,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return null;
 	}
 
-	private Pair checkLeftMovePossibility(PegLayout chosenSquare,int[][] mGrid) {
+	private Pair checkLeftMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {

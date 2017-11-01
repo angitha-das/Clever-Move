@@ -3,8 +3,6 @@ package com.example.angitha.mygame.controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
@@ -41,17 +39,17 @@ public class GamePlayController{
     /**
      * number of columns
      */
-    private static final int COLS = 9;
+    private static int COLS =0;
 
     /**
      * number of rows
      */
-    private static final int ROWS = 9;
+    private static int ROWS =0;
 
     /**
      * mGrid, contains 0 for empty cell or player ID
      */
-    private final int[][] mGrid = new int[ROWS][COLS];
+    private int[][] mGrid;
 
     private final int[][] mGridCopy = new int[ROWS][COLS];
     /**
@@ -81,7 +79,7 @@ public class GamePlayController{
     private final Context mContext;
     private final BoardView mBoardView;
 
-    private PegLayout[][] squares = new PegLayout[9][9] ;
+    private PegLayout[][] squares = new PegLayout[ROWS][COLS] ;
 
     private GameLevels mGameLevels = GameLevels.getInstance();
 
@@ -161,10 +159,13 @@ public class GamePlayController{
         mTotalScore = 0;
         // initialize board as per level
         if(undo){
+            ROWS = mGridCopy.length;
+            COLS =  mGridCopy[0].length;
+            mGrid = new int[ROWS][COLS];
             undoAnim = false;
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
-            for (int r = 0; r < 9; r++) {
-                for (int c = 0; c < 9; c++) {
+            for (int r = 0; r < ROWS; r++) {
+                for (int c = 0; c < COLS; c++) {
                     mGrid[r][c] = mGridCopy[r][c];
                     if (mGridCopy[r][c] == 1) {
                         ++mTotalScore;
@@ -176,11 +177,14 @@ public class GamePlayController{
             undoAnim = true;
             if (mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getLastLevel()) {
                 int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
+                ROWS = mLevelGrid.length;
+                COLS =  mLevelGrid[0].length;
+                mGrid = new int[ROWS][COLS];
                 if (!mGameLevels.gameTour) {
                     mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
                 }
-                for (int r = 0; r < 9; r++) {
-                    for (int c = 0; c < 9; c++) {
+                for (int r = 0; r < ROWS; r++) {
+                    for (int c = 0; c < COLS; c++) {
                         mGrid[r][c] = mLevelGrid[r][c];
                         if (mLevelGrid[r][c] == 1) {
                             ++mTotalScore;
@@ -296,6 +300,7 @@ public class GamePlayController{
             }
         }
     }
+
     private void saveGameLevelCompleted(){
         undo = false;
         if(initialize()) {
@@ -338,29 +343,11 @@ public class GamePlayController{
             PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    view = (PegView) event.getLocalState();
-                    PegLayout chosenSquare = (PegLayout) v;
-                    PegLayout[][] squares = getSquares();
-
-                    Pair[] allPredictions  = view.predict(chosenSquare, mGrid);
-                    for (Pair allPrediction : allPredictions) {
-                        if (allPrediction != null) {
-                            int x = allPrediction.getI();
-                            int y = allPrediction.getJ();
-                            squares[x][y].setBackgroundColor(Color.CYAN);
-                        }
-                    }
                     break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    v.setBackgroundDrawable(hoverSquare);
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-                    v.setBackgroundDrawable(emptySquare);
-                    break;
-                case DragEvent.ACTION_DROP:
-				/*
-				 * When Peg is dropped move method is called and score is updated
-				 */
+                 case DragEvent.ACTION_DROP:
+				    /*
+				    * When Peg is dropped move method is called and score is updated
+				    */
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     //if(view.getparent()!=null){}
@@ -423,6 +410,18 @@ public class GamePlayController{
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                PegView chosenSquare = (PegView) v;
+                PegLayout[][] squares = getSquares();
+                Pair[] allPredictions  = chosenSquare.predict(chosenSquare, mGrid);
+                for (Pair allPrediction : allPredictions) {
+                    if (allPrediction != null) {
+                        int x = allPrediction.getI();
+                        int y = allPrediction.getJ();
+                        squares[x][y].setBackgroundDrawable(hoverSquare);
+                    }
+                }
+
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(null, shadowBuilder, v, 0);
                 v.setVisibility(View.INVISIBLE);
