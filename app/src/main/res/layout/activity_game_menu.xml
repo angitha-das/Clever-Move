@@ -5,9 +5,8 @@
     android:id="@+id/menuView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
-    tools:context="com.example.angitha.mygame.activity.GameMenuActivity"
-    tools:layout_editor_absoluteY="25dp">
+    android:background="@color/mid_purple"
+    tools:context="com.example.angitha.mygame.activity.GameMenuActivity">
 
     <TextView
         android:id="@+id/app_name"
@@ -25,7 +24,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/play"
         android:layout_width="wrap_content"
