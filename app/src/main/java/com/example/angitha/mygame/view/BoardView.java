@@ -2,13 +2,8 @@ package com.example.angitha.mygame.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -20,15 +15,16 @@ import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
 
+import static com.example.angitha.mygame.levels.GameLevels.COLS;
+import static com.example.angitha.mygame.levels.GameLevels.ROWS;
+
 /**
  * Created by angitha on 1/7/17.
  */
 
 public class BoardView extends TableLayout {
 
-	private int Row = 0;
-	private int Col = 0;
-
+	private int[][] mBoardMatrix;
 	private TableRow[] row;
 	private PegLayout[][] squares;
 	private PegView[][] pieces ;
@@ -38,7 +34,7 @@ public class BoardView extends TableLayout {
 
 	private Context mContext;
 
-	private int[][] mBoardMatrix;
+
 	private GamePlayController gamePlayController;
 
 	private GamePlayController.SquareDragListener squareDragListener;
@@ -66,12 +62,8 @@ public class BoardView extends TableLayout {
 						    GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
 		this.squareDragListener = squareDragListener;
 		this.pegTouchListener = pegTouchListener;
-		this.mBoardMatrix = boardMatrix;
-		this.squares = gamePlayController.getSquares();
 		this.gamePlayController = gamePlayController;
-		this.Row = mBoardMatrix.length;
-		this.Col = mBoardMatrix[0].length;
-		buildCells();
+		buildCells(boardMatrix);
 	}
 
 	/*
@@ -79,21 +71,23 @@ public class BoardView extends TableLayout {
 	* Sets rows and columns of PegLayouts and PegViews
 	*/
 
-	private void buildCells() {
+	public void buildCells(int[][] boardMatrix) {
+		this.mBoardMatrix = boardMatrix;
+		this.squares = gamePlayController.getSquares();
 		init();
 		removeAllViewsInLayout();
 		int height = (((Activity) getContext()).getWindowManager()
-				.getDefaultDisplay().getWidth())/mBoardMatrix.length;
+				.getDefaultDisplay().getWidth())/COLS;
 		int width = (((Activity) getContext()).getWindowManager()
-				.getDefaultDisplay().getWidth())/mBoardMatrix.length;
+				.getDefaultDisplay().getWidth())/COLS;
 
-		row  = new TableRow[Row];
-		pieces = new PegView[Row][Col];
+		row  = new TableRow[ROWS];
+		pieces = new PegView[ROWS][COLS];
 
 
-		for (int r = 0; r < Row; r++) {
+		for (int r = 0; r < ROWS; r++) {
 			row[r] = new TableRow(mContext);
-			for (int c = 0; c < Col; c++) {
+			for (int c = 0; c < COLS; c++) {
 				if (!(mBoardMatrix[r][c] == 0)) {
 					squares[r][c] = new PegLayout(mContext, r, c);
 					squares[r][c].setBackgroundDrawable(emptySquare);
@@ -118,8 +112,8 @@ public class BoardView extends TableLayout {
 			}
 			addView(row[r], new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		}
-		for (int r = 0; r < Row; r++) {
-			for (int c = 0; c < Col; c++) {
+		for (int r = 0; r < ROWS; r++) {
+			for (int c = 0; c < COLS; c++) {
 				PegView pegView = pieces[r][c];
 				if(pegView !=null){
 					if(gamePlayController.hideAnimationInUndo()){
@@ -144,10 +138,4 @@ public class BoardView extends TableLayout {
 		return pixels;
 	}
 
-	/**
-	 * Reset board for new game same level
-	 */
-	public void resetBoard() {
-		buildCells();
-	}
 }

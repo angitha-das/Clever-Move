@@ -19,6 +19,9 @@ public class GameLevels {
     public int levelToPlay;
     public boolean fromMenu = false;
     public boolean gameTour = false;
+    public static int ROWS;
+    public static int COLS;
+
 
     /*
     0 invisible
@@ -26,34 +29,27 @@ public class GameLevels {
     2 empty
      */
     private static int[][] gridForLevel1 = {
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,2,1,1,2,0,0,0},
+            {0,0,0,0,0,0},
+            {0,2,1,1,2,0},
+            {0,0,0,0,0,0}
+
     };
     private static int[][] gridForLevel2 = {
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,2,1,1,0,0,0},
-            {0,0,0,1,0,0,0,0,0},
-            {0,0,0,2,1,2,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
+
+            {0,0,0,0,0,0},
+            {0,2,1,1,0,0},
+            {0,1,0,0,0,0},
+            {0,2,1,2,0,0},
+            {0,0,0,0,0,0}
 
     };
     private static int[][] gridForLevel3 = {
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,1,1,1,0,0,0},
-            {0,0,0,1,0,0,0,0,0},
-            {0,0,0,2,1,2,1,0,0},
-            {0,0,0,1,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0},
+            {0,1,1,1,0,0},
+            {0,1,0,0,0,0},
+            {0,2,1,2,1,0},
+            {0,1,0,0,0,0},
+            {0,0,0,0,0,0}
 
     };
 
@@ -66,7 +62,8 @@ public class GameLevels {
             {0,0,0,0,1,0,0,0,0},
             {0,0,0,0,1,0,0,0,0},
             {0,0,0,0,2,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0}
+            {0,0,0,0,0,0,0,0,0},
+
     };
 
     private static int[][] gridForLevel5 = {
@@ -182,18 +179,66 @@ public class GameLevels {
 
     public static int[][] setGameBoard(int Level){
         switch (Level) {
-            case GameRules.Level.LEVEL1:return gridForLevel1;
-            case GameRules.Level.LEVEL2:return gridForLevel2;
-            case GameRules.Level.LEVEL3:return gridForLevel3;
-            case GameRules.Level.LEVEL4:return gridForLevel4;
-            case GameRules.Level.LEVEL5:return gridForLevel5;
-//            case GameRules.Level.LEVEL6:return gridForLevel6;
-//            case GameRules.Level.LEVEL7:return gridForLevel7;
-//            case GameRules.Level.LEVEL8:return gridForLevel8;
-//            case GameRules.Level.LEVEL9:return gridForLevel9;
-//            case GameRules.Level.LEVEL10:return gridForLevel10;
-//            case GameRules.Level.LEVEL11:return gridForLevel11;
-//            case GameRules.Level.LEVEL12:return gridForLevel12;
+            case GameRules.Level.LEVEL1:{
+                ROWS = gridForLevel1.length;
+                COLS =  gridForLevel1[0].length;
+                return gridForLevel1;
+            }
+            case GameRules.Level.LEVEL2:{
+                ROWS = gridForLevel2.length;
+                COLS =  gridForLevel2[0].length;
+                return gridForLevel2;
+            }
+            case GameRules.Level.LEVEL3:{
+                ROWS = gridForLevel3.length;
+                COLS =  gridForLevel3[0].length;
+                return gridForLevel3;
+            }
+            case GameRules.Level.LEVEL4:{
+                ROWS = gridForLevel4.length;
+                COLS =  gridForLevel4[0].length;
+                return gridForLevel4;
+            }
+            case GameRules.Level.LEVEL5:{
+                ROWS = gridForLevel5.length;
+                COLS =  gridForLevel5[0].length;
+                return gridForLevel5;
+            }
+//            case GameRules.Level.LEVEL6:{
+//                ROWS = gridForLevel6.length;
+//                COLS =  gridForLevel6[0].length;
+//                return gridForLevel6;
+//            }
+//            case GameRules.Level.LEVEL7:{
+//                ROWS = gridForLevel7.length;
+//                COLS =  gridForLevel7[0].length;
+//                return gridForLevel7;
+//            }
+//            case GameRules.Level.LEVEL8:{
+//                ROWS = gridForLevel8.length;
+//                COLS =  gridForLevel8[0].length;
+//                return gridForLevel8;
+//            }
+//            case GameRules.Level.LEVEL9:{
+//                ROWS = gridForLevel9.length;
+//                COLS =  gridForLevel9[0].length;
+//                return gridForLevel9;
+//            }
+//            case GameRules.Level.LEVEL10:{
+//                ROWS = gridForLevel10.length;
+//                COLS =  gridForLevel10[0].length;
+//                return gridForLevel10;
+//            }
+//            case GameRules.Level.LEVEL11:{
+//                ROWS = gridForLevel11.length;
+//                COLS =  gridForLevel11[0].length;
+//                return gridForLevel11;
+//            }
+//            case GameRules.Level.LEVEL12:{
+//                ROWS = gridForLevel12.length;
+//                COLS =  gridForLevel12[0].length;
+//                return gridForLevel12;
+//            }
             default:break;
         }
         return new int[0][];

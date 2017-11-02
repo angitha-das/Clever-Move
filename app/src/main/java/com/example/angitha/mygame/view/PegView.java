@@ -6,6 +6,9 @@ import android.view.View;
 
 import com.example.angitha.mygame.Pair;
 
+import static com.example.angitha.mygame.levels.GameLevels.COLS;
+import static com.example.angitha.mygame.levels.GameLevels.ROWS;
+
 
 /**
  * PegView is a subclassed ImageView for storing the Pegs
@@ -18,7 +21,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	private int row;
 	private int col;
 
-	private final int[][] mGridCopy;
+	public static int[][]  mGridCopy;
 	/**
 	 * Takes row and column as well as superclass constructor
 	 *
@@ -109,7 +112,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 	 * @param mGrid
 	 * @return bool
 	 */
-	public boolean move(PegLayout oldSquare, PegLayout newSquare, PegLayout[][] squares, int[][] mGrid,int[][] mGridCopy) {
+	public boolean move(PegLayout oldSquare, PegLayout newSquare, PegLayout[][] squares, int[][] mGrid) {
 		int newRow = newSquare.getRow();
 		int newCol = newSquare.getColumn();
 
@@ -121,19 +124,19 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 			if (((Math.abs(newRow - oldRow) == 2) && (newCol == oldCol)) ||
 					(Math.abs(newCol - oldCol) == 2) && (newRow == oldRow)) {
 				if ((oldCol - newCol == -2) && (squares[newRow][newCol - 1])!=null && (!squares[newRow][newCol - 1].isEmpty()) ) {
-					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
+					copyBoardStatusBeforeNextMove(mGrid);
 					squares[newRow][newCol - 1].removeAllViews();
 					mGrid[newRow][newCol - 1] = 2;
 				} else if ((oldCol - newCol == 2) && (squares[newRow][newCol + 1])!=null && (!squares[newRow][newCol + 1].isEmpty())) {
-					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
+					copyBoardStatusBeforeNextMove(mGrid);
 					squares[newRow][newCol + 1].removeAllViews();
 					mGrid[newRow][newCol + 1] = 2;
 				} else if ((oldRow - newRow == -2)  && (squares[newRow - 1][newCol])!=null && (!squares[newRow - 1][newCol].isEmpty())) {
-					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
+					copyBoardStatusBeforeNextMove(mGrid);
 					squares[newRow - 1][newCol].removeAllViews();
 					mGrid[newRow - 1][newCol] = 2;
 				} else if ((oldRow - newRow == 2) && (squares[newRow + 1][newCol])!=null && (!squares[newRow + 1][newCol].isEmpty())) {
-					copyBoardStatusBeforeNextMove(mGridCopy,mGrid);
+					copyBoardStatusBeforeNextMove(mGrid);
 					squares[newRow + 1][newCol].removeAllViews();
 					mGrid[newRow + 1][newCol] = 2;
 				} else {
@@ -152,23 +155,23 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return false;
 	}
 
-	private void copyBoardStatusBeforeNextMove(int[][]mGridCopy,int[][] mGrid) {
-		mGridCopy = new int[mGrid.length][mGrid[0].length];
-		for (int r = 0; r < mGridCopy.length; r++) {
-			for (int c = 0; c < mGridCopy[0].length; c++) {
+	private void copyBoardStatusBeforeNextMove(int[][] mGrid) {
+		mGridCopy = new int[ROWS][COLS];
+		for (int r = 0; r < ROWS; r++) {
+			for (int c = 0; c < COLS; c++) {
 				mGridCopy[r][c] = mGrid[r][c];
 			}
 		}
 	}
 
 	public boolean anyMoreMovesPossible(int[][] inputArr) {
-		for (int i = 0; i < inputArr.length; i++) {
-			for (int j = 0; j < inputArr[i].length; j++) {
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
 				if (inputArr[i][j] == 1) {
-						youHaveLost = (((j-1)>0 && (j-1)<inputArr[i].length && (j-2)>0 && (j-2)<inputArr[i].length && (inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2)) ||
-								((j+1)>0 && (j+1)<inputArr[i].length && (j+2)>0 && (j+2)<inputArr[i].length && (inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2))||
-								((i+1)>0 && (i+1)<inputArr[i].length && (i+2)>0 && (i+2)<inputArr[i].length && (inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2))||
-								((i-1)>0 && (i-1)<inputArr[i].length && (i-2)>0 && (i-2)<inputArr[i].length && (inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2)));
+						youHaveLost = (((j-1)>0 && (j-1)<COLS && (j-2)>0 && (j-2)<COLS && (inputArr[i][j - 1] == 1 && inputArr[i][j - 2] == 2)) ||
+								((j+1)>0 && (j+1)<COLS && (j+2)>0 && (j+2)<COLS && (inputArr[i][j + 1] == 1 && inputArr[i][j + 2] == 2))||
+								((i+1)>0 && (i+1)<ROWS && (i+2)>0 && (i+2)<ROWS && (inputArr[i + 1][j] == 1 && inputArr[i + 2][j] == 2))||
+								((i-1)>0 && (i-1)<ROWS && (i-2)>0 && (i-2)<ROWS && (inputArr[i - 1][j] == 1 && inputArr[i - 2][j] == 2)));
 						if(youHaveLost){
 							return true;//quit,you lost
 						}
@@ -202,7 +205,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 				if (mGrid[i][j] == 1) {
-					if(((j-1)>0 && (j-1)<mGrid[i].length && (j-2)>0 && (j-2)<mGrid[i].length && (mGrid[i][j - 1] == 1 && mGrid[i][j - 2] == 2))){
+					if(((j-1)>0 && (j-1)<COLS && (j-2)>0 && (j-2)<COLS && (mGrid[i][j - 1] == 1 && mGrid[i][j - 2] == 2))){
 						return new Pair(i,j-2);
 					}
 				}
@@ -214,7 +217,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {
-			if(((j+1)>0 && (j+1)<mGrid[i].length && (j+2)>0 && (j+2)<mGrid[i].length && (mGrid[i][j + 1] == 1 && mGrid[i][j + 2] == 2))){
+			if(((j+1)>0 && (j+1)<COLS && (j+2)>0 && (j+2)<COLS && (mGrid[i][j + 1] == 1 && mGrid[i][j + 2] == 2))){
 				return new Pair(i,j+2);
 			}
 		}
@@ -226,7 +229,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {
-			if(((i+1)>0 && (i+1)<mGrid[i].length && (i+2)>0 && (i+2)<mGrid[i].length && (mGrid[i + 1][j] == 1 && mGrid[i + 2][j] == 2))){
+			if(((i+1)>0 && (i+1)<ROWS && (i+2)>0 && (i+2)<ROWS && (mGrid[i + 1][j] == 1 && mGrid[i + 2][j] == 2))){
 				return new Pair(i+2,j);
 			}
 		}
@@ -237,7 +240,7 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();
 		if (mGrid[i][j] == 1) {
-			if(((i-1)>0 && (i-1)<mGrid[i].length && (i-2)>0 && (i-2)<mGrid[i].length && (mGrid[i - 1][j] == 1 && mGrid[i - 2][j] == 2))){
+			if(((i-1)>0 && (i-1)<ROWS && (i-2)>0 && (i-2)<ROWS && (mGrid[i - 1][j] == 1 && mGrid[i - 2][j] == 2))){
 				return new Pair(i-2,j);
 			}
 		}

@@ -84,7 +84,8 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-        mGameController = new GamePlayController(this, boardView, levelIndicator, previousLevel, nextLevel, undo, gameBackground);
+        mGameController = new GamePlayController(this, boardView, levelIndicator,
+                previousLevel, nextLevel,undo, gameBackground);
     }
 
     @Override

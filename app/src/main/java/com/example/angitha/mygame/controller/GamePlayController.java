@@ -26,7 +26,10 @@ import com.example.angitha.mygame.view.PegView;
 
 import java.util.Random;
 
+import static com.example.angitha.mygame.levels.GameLevels.COLS;
+import static com.example.angitha.mygame.levels.GameLevels.ROWS;
 import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
+import static com.example.angitha.mygame.view.PegView.mGridCopy;
 
 
 /**
@@ -34,17 +37,6 @@ import static com.example.angitha.mygame.levels.GameLevels.setGameBoard;
  */
 
 public class GamePlayController{
-
-    private static final String TAG = GamePlayController.class.getName();
-    /**
-     * number of columns
-     */
-    private static int COLS =0;
-
-    /**
-     * number of rows
-     */
-    private static int ROWS =0;
 
     /**
      * mGrid, contains 0 for empty cell or player ID
@@ -70,16 +62,12 @@ public class GamePlayController{
     private Drawable emptySquare;
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
-
-
     /**
      * current status
      */
     private final Context mContext;
     private final BoardView mBoardView;
-
-    private PegLayout[][] squares = new PegLayout[ROWS][COLS] ;
-
+    private PegLayout[][] squares;
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
@@ -144,7 +132,7 @@ public class GamePlayController{
      * @param dps
      * @return pixels
      */
-    public int dpToPixels(int dps) {
+    private int dpToPixels(int dps) {
         float scale = mContext.getResources().getDisplayMetrics().density;
         int pixels = (int) (dps * scale + 0.5f);
         return pixels;
@@ -158,9 +146,9 @@ public class GamePlayController{
         mTotalScore = 0;
         // initialize board as per level
         if(undo){
-            ROWS = mGridCopy.length;
-            COLS =  mGridCopy[0].length;
             mGrid = new int[ROWS][COLS];
+            squares = new PegLayout[ROWS][COLS];
+
             undoAnim = false;
             mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext)+1));
             for (int r = 0; r < ROWS; r++) {
@@ -176,9 +164,10 @@ public class GamePlayController{
             undoAnim = true;
             if (mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getLastLevel()) {
                 int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
-                ROWS = mLevelGrid.length;
-                COLS =  mLevelGrid[0].length;
+
                 mGrid = new int[ROWS][COLS];
+                squares = new PegLayout[ROWS][COLS];
+
                 if (!mGameLevels.gameTour) {
                     mLevelIndicator.setText(String.format(" %d ", mGameLevels.getGameLevelToPlay(mContext) + 1));
                 }
@@ -222,7 +211,7 @@ public class GamePlayController{
             previousNextLevelSetup();
             setScore(mTotalScore);
             updateTextViewScore();
-            mBoardView.resetBoard();
+            mBoardView.buildCells(mGrid);
         }else{
             mContext.startActivity(new Intent(mContext, GameCompleted.class));
             exitGame();
@@ -237,7 +226,7 @@ public class GamePlayController{
             previousNextLevelSetup();
             setScore(mTotalScore);
             updateTextViewScore();
-            mBoardView.resetBoard();
+            mBoardView.buildCells(mGrid);
         }else{
             mContext.startActivity(new Intent(mContext, GameCompleted.class));
             exitGame();
@@ -253,7 +242,7 @@ public class GamePlayController{
             previousNextLevelSetup();
             setScore(mTotalScore);
             updateTextViewScore();
-            mBoardView.resetBoard();
+            mBoardView.buildCells(mGrid);
         }else{
             mContext.startActivity(new Intent(mContext, GameCompleted.class));
             exitGame();
@@ -266,7 +255,7 @@ public class GamePlayController{
             previousNextLevelSetup();
             setScore(mTotalScore);
             updateTextViewScore();
-            mBoardView.resetBoard();
+            mBoardView.buildCells(mGrid);
         }else{
             mContext.startActivity(new Intent(mContext, GameCompleted.class));
             exitGame();
@@ -306,7 +295,7 @@ public class GamePlayController{
             previousNextLevelSetup();
             setScore(mTotalScore);
             updateTextViewScore();
-            mBoardView.resetBoard();
+            mBoardView.buildCells(mGrid);
         }else{
             mContext.startActivity(new Intent(mContext, GameCompleted.class));
             exitGame();
@@ -351,7 +340,7 @@ public class GamePlayController{
                     PegLayout newSquare = (PegLayout) v;
                     //if(view.getparent()!=null){}
                     oldSquare = (PegLayout) view.getParent();
-                    if (view.move(oldSquare, newSquare, getSquares(),mGrid,mGridCopy)) {
+                    if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
                         mScore = getScore();
                         --mScore;
                         setScore(mScore);
