@@ -8,8 +8,8 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:width="64dp"
-            android:height="128dp"
+            android:width="200dp"
+            android:height="200dp"
             android:src="@mipmap/ic_launcher"/>
     </item>
 

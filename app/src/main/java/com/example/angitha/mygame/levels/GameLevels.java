@@ -25,7 +25,7 @@ public class GameLevels {
 
     /*
     0 invisible
-    1 filled
+    ic_launcher filled
     2 empty
      */
     private static int[][] gridForLevel1 = {
