@@ -8,9 +8,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:width="200dp"
-            android:height="200dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher_square_final"/>
     </item>
 
 </layer-list>

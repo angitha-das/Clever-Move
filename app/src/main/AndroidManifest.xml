@@ -2,17 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.angitha.mygame">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_s"
+        android:icon="@mipmap/ic_launcher_square_final"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_r"
+        android:roundIcon="@mipmap/ic_launcher_circle_final"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -37,7 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activity.About" />
-        <activity android:name=".activity.GameCompleted"></activity>
+        <activity android:name=".activity.GameCompleted"/>
     </application>
 
 </manifest>
