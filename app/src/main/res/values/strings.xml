@@ -19,7 +19,8 @@
     <string name="finish_game">Quit</string>
     <string name="game_level">Levels</string>
 
-
+    <string name="you_lost">That was your last move!</string>
+    <string name="retry_text_alert">Would you retry this level?</string>
     <string name="error_message">Complete the game and move forward.</string>
     <string name="tour_completed">Awesome!\nThat\'s it!</string>
     <string name="game_completed">Congrats\n See you soon with more challenges!</string>

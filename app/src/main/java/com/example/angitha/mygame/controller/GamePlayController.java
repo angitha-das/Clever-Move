@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.controller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.DragEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -303,18 +305,44 @@ public class GamePlayController{
     }
 
     private void alertProceedToNextLevel(final int msgId, final int nowWhat) {
-        new AlertDialog.Builder(mContext)
-                .setTitle(msgId)
-                .setCancelable(true)
-                .setNeutralButton(nowWhat,new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                        if(msgId == R.string.sorry_you_lost){
-                            restartGame();
-                        }
-                    }
-                }).show();
+//        new AlertDialog.Builder(mContext)
+//                .setTitle(msgId)
+//                .setCancelable(true)
+//                .setNeutralButton(nowWhat,new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    // TODO Auto-generated method stub
+//                        if(msgId == R.string.sorry_you_lost){
+//                            restartGame();
+//                        }
+//                    }
+//                }).show();
+
+//        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+//        final AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.setContentView(R.layout.alert_retry_layout);
+//
+//        View inflate = LayoutInflater.from(mContext).inflate(R.layout.alert_retry_layout, null);
+//        alertDialog.setContentView(inflate);
+//        ImageView retry =  inflate.findViewById(R.id.retry);
+//        ImageView close = inflate.findViewById(R.id.close);
+//        retry.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                restartGame();
+//            }
+//        });
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertDialog.dismiss();
+//            }
+//        });
+//        alertDialog.show();
+        final Dialog dialog = new Dialog(mContext);
+        dialog.setContentView(R.layout.alert_retry_layout);
+
+        dialog.show();
     }
 
     /**
