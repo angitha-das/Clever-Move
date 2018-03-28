@@ -10,6 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/you_lost"
+        android:textSize="@dimen/alert_heading"
+        android:textColor="@color/dull_yellow"
+        android:fontFamily="@font/imprima"
+        android:layout_margin="16dp"
         android:layout_centerHorizontal="true"/>
 
     <ImageView
@@ -24,13 +28,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
+        android:fontFamily="@font/imprima"
+        android:textSize="@dimen/alert_sub_heading"
+        android:layout_margin="16dp"
         android:text="@string/retry_text_alert"
+        android:textColor="@color/colorGrey"
         android:layout_centerHorizontal="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_margin"
         android:layout_below="@+id/subtitle"
-        android:background="@color/colorAccent"
+        android:background="@color/dull_yellow"
         android:orientation="horizontal"
         android:weightSum="2">
         <ImageView

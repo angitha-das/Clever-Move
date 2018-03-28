@@ -7,6 +7,8 @@
 
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#808080</color>
+    <color name="colorButtonBlue">#3A5898</color>
 
 
     //game tour background
@@ -70,5 +72,7 @@
     <color name="light_orange">#f37402</color>
     <color name="dark_orange">#d2450f</color>
     <color name="bright_yellow">#fee600</color>
+
+    <color name="dull_yellow">#febe00</color>
     //ece7db icons
 </resources>

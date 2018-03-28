@@ -2,24 +2,20 @@ package com.example.angitha.mygame.controller;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.DragEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.Pair;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
-import com.example.angitha.mygame.activity.GameCompleted;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.view.BoardView;
@@ -90,8 +86,7 @@ public class GamePlayController{
                 mBoardView.initialize(this, mGrid, new SquareDragListener(), new PegTouchListener());
             }
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
     }
 
@@ -110,8 +105,7 @@ public class GamePlayController{
                 mBoardView.initialize(this,mGrid,new SquareDragListener(),new PegTouchListener());
             }
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
 
     }
@@ -215,8 +209,9 @@ public class GamePlayController{
             updateTextViewScore();
             mBoardView.buildCells(mGrid);
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
+//            mContext.startActivity(new Intent(mContext, GameCompleted.class));
+//            exitGame();
         }
     }
 
@@ -230,8 +225,7 @@ public class GamePlayController{
             updateTextViewScore();
             mBoardView.buildCells(mGrid);
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
     }
 
@@ -246,8 +240,7 @@ public class GamePlayController{
             updateTextViewScore();
             mBoardView.buildCells(mGrid);
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
     }
 
@@ -259,8 +252,7 @@ public class GamePlayController{
             updateTextViewScore();
             mBoardView.buildCells(mGrid);
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
     }
 
@@ -299,49 +291,51 @@ public class GamePlayController{
             updateTextViewScore();
             mBoardView.buildCells(mGrid);
         }else{
-            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-            exitGame();
+            completedAllLevels();
         }
     }
 
-    private void alertProceedToNextLevel(final int msgId, final int nowWhat) {
-//        new AlertDialog.Builder(mContext)
-//                .setTitle(msgId)
-//                .setCancelable(true)
-//                .setNeutralButton(nowWhat,new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    // TODO Auto-generated method stub
-//                        if(msgId == R.string.sorry_you_lost){
-//                            restartGame();
-//                        }
-//                    }
-//                }).show();
+    private void completedAllLevels() {
+        final Dialog dialog = new Dialog(mContext);
+        dialog.setContentView(R.layout.game_over_layout);
+        Button share =  dialog.findViewById(R.id.share);
+        Button close = dialog.findViewById(R.id.close);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                //shareApp();
 
-//        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-//        final AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.setContentView(R.layout.alert_retry_layout);
-//
-//        View inflate = LayoutInflater.from(mContext).inflate(R.layout.alert_retry_layout, null);
-//        alertDialog.setContentView(inflate);
-//        ImageView retry =  inflate.findViewById(R.id.retry);
-//        ImageView close = inflate.findViewById(R.id.close);
-//        retry.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                restartGame();
-//            }
-//        });
-//        close.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//        alertDialog.show();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                exitGame();
+            }
+        });
+        dialog.show();
+    }
+
+    private void alertProceedToNextLevel() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.alert_retry_layout);
-
+        ImageView retry =  dialog.findViewById(R.id.retry);
+        ImageView close = dialog.findViewById(R.id.close);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                restartGame();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 
@@ -400,7 +394,7 @@ public class GamePlayController{
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
-                            alertProceedToNextLevel(R.string.sorry_you_lost,R.string.yes);
+                            alertProceedToNextLevel();
                         }
                     }
                     break;
