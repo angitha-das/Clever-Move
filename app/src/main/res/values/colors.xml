@@ -9,7 +9,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#808080</color>
     <color name="colorButtonBlue">#3A5898</color>
-
+    <color name="dull_yellow">#febe00</color>
 
     //game tour background
 
@@ -73,6 +73,15 @@
     <color name="dark_orange">#d2450f</color>
     <color name="bright_yellow">#fee600</color>
 
-    <color name="dull_yellow">#febe00</color>
+    <color name="darkBlue">#232C6D</color>
+    <color name="lightBlue">#5D69BA</color>
+    <color name="lightOrange">#f9ab5c</color>
+    <color name="orange">#FF8A11</color>
+
+    <color name="lightViolet">#3004DB</color>
+    <color name="lighterViolet">#5389f5</color>
+    <color name="green"> #1F9F0C</color>
+    <color name="lightGreen"> #55B32A</color>
+
     //ece7db icons
 </resources>

@@ -2,6 +2,8 @@ package com.example.angitha.mygame.controller;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.constraint.ConstraintLayout;
@@ -321,6 +323,7 @@ public class GamePlayController{
     private void alertProceedToNextLevel() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.alert_retry_layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ImageView retry =  dialog.findViewById(R.id.retry);
         ImageView close = dialog.findViewById(R.id.close);
         retry.setOnClickListener(new View.OnClickListener() {
