@@ -1,60 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_background">
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/you_lost"
-        android:textSize="@dimen/alert_heading"
-        android:textColor="@color/dull_yellow"
-        android:fontFamily="@font/imprima"
-        android:layout_margin="16dp"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher_circle_final" />
-    <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:fontFamily="@font/imprima"
-        android:textSize="@dimen/alert_sub_heading"
-        android:layout_margin="16dp"
-        android:text="@string/retry_text_alert"
-        android:textColor="@color/colorGrey"
-        android:layout_centerHorizontal="true"/>
-    <LinearLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_margin"
-        android:layout_below="@+id/subtitle"
-        android:background="@color/dull_yellow"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <ImageView
-            android:id="@+id/close"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background">
+
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/close"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/imprima"
+            android:text="@string/you_lost"
+            android:textColor="@color/dull_yellow"
+            android:textSize="@dimen/alert_heading" />
+
         <ImageView
-            android:id="@+id/retry"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/refresh"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@mipmap/ic_launcher_circle_final" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/imprima"
+            android:text="@string/retry_text_alert"
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/alert_sub_heading" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_margin"
+            android:layout_below="@+id/subtitle"
+            android:background="@color/dull_yellow"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/close" />
+
+            <ImageView
+                android:id="@+id/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/refresh" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

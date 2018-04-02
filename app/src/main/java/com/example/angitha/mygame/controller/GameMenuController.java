@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.utils.Utils;
 
 /**
  * Created by angitha on 1/7/17.
@@ -31,7 +32,8 @@ public class GameMenuController implements View.OnClickListener{
                  break;
             case R.id.like:mListener.rateApp();
                 break;
-            case R.id.share:mListener.shareApp();
+            case R.id.share:
+                Utils.shareApp(v.getContext());
                 break;
             case R.id.sound:
                 break;
@@ -51,6 +53,5 @@ public class GameMenuController implements View.OnClickListener{
         void gameTour();
         void aboutInfo();
         void rateApp();
-        void shareApp();
     }
 }

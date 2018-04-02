@@ -101,19 +101,4 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
                     Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
         }
     }
-
-    @Override
-    public void shareApp() {
-        try {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
-            String sAux = "\nLet me recommend you this application\n\n";
-            sAux = sAux + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName();
-            i.putExtra(Intent.EXTRA_TEXT, sAux);
-            startActivity(Intent.createChooser(i, "choose one"));
-        } catch(Exception e) {
-            e.toString();
-        }
-    }
 }

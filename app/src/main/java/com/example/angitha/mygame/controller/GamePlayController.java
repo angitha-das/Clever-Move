@@ -20,6 +20,7 @@ import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.levels.GameLevels;
+import com.example.angitha.mygame.utils.Utils;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
@@ -300,13 +301,14 @@ public class GamePlayController{
     private void completedAllLevels() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.game_over_layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button share =  dialog.findViewById(R.id.share);
         Button close = dialog.findViewById(R.id.close);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                //shareApp();
+                Utils.shareApp(view.getContext());
 
             }
         });
@@ -317,6 +319,7 @@ public class GamePlayController{
                 exitGame();
             }
         });
+        dialog.setCancelable(false);
         dialog.show();
     }
 
@@ -337,8 +340,10 @@ public class GamePlayController{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                exitGame();
             }
         });
+        dialog.setCancelable(false);
         dialog.show();
     }
 
