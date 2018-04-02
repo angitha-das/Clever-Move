@@ -308,6 +308,7 @@ public class GamePlayController{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                exitGame();
                 Utils.shareApp(view.getContext());
 
             }

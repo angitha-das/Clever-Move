@@ -94,7 +94,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/imprima"
-        android:text="7"
         android:textColor="@color/colorWhite"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
