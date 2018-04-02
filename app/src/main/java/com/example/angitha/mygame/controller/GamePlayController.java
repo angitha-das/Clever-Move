@@ -53,6 +53,8 @@ public class GamePlayController{
     private ImageView mPreviousLevel;
     private ImageView mNextLevel;
     private ImageView mUndoMove;
+    private ImageView mCloseButton;
+    private ImageView mRefresh;
     private ConstraintLayout mGameBackground;
     private  ImageView step1;
     private  ImageView step2;
@@ -72,13 +74,15 @@ public class GamePlayController{
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
-            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove,ConstraintLayout gameBackground) {
+            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove,ImageView close, ImageView refresh,ConstraintLayout gameBackground) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mLevelIndicator = levelIndicator;
         this.mPreviousLevel = previousLevel;
         this.mNextLevel = nextLevel;
         this.mUndoMove = undoMove;
+        this.mCloseButton = close;
+        this.mRefresh = refresh;
         this.mGameBackground = gameBackground;
 
         if(initialize()) {
@@ -119,6 +123,7 @@ public class GamePlayController{
 
     private void previousNextLevelSetup(){
         //Initialize Previous and next level icon
+        showAllViewsInBackground();
         mUndoMove.setEnabled(false);
         mUndoMove.setVisibility(View.INVISIBLE);
         mPreviousLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) > 0)?View.VISIBLE:View.INVISIBLE);
@@ -202,6 +207,26 @@ public class GamePlayController{
         ((GamePlayActivity) mContext).finish();
     }
 
+    private void hideAllViewsInBackground(){
+        mBoardView.setVisibility(View.INVISIBLE);
+        mCloseButton.setVisibility(View.INVISIBLE);
+        mUndoMove.setVisibility(View.INVISIBLE);
+        mRefresh.setVisibility(View.INVISIBLE);
+        mLevelIndicator.setVisibility(View.INVISIBLE);
+        mPreviousLevel.setVisibility(View.INVISIBLE);
+        mNextLevel.setVisibility(View.INVISIBLE);
+    }
+
+    private void showAllViewsInBackground(){
+        mBoardView.setVisibility(View.VISIBLE);
+        mCloseButton.setVisibility(View.VISIBLE);
+        mUndoMove.setVisibility(View.VISIBLE);
+        mRefresh.setVisibility(View.VISIBLE);
+        mLevelIndicator.setVisibility(View.VISIBLE);
+        mPreviousLevel.setVisibility(View.VISIBLE);
+        mNextLevel.setVisibility(View.VISIBLE);
+    }
+
     public void playPreviousGameLevel() {
         undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)-1);
@@ -213,8 +238,6 @@ public class GamePlayController{
             mBoardView.buildCells(mGrid);
         }else{
             completedAllLevels();
-//            mContext.startActivity(new Intent(mContext, GameCompleted.class));
-//            exitGame();
         }
     }
 
@@ -299,6 +322,7 @@ public class GamePlayController{
     }
 
     private void completedAllLevels() {
+        hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.game_over_layout);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -325,6 +349,7 @@ public class GamePlayController{
     }
 
     private void alertProceedToNextLevel() {
+        hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.alert_retry_layout);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
