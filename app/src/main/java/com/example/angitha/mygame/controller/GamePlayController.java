@@ -2,6 +2,7 @@ package com.example.angitha.mygame.controller;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,7 @@ import com.example.angitha.mygame.Pair;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
+import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.utils.Utils;
 import com.example.angitha.mygame.view.BoardView;
@@ -331,8 +333,8 @@ public class GamePlayController{
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
                 exitGame();
+                dialog.dismiss();
                 Utils.shareApp(view.getContext());
 
             }
@@ -341,7 +343,9 @@ public class GamePlayController{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                exitGame();
+                Intent intent = new Intent(mContext, LevelsRecyclerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mContext.startActivity(intent);
             }
         });
         dialog.setCancelable(false);

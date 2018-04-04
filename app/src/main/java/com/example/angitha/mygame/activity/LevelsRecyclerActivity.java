@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -55,6 +56,14 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
         MyLevelsAdapter adapter = new MyLevelsAdapter(getApplicationContext(),levelList, logos);
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(LevelsRecyclerActivity.this, 3));
         recyclerViewLevels.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(LevelsRecyclerActivity.this, GameMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void pressBack(View view) {

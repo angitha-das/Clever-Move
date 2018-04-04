@@ -12,7 +12,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,10 +22,14 @@
         </activity>
         <activity
             android:name=".activity.IntroActivity"
-            android:theme="@style/Theme.Intro" />
-        <activity android:name=".activity.GameMenuActivity" />
-        <activity android:name=".activity.GamePlayActivity" />
-        <activity android:name=".activity.LevelsRecyclerActivity" />
+            android:theme="@style/Theme.Intro"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GameMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GamePlayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LevelsRecyclerActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
