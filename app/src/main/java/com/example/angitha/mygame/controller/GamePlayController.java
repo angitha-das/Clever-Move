@@ -166,7 +166,11 @@ public class GamePlayController{
                 }
             }
         }else {
-            applyGameTheme();
+            if (!mGameLevels.gameTour) {
+                applyGameTheme();
+            }else{
+                applyGameTourBackground();
+            }
             undoAnim = true;
             if (mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getLastLevel()) {
                 int mLevelGrid[][] = setGameBoard(mGameLevels.getGameLevelToPlay(mContext));
@@ -191,6 +195,13 @@ public class GamePlayController{
             }
         }
         return true;
+    }
+
+    private void applyGameTourBackground(){
+        ThemePak mPak = ThemePak.getInstance();
+        hoverSquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext,R.color.colorWhite),dpToPixels(2),dpToPixels(5));
+        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, R.color.lightBlue),dpToPixels(2),dpToPixels(5));
+        cellDrawable =mPak.createDrawable(mContext,dpToPixels(5), ContextCompat.getColor(mContext, R.color.pink_dark),ContextCompat.getColor(mContext,  R.color.pink));
     }
 
     private void applyGameTheme() {
@@ -342,9 +353,9 @@ public class GamePlayController{
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                exitGame();
                 dialog.dismiss();
                 Intent intent = new Intent(mContext, LevelsRecyclerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mContext.startActivity(intent);
             }
         });

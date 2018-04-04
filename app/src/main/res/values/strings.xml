@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Brainvita</string>
+    <string name="app_name">Clever Move</string>
 
     <string name="restart_game">Restart Game? </string>
     <string name="next_level">Proceed To Next Level? </string>

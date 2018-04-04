@@ -51,8 +51,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         scaleIn.setRepeatMode(Animation.REVERSE);
         play_button.startAnimation(scaleIn);
 
-        Typeface custom_font = Typeface.createFromAsset(getAssets(), "font/pacifico_regular.ttf");
-        title.setTypeface(custom_font);
         GameMenuController gameMenuController = new GameMenuController(this);
         menuView.setListeners(gameMenuController);
     }
@@ -76,7 +74,6 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         Intent gameTourIntent = new Intent(this, IntroActivity.class);
         gameTourIntent.putExtra("isFromMenu", "yesFromMenu");
         startActivity(gameTourIntent);
-        finish();
     }
 
     @Override

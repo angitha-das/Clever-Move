@@ -44,10 +44,10 @@ public class IntroActivity extends MaterialIntroActivity {
             GameLevels.getInstance().gameTour = true;
 
             addSlide(new SlideFragmentBuilder()
-                    .backgroundColor(R.color.first_slide_background)
-                    .buttonsColor(R.color.first_slide_buttons)
-                    .image(R.drawable.logo)
-                    .title("Brainvita")
+                    .backgroundColor(R.color.custom_slide_background)
+                    .buttonsColor(R.color.custom_slide_buttons)
+                    .image(R.mipmap.ic_launcher_circle_final)
+                    .title(getResources().getString(R.string.app_name))
                     .description("A solo strategy game for age group 5" +
                             " and above and an ideal game for adults too")
                     .build());
@@ -58,13 +58,6 @@ public class IntroActivity extends MaterialIntroActivity {
                     .title("How To Play?")
                     .description("Start by jumping the grids either horizontally or vertically " +
                             "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
-                    .build());
-
-            addSlide(new SlideFragmentBuilder()
-                    .backgroundColor(R.color.fourth_slide_background)
-                    .buttonsColor(R.color.fourth_slide_buttons)
-                    .title("That's it")
-                    .description("Would you join us?")
                     .build());
 
             addSlide(new CustomSlide());
@@ -81,8 +74,8 @@ public class IntroActivity extends MaterialIntroActivity {
     public void onFinish() {
         GameLevels.getInstance().gameTour=false;
         Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
-        finish();
     }
     @Override
     protected void onDestroy() {
@@ -96,10 +89,6 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onBackPressed() {
-        if(value.equalsIgnoreCase("yesFromMenu")){
-            Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
-            startActivity(i);
-        }
         finish();
     }
 }

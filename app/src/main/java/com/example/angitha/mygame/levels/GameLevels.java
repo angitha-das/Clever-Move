@@ -254,10 +254,10 @@ public class GameLevels {
     }
 
     public int getGameLevelToPlay(Context mContext){
-        if(fromMenu) {
-            levelToPlay = getHighestLevelCrossed(mContext) ;
-        }else if(gameTour){
+        if(gameTour){
             return 1;
+        }else if(fromMenu && !gameTour) {
+            levelToPlay = getHighestLevelCrossed(mContext) ;
         }
         return levelToPlay;
     }
