@@ -62,11 +62,6 @@ public class IntroActivity extends MaterialIntroActivity {
 
             addSlide(new CustomSlide());
 
-        }else{
-            GameLevels.getInstance().gameTour=false;
-            Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
-            startActivity(i);
-            finish();
         }
     }
 
@@ -84,12 +79,12 @@ public class IntroActivity extends MaterialIntroActivity {
     }
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         GameLevels.getInstance().gameTour=false;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("first_time", true);
         editor.apply();
+        super.onDestroy();
     }
 
     @Override
