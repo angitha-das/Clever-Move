@@ -23,11 +23,12 @@
         android:textSize="@dimen/option_title_size"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:layout_toRightOf="@+id/button_back"
-        android:text="@string/game_level" />
+        android:layout_toEndOf="@+id/button_back"
+        android:text="@string/game_level"
+        android:fontFamily="@font/imprima"/>
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewLevels"

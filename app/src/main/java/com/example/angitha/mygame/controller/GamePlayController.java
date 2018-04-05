@@ -129,7 +129,7 @@ public class GamePlayController{
         mUndoMove.setEnabled(false);
         mUndoMove.setVisibility(View.INVISIBLE);
         mPreviousLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) > 0)?View.VISIBLE:View.INVISIBLE);
-        mNextLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getHighestLevelCrossed(mContext))?View.VISIBLE:View.INVISIBLE);
+        mNextLevel.setVisibility((mGameLevels.getGameLevelToPlay(mContext) < mGameLevels.getHighestLevelCrossed(mContext) && (mGameLevels.getGameLevelToPlay(mContext) != mGameLevels.getLastLevel()))?View.VISIBLE:View.INVISIBLE);
     }
 
     /**

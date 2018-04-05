@@ -72,10 +72,15 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onFinish() {
+        super.onFinish();
         GameLevels.getInstance().gameTour=false;
-        Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        if(value.equalsIgnoreCase("yesFromMenu")){
+            finish();
+        }else{
+            Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
     @Override
     protected void onDestroy() {
@@ -89,6 +94,7 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onBackPressed() {
+        GameLevels.getInstance().gameTour = false;
         finish();
     }
 }

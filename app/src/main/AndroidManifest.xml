@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +35,6 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activity.About" />
-        <activity android:name=".activity.GameCompleted"/>
     </application>
 
 </manifest>
