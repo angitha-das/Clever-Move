@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,8 +74,8 @@ public class IntroActivity extends MaterialIntroActivity {
             finish();
         }else{
             Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
-            finish();
         }
     }
     @Override
@@ -90,6 +91,8 @@ public class IntroActivity extends MaterialIntroActivity {
     @Override
     public void onBackPressed() {
         GameLevels.getInstance().gameTour = false;
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 }

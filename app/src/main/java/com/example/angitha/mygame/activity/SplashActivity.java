@@ -1,5 +1,6 @@
 package com.example.angitha.mygame.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.example.angitha.mygame.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity {
     SharedPreferences prefs;
+    final Handler handler = new Handler();
+    Runnable runnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +35,12 @@ public class SplashActivity extends AppCompatActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        new Handler().postDelayed(new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
                 if(prefs!=null && !prefs.getBoolean("first_time", false)){
                     Intent i = new Intent(SplashActivity.this, IntroActivity.class);
-                    startActivity(i);
-                    finish();
+                    startActivityForResult(i,1);
                 }else{
                     GameLevels.getInstance().gameTour=false;
                     Intent i = new Intent(SplashActivity.this, GameMenuActivity.class);
@@ -46,7 +48,17 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, Constants.SPLASH_TIME_OUT);
+        };
+        handler.postDelayed(runnable, Constants.SPLASH_TIME_OUT);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacks(runnable);
+        super.onBackPressed();
+    }
 }
