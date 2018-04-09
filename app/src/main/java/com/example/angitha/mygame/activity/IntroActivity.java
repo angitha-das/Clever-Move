@@ -53,14 +53,15 @@ public class IntroActivity extends MaterialIntroActivity {
                             " and above and an ideal game for adults too")
                     .build());
 
-            addSlide(new SlideFragmentBuilder()
-                    .backgroundColor(R.color.second_slide_background)
-                    .buttonsColor(R.color.second_slide_buttons)
-                    .title("How To Play?")
-                    .description("Start by jumping the grids either horizontally or vertically " +
-                            "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
-                    .build());
+//            addSlide(new SlideFragmentBuilder()
+//                    .backgroundColor(R.color.second_slide_background)
+//                    .buttonsColor(R.color.second_slide_buttons)
+//                    .title("How To Play?")
+//                    .description("Start by jumping the grids either horizontally or vertically " +
+//                            "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
+//                    .build());
 
+            addSlide(new HowToPlayCustomSlide());
             addSlide(new CustomSlide());
 
         }
