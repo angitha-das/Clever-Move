@@ -183,7 +183,6 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 
 	public Pair[] predict(PegView chosenSquare, int[][] mGrid) {
 		Pair[] predictMoves = new Pair[4];
-		//if (!chosenSquare.isEmpty())
 		{
 			if(checkLeftMovePossibility(chosenSquare,mGrid)!=null){
 			predictMoves[0]=checkLeftMovePossibility(chosenSquare,mGrid);
@@ -200,6 +199,10 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		}
 		return predictMoves;
 	}
+
+	public boolean cannotPredict(Pair[] predictMoves){
+	    return predictMoves[0]==null&&predictMoves[1]==null&&predictMoves[2]==null&&predictMoves[3]==null;
+    }
 
 	private Pair checkBottomMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();

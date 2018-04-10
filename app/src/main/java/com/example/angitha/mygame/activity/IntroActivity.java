@@ -44,22 +44,15 @@ public class IntroActivity extends MaterialIntroActivity {
 
             GameLevels.getInstance().gameTour = true;
 
-            addSlide(new SlideFragmentBuilder()
-                    .backgroundColor(R.color.custom_slide_background)
-                    .buttonsColor(R.color.custom_slide_buttons)
-                    .image(R.mipmap.ic_launcher_circle_final)
-                    .title(getResources().getString(R.string.app_name))
-                    .description("A solo strategy game for age group 5" +
-                            " and above and an ideal game for adults too")
-                    .build());
-
 //            addSlide(new SlideFragmentBuilder()
-//                    .backgroundColor(R.color.second_slide_background)
-//                    .buttonsColor(R.color.second_slide_buttons)
-//                    .title("How To Play?")
-//                    .description("Start by jumping the grids either horizontally or vertically " +
-//                            "over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid over an adjacent grid to an empty hole.Continue until you are left with 1 grid")
+//                    .backgroundColor(R.color.custom_slide_background)
+//                    .buttonsColor(R.color.custom_slide_buttons)
+//                    .image(R.mipmap.ic_launcher_circle_final)
+//                    .title(getResources().getString(R.string.app_name))
+//                    .description("A solo strategy game for age group 5" +
+//                            " and above and an ideal game for adults too")
 //                    .build());
+            addSlide(new IntroCustomSlide());
 
             addSlide(new HowToPlayCustomSlide());
             addSlide(new CustomSlide());

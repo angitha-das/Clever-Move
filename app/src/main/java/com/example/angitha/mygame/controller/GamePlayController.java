@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.media.MediaPlayer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.DragEvent;
@@ -67,6 +68,11 @@ public class GamePlayController{
     private Drawable emptySquare;
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
+
+    MediaPlayer successMove,failMove,levelCompleted,levelLost,click;
+
+
+
     /**
      * current status
      */
@@ -86,6 +92,7 @@ public class GamePlayController{
         this.mCloseButton = close;
         this.mRefresh = refresh;
         this.mGameBackground = gameBackground;
+        initializeTunes();
 
         if(initialize()) {
             previousNextLevelSetup();
@@ -107,6 +114,7 @@ public class GamePlayController{
         this.step2 = step2;
         this.step3 = step3;
         this.textView = textView;
+        initializeTunes();
 
         if(initialize()){
             setScore(mTotalScore);
@@ -117,6 +125,13 @@ public class GamePlayController{
             completedAllLevels();
         }
 
+    }
+
+    private void initializeTunes(){
+        successMove= MediaPlayer.create(mContext,R.raw.success_move);
+        failMove= MediaPlayer.create(mContext,R.raw.fail_move);
+        levelCompleted= MediaPlayer.create(mContext,R.raw.level_complete);
+        levelLost = MediaPlayer.create(mContext,R.raw.lost_game);
     }
 
     public boolean hideAnimationInUndo(){
@@ -335,6 +350,7 @@ public class GamePlayController{
     }
 
     private void completedAllLevels() {
+        levelCompleted.start();
         hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.game_over_layout);
@@ -363,7 +379,7 @@ public class GamePlayController{
         dialog.show();
     }
 
-    private void alertProceedToNextLevel() {
+    private void alertRetryLevel() {
         hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.alert_retry_layout);
@@ -409,11 +425,15 @@ public class GamePlayController{
 				    */
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
-                    //if(view.getparent()!=null){}
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
                         mScore = getScore();
                         --mScore;
+                        if(mScore >1){
+                            successMove.start();
+                        }else{
+                            levelCompleted.start();
+                        }
                         setScore(mScore);
                         if(mGameLevels.gameTour) {
                             if (getScore() == 3) {
@@ -443,9 +463,13 @@ public class GamePlayController{
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
-                            alertProceedToNextLevel();
+                            levelLost.start();
+                            alertRetryLevel();
                         }
                     }
+
+
+
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     view = (PegView) event.getLocalState();
@@ -473,6 +497,9 @@ public class GamePlayController{
                 PegView chosenSquare = (PegView) v;
                 PegLayout[][] squares = getSquares();
                 Pair[] allPredictions  = chosenSquare.predict(chosenSquare, mGrid);
+                if(chosenSquare.cannotPredict(allPredictions)){
+                    failMove.start();
+                }
                 for (Pair allPrediction : allPredictions) {
                     if (allPrediction != null) {
                         int x = allPrediction.getI();

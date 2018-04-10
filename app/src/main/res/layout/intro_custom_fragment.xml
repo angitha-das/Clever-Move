@@ -6,6 +6,19 @@
     android:background="@color/transparent">
 
     <TextView
+        android:id="@+id/heading"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/imprima"
+        android:textSize="30sp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/content"
+        android:textColor="@android:color/white" />
+
+    <TextView
         android:id="@+id/content"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:fontFamily="@font/imprima"
@@ -14,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/goal"
+        android:text="Make your moves by jumping a peg over an adjacent peg into a hole and remove the jumped peg."
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

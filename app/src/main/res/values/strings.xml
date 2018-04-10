@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CleverMove</string>
+    <string name="app_name">Clever Move</string>
 
     <string name="restart_game">Restart Game? </string>
     <string name="next_level">Proceed To Next Level? </string>
@@ -10,7 +10,7 @@
     <string name="continue_playing">Continue</string>
     <string name="back">Back</string>
     <string name="difficulty">DIFFICULTY</string>
-
+    <string name="goal">The goal is to have just one peg left on the board! \n\n If several pegs stay on the board and no move is possible, you lose. \n\n Let me guide you</string>
     <string name="level_1">Easy</string>
     <string name="level_2">Medium</string>
     <string name="level_3">Extreme</string>
@@ -26,7 +26,7 @@
     <string name="you_lost">That was your last move!</string>
     <string name="retry_text_alert">Would you retry this level?</string>
     <string name="error_message">Complete the game and move forward.</string>
-    <string name="tour_completed">Awesome!\nThat\'s it!</string>
+    <string name="tour_completed">Awesome!</string>
 
 
 </resources>
