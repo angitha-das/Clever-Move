@@ -23,6 +23,8 @@ import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.levels.GameLevels;
+import com.example.angitha.mygame.utils.Constants;
+import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.utils.Utils;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
@@ -69,7 +71,7 @@ public class GamePlayController{
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
 
-    MediaPlayer successMove,failMove,levelCompleted,levelLost,click;
+    MediaPlayer successMove,failMove,levelCompleted,levelLost;
 
 
 
@@ -126,6 +128,21 @@ public class GamePlayController{
         }
 
     }
+
+    public void manageSound(){
+        if(PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND,false)){
+            successMove.setVolume(0,0);
+            failMove.setVolume(0,0);
+            levelCompleted.setVolume(0,0);
+            levelLost.setVolume(0,0);
+        }else{
+            successMove.setVolume(1,1);
+            failMove.setVolume(1,1);
+            levelCompleted.setVolume(1,1);
+            levelLost.setVolume(1,1);
+        }
+    }
+
 
     private void initializeTunes(){
         successMove= MediaPlayer.create(mContext,R.raw.success_move);

@@ -26,7 +26,7 @@ public class GameMenuController implements View.OnClickListener{
                 break;
             case R.id.levels:mListener.showAllLevels();
                 break;
-            case R.id.info:mListener.aboutInfo();
+            case R.id.muteSound:mListener.toggleGameSound();
                 break;
             case R.id.gameTour:mListener.gameTour();
                  break;
@@ -34,10 +34,6 @@ public class GameMenuController implements View.OnClickListener{
                 break;
             case R.id.share:
                 Utils.shareApp(v.getContext());
-                break;
-            case R.id.sound:
-                break;
-            case R.id.achievements:
                 break;
            default:break;
         }
@@ -51,7 +47,7 @@ public class GameMenuController implements View.OnClickListener{
         void onPlay(GameRules gameRules);
         void showAllLevels();
         void gameTour();
-        void aboutInfo();
+        void toggleGameSound();
         void rateApp();
     }
 }

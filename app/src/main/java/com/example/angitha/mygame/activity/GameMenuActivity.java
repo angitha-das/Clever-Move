@@ -16,8 +16,11 @@ import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GameMenuController;
+import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.utils.Constants;
+import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.view.MenuView;
 
 /**
@@ -27,6 +30,7 @@ import com.example.angitha.mygame.view.MenuView;
 public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener {
     GameLevels gameLevels = GameLevels.getInstance();
     ImageView play_button;
+    ImageView mute_button;
     Intent gamePlayIntent;
 
     @Override
@@ -40,8 +44,8 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
         MenuView menuView = findViewById(R.id.menuView);
 
-        TextView title = findViewById(R.id.app_name);
         play_button =  findViewById(R.id.play);
+        mute_button = findViewById(R.id.muteSound);
 
         ScaleAnimation scaleIn = new ScaleAnimation(0.6f, 0.9f, 0.6f, 0.9f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
@@ -77,9 +81,9 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     }
 
     @Override
-    public void aboutInfo() {
-        Intent aboutInfoIntent = new Intent(this, About.class);
-        startActivity(aboutInfoIntent);
+    public void toggleGameSound() {
+       PrefUtils.saveMuteStatus(this, Constants.MUTE_SOUND, !PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, false));
+        mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, false)?R.drawable.music:R.drawable.theme);
     }
 
     @Override

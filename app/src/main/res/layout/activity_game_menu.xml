@@ -60,17 +60,17 @@
         android:layout_marginStart="8dp"
         android:src="@drawable/levels"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/info"
+        app:layout_constraintEnd_toStartOf="@+id/muteSound"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info" />
+        app:layout_constraintTop_toTopOf="@+id/muteSound" />
     <ImageView
-        android:id="@+id/info"
+        android:id="@+id/muteSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/info"
+        android:src="@drawable/music"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gameTour"
         app:layout_constraintStart_toEndOf="@+id/levels"
@@ -86,7 +86,7 @@
         android:src="@drawable/tour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/like"
-        app:layout_constraintStart_toEndOf="@+id/info" />
+        app:layout_constraintStart_toEndOf="@+id/muteSound" />
 
 
     <ImageView
@@ -113,20 +113,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toTopOf="@+id/like" />
-
-    <ImageView
-        android:id="@+id/sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/music"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/achievements"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trophy"
-        android:visibility="gone" />
+        app:layout_constraintTop_toTopOf="@+id/like"
+        app:layout_constraintVertical_bias="1.0" />
 
 </com.example.angitha.mygame.view.MenuView>
