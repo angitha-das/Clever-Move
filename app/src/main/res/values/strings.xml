@@ -10,6 +10,7 @@
     <string name="continue_playing">Continue</string>
     <string name="back">Back</string>
     <string name="difficulty">DIFFICULTY</string>
+    <string name="tour_intro">Make your moves by jumping a peg over an adjacent peg into a hole and remove the jumped peg.</string>
     <string name="goal">The goal is to have just one peg left on the board! \n\n If several pegs stay on the board and no move is possible, you lose. \n\n Let me guide you</string>
     <string name="level_1">Easy</string>
     <string name="level_2">Medium</string>

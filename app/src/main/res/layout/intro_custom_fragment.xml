@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Make your moves by jumping a peg over an adjacent peg into a hole and remove the jumped peg."
+        android:text="@string/tour_intro"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

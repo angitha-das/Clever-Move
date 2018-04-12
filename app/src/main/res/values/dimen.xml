@@ -14,4 +14,5 @@
     <dimen name="alert_sub_heading">16sp</dimen>
     <dimen name="play_font_size">25sp</dimen>
     <dimen name="seekbar_text_size">17sp</dimen>
+    <dimen name="text_guide">20sp</dimen>
 </resources>
