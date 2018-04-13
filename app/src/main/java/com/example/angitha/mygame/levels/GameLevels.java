@@ -3,6 +3,7 @@ package com.example.angitha.mygame.levels;
 import android.content.Context;
 
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.utils.Constants;
 
 import static com.example.angitha.mygame.utils.PrefUtils.getFromPrefs;
 import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
@@ -12,8 +13,8 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
  */
 
 public class GameLevels {
-    private int totalNumberOfLevels = 5;
-    private static final String KEY_LEVEL = "levelCrossed";
+    private int totalNumberOfLevels = 11;
+
 
     //clicked from levels activity.disable unlocked levels from click
     public int levelToPlay;
@@ -28,22 +29,15 @@ public class GameLevels {
     ic_launcher filled
     2 empty
      */
+
     private static int[][] gridForLevel1 = {
-            {0,0,0,0,0,0},
-            {0,2,1,1,2,0},
-            {0,0,0,0,0,0}
-
-    };
-    private static int[][] gridForLevel2 = {
-
             {0,0,0,0,0,0},
             {0,2,1,1,0,0},
             {0,1,0,0,0,0},
             {0,2,1,2,0,0},
             {0,0,0,0,0,0}
-
     };
-    private static int[][] gridForLevel3 = {
+    private static int[][] gridForLevel2 = {
             {0,0,0,0,0,0},
             {0,1,1,1,0,0},
             {0,1,0,0,0,0},
@@ -53,7 +47,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel4 = {
+    private static int[][] gridForLevel3 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,2,0,0,0,0},
             {0,0,0,0,1,0,0,0,0},
@@ -66,7 +60,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel5 = {
+    private static int[][] gridForLevel4 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,2,0,0,0,0},
@@ -78,7 +72,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel6 = {
+    private static int[][] gridForLevel5 = {
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
             {0,2,1,1,1,1,1,2,0},
@@ -90,7 +84,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0},
     };
 
-    private static int[][] gridForLevel7 = {
+    private static int[][] gridForLevel6 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -102,7 +96,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel8 = {
+    private static int[][] gridForLevel7 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
@@ -114,7 +108,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel9 = {
+    private static int[][] gridForLevel8 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -128,7 +122,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel10 = {
+    private static int[][] gridForLevel9 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
@@ -140,7 +134,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0},
     };
 
-    private static int[][] gridForLevel11 = {
+    private static int[][] gridForLevel10 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -153,7 +147,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel12 = {
+    private static int[][] gridForLevel11 = {
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,1,2,1,0,0,0},
@@ -204,41 +198,36 @@ public class GameLevels {
                 COLS =  gridForLevel5[0].length;
                 return gridForLevel5;
             }
-//            case GameRules.Level.LEVEL6:{
-//                ROWS = gridForLevel6.length;
-//                COLS =  gridForLevel6[0].length;
-//                return gridForLevel6;
-//            }
-//            case GameRules.Level.LEVEL7:{
-//                ROWS = gridForLevel7.length;
-//                COLS =  gridForLevel7[0].length;
-//                return gridForLevel7;
-//            }
-//            case GameRules.Level.LEVEL8:{
-//                ROWS = gridForLevel8.length;
-//                COLS =  gridForLevel8[0].length;
-//                return gridForLevel8;
-//            }
-//            case GameRules.Level.LEVEL9:{
-//                ROWS = gridForLevel9.length;
-//                COLS =  gridForLevel9[0].length;
-//                return gridForLevel9;
-//            }
-//            case GameRules.Level.LEVEL10:{
-//                ROWS = gridForLevel10.length;
-//                COLS =  gridForLevel10[0].length;
-//                return gridForLevel10;
-//            }
-//            case GameRules.Level.LEVEL11:{
-//                ROWS = gridForLevel11.length;
-//                COLS =  gridForLevel11[0].length;
-//                return gridForLevel11;
-//            }
-//            case GameRules.Level.LEVEL12:{
-//                ROWS = gridForLevel12.length;
-//                COLS =  gridForLevel12[0].length;
-//                return gridForLevel12;
-//            }
+            case GameRules.Level.LEVEL6:{
+                ROWS = gridForLevel6.length;
+                COLS =  gridForLevel6[0].length;
+                return gridForLevel6;
+            }
+            case GameRules.Level.LEVEL7:{
+                ROWS = gridForLevel7.length;
+                COLS =  gridForLevel7[0].length;
+                return gridForLevel7;
+            }
+            case GameRules.Level.LEVEL8:{
+                ROWS = gridForLevel8.length;
+                COLS =  gridForLevel8[0].length;
+                return gridForLevel8;
+            }
+            case GameRules.Level.LEVEL9:{
+                ROWS = gridForLevel9.length;
+                COLS =  gridForLevel9[0].length;
+                return gridForLevel9;
+            }
+            case GameRules.Level.LEVEL10:{
+                ROWS = gridForLevel10.length;
+                COLS =  gridForLevel10[0].length;
+                return gridForLevel10;
+            }
+            case GameRules.Level.LEVEL11:{
+                ROWS = gridForLevel11.length;
+                COLS =  gridForLevel11[0].length;
+                return gridForLevel11;
+            }
             default:break;
         }
         return new int[0][];
@@ -250,13 +239,13 @@ public class GameLevels {
 
     //updating status of levels
     public void updateLevelStatus(Context mContext){
-        saveToPrefs(mContext,KEY_LEVEL,levelToPlay);
+        saveToPrefs(mContext, Constants.KEY_LEVEL,levelToPlay);
     }
 
     public int getGameLevelToPlay(Context mContext){
         if(gameTour){
-            return 1;
-        }else if(fromMenu && !gameTour) {
+            return 0;
+        }else if(fromMenu) {
             levelToPlay = getHighestLevelCrossed(mContext) ;
         }
         return levelToPlay;
@@ -267,10 +256,10 @@ public class GameLevels {
     }
 
     public int getHighestLevelCrossed(Context mContext){
-      return getFromPrefs(mContext, KEY_LEVEL, 0);
+      return getFromPrefs(mContext, Constants.KEY_LEVEL, 1);
     }
 
     public int getLastLevel(){
-        return 5;
+        return totalNumberOfLevels;
     }
 }

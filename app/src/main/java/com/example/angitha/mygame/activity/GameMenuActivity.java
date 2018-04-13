@@ -46,6 +46,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
         play_button =  findViewById(R.id.play);
         mute_button = findViewById(R.id.muteSound);
+        mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true)?R.drawable.music:R.drawable.no_music);
 
         ScaleAnimation scaleIn = new ScaleAnimation(0.6f, 0.9f, 0.6f, 0.9f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
@@ -82,8 +83,8 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
     @Override
     public void toggleGameSound() {
-       PrefUtils.saveMuteStatus(this, Constants.MUTE_SOUND, !PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, false));
-        mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, false)?R.drawable.music:R.drawable.theme);
+       PrefUtils.saveMuteStatus(this, Constants.MUTE_SOUND, !PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true));
+        mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true)?R.drawable.music:R.drawable.no_music);
     }
 
     @Override

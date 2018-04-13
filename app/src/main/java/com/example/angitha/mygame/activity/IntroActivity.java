@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
@@ -44,16 +45,7 @@ public class IntroActivity extends MaterialIntroActivity {
 
             GameLevels.getInstance().gameTour = true;
 
-//            addSlide(new SlideFragmentBuilder()
-//                    .backgroundColor(R.color.custom_slide_background)
-//                    .buttonsColor(R.color.custom_slide_buttons)
-//                    .image(R.mipmap.ic_launcher_circle_final)
-//                    .title(getResources().getString(R.string.app_name))
-//                    .description("A solo strategy game for age group 5" +
-//                            " and above and an ideal game for adults too")
-//                    .build());
             addSlide(new IntroCustomSlide());
-
             addSlide(new HowToPlayCustomSlide());
             addSlide(new CustomSlide());
 
@@ -67,24 +59,19 @@ public class IntroActivity extends MaterialIntroActivity {
         if(value.equalsIgnoreCase("yesFromMenu")){
             finish();
         }else{
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_time", true);
+            editor.apply();
+
             Intent i = new Intent(IntroActivity.this, GameMenuActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
     }
-    @Override
-    protected void onDestroy() {
-        GameLevels.getInstance().gameTour=false;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("first_time", true);
-        editor.apply();
-        super.onDestroy();
-    }
 
     @Override
     public void onBackPressed() {
-        GameLevels.getInstance().gameTour = false;
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK, returnIntent);
         finish();

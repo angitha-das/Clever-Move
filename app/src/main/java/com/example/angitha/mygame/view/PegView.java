@@ -200,10 +200,6 @@ public class PegView extends android.support.v7.widget.AppCompatImageView {
 		return predictMoves;
 	}
 
-	public boolean cannotPredict(Pair[] predictMoves){
-	    return predictMoves[0]==null&&predictMoves[1]==null&&predictMoves[2]==null&&predictMoves[3]==null;
-    }
-
 	private Pair checkBottomMovePossibility(PegView chosenSquare,int[][] mGrid) {
 		int i = chosenSquare.getRow();
 		int j = chosenSquare.getColumn();

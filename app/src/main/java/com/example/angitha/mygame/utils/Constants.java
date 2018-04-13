@@ -9,5 +9,6 @@ public class Constants {
      * Splash timeout - 2 second
      */
     public static final int SPLASH_TIME_OUT = 2000;
+    public static final String KEY_LEVEL = "levelCrossed";
     public static final String MUTE_SOUND = "muteSound";
 }

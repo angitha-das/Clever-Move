@@ -3,11 +3,13 @@ package com.example.angitha.mygame.controller;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.DragEvent;
@@ -23,8 +25,7 @@ import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.levels.GameLevels;
-import com.example.angitha.mygame.utils.Constants;
-import com.example.angitha.mygame.utils.PrefUtils;
+import com.example.angitha.mygame.utils.SoundHandler;
 import com.example.angitha.mygame.utils.Utils;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
@@ -71,16 +72,13 @@ public class GamePlayController{
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
 
-    MediaPlayer successMove,failMove,levelCompleted,levelLost;
-
-
-
     /**
      * current status
      */
     private final Context mContext;
     private final BoardView mBoardView;
     private PegLayout[][] squares;
+    private boolean notDropped = true;
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
@@ -94,7 +92,7 @@ public class GamePlayController{
         this.mCloseButton = close;
         this.mRefresh = refresh;
         this.mGameBackground = gameBackground;
-        initializeTunes();
+        SoundHandler.initializeTunes(context);
 
         if(initialize()) {
             previousNextLevelSetup();
@@ -116,7 +114,7 @@ public class GamePlayController{
         this.step2 = step2;
         this.step3 = step3;
         this.textView = textView;
-        initializeTunes();
+        SoundHandler.initializeTunes(context);
 
         if(initialize()){
             setScore(mTotalScore);
@@ -127,28 +125,6 @@ public class GamePlayController{
             completedAllLevels();
         }
 
-    }
-
-    public void manageSound(){
-        if(PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND,false)){
-            successMove.setVolume(0,0);
-            failMove.setVolume(0,0);
-            levelCompleted.setVolume(0,0);
-            levelLost.setVolume(0,0);
-        }else{
-            successMove.setVolume(1,1);
-            failMove.setVolume(1,1);
-            levelCompleted.setVolume(1,1);
-            levelLost.setVolume(1,1);
-        }
-    }
-
-
-    private void initializeTunes(){
-        successMove= MediaPlayer.create(mContext,R.raw.success_move);
-        failMove= MediaPlayer.create(mContext,R.raw.fail_move);
-        levelCompleted= MediaPlayer.create(mContext,R.raw.level_complete);
-        levelLost = MediaPlayer.create(mContext,R.raw.lost_game);
     }
 
     public boolean hideAnimationInUndo(){
@@ -367,7 +343,7 @@ public class GamePlayController{
     }
 
     private void completedAllLevels() {
-        levelCompleted.start();
+        SoundHandler.levelCompleted(mContext);
         hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.game_over_layout);
@@ -435,21 +411,24 @@ public class GamePlayController{
             PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
+                    notDropped=true;
                     break;
                  case DragEvent.ACTION_DROP:
 				    /*
 				    * When Peg is dropped move method is called and score is updated
 				    */
+				    notDropped = false;
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
                     if (view.move(oldSquare, newSquare, getSquares(),mGrid)) {
+
                         mScore = getScore();
                         --mScore;
                         if(mScore >1){
-                            successMove.start();
+                            SoundHandler.playSuccessMove(mContext);
                         }else{
-                            levelCompleted.start();
+                            SoundHandler.levelCompleted(mContext);
                         }
                         setScore(mScore);
                         if(mGameLevels.gameTour) {
@@ -477,18 +456,21 @@ public class GamePlayController{
                             }
                         }
                         updateTextViewScore();
+                    }else{
+                        SoundHandler.playFailMove(mContext);
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
-                            levelLost.start();
+                            SoundHandler.levelLost(mContext);
                             alertRetryLevel();
                         }
                     }
-
-
-
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
+                    if(notDropped){
+                        SoundHandler.playFailMove(mContext);
+                    }
+
                     view = (PegView) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
                     v.setBackgroundDrawable(emptySquare);
@@ -514,9 +496,7 @@ public class GamePlayController{
                 PegView chosenSquare = (PegView) v;
                 PegLayout[][] squares = getSquares();
                 Pair[] allPredictions  = chosenSquare.predict(chosenSquare, mGrid);
-                if(chosenSquare.cannotPredict(allPredictions)){
-                    failMove.start();
-                }
+
                 for (Pair allPrediction : allPredictions) {
                     if (allPrediction != null) {
                         int x = allPrediction.getI();
