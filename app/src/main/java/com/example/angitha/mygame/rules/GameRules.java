@@ -25,9 +25,17 @@ public class GameRules {
         public static final int LEVEL9 = 8;
         public static final int LEVEL10 = 9;
         public static final int LEVEL11 = 10;
+        public static final int LEVEL12 = 11;
+        public static final int LEVEL13 = 12;
+        public static final int LEVEL14 = 13;
+        public static final int LEVEL15 = 14;
+        public static final int LEVEL16 = 15;
+        public static final int LEVEL17 = 16;
+        public static final int LEVEL18 = 17;
         Level() {
-            super(new int[]{LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5,LEVEL5,
-                    LEVEL6,LEVEL7,LEVEL8,LEVEL9,LEVEL10,LEVEL11});
+            super(new int[]{LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5,
+                    LEVEL6,LEVEL7,LEVEL8,LEVEL9,LEVEL10,LEVEL11,LEVEL12,LEVEL13,LEVEL14,LEVEL15,
+                    LEVEL16,LEVEL17,LEVEL18});
         }
     }
 

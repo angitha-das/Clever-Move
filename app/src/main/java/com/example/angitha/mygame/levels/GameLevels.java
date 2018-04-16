@@ -13,7 +13,7 @@ import static com.example.angitha.mygame.utils.PrefUtils.saveToPrefs;
  */
 
 public class GameLevels {
-    private int totalNumberOfLevels = 11;
+    private int totalNumberOfLevels = 18;
 
 
     //clicked from levels activity.disable unlocked levels from click
@@ -26,7 +26,7 @@ public class GameLevels {
 
     /*
     0 invisible
-    ic_launcher filled
+    1 filled
     2 empty
      */
 
@@ -38,16 +38,55 @@ public class GameLevels {
             {0,0,0,0,0,0}
     };
     private static int[][] gridForLevel2 = {
+            {0,0,0,0,0},
+            {0,1,1,2,0},
+            {0,0,1,1,0},
+            {0,0,0,2,0},
+            {0,0,0,1,0},
+            {0,0,0,0,0}
+    };
+
+
+    private static int[][] gridForLevel3 = {
             {0,0,0,0,0,0},
             {0,1,1,1,0,0},
             {0,1,0,0,0,0},
             {0,2,1,2,1,0},
             {0,1,0,0,0,0},
             {0,0,0,0,0,0}
-
     };
 
-    private static int[][] gridForLevel3 = {
+
+    private static int[][] gridForLevel4 = {
+            {0,0,0,0,0,0},
+            {0,2,2,2,2,0},
+            {0,2,1,1,2,0},
+            {0,2,1,2,2,0},
+            {0,1,1,2,2,0},
+            {0,2,2,1,2,0},
+            {0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel5 = {
+            {0,0,0,0,0,0},
+            {0,2,1,2,0,0},
+            {0,1,2,1,0,0},
+            {0,1,2,2,0,0},
+            {0,2,1,2,0,0},
+            {0,2,2,1,0,0},
+            {0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel6 = {
+            {0,0,0,0,0,0},
+            {0,2,2,2,1,0},
+            {0,2,2,2,1,0},
+            {0,2,2,1,2,0},
+            {0,1,1,2,1,0},
+            {0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel7 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,2,0,0,0,0},
             {0,0,0,0,1,0,0,0,0},
@@ -60,7 +99,25 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel4 = {
+    private static int[][] gridForLevel8 = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,2,1,1,2,0,0,0},
+            {0,0,2,2,1,1,0,0,0},
+            {0,0,1,2,2,1,0,0,0},
+            {0,0,1,1,1,1,0,0,0},
+            {0,0,0,0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel9 = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,2,1,1,1,2,0,0},
+            {0,0,2,1,1,1,2,0,0},
+            {0,1,1,1,1,1,1,1,0},
+            {0,2,2,2,2,2,2,2,0},
+            {0,0,0,0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel10 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,2,0,0,0,0},
@@ -72,7 +129,40 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel5 = {
+    private static int[][] gridForLevel11 = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,1,1,1,2,0,0,0},
+            {0,0,1,1,1,1,0,0,0},
+            {0,0,1,1,1,1,0,0,0},
+            {0,0,0,0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel11a = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,2,2,1,1,2,0,0},
+            {0,0,2,1,1,1,2,0,0},
+            {0,0,1,2,1,2,2,0,0},
+            {0,0,2,1,2,1,2,0,0},
+            {0,0,2,2,2,2,2,0,0},
+            {0,0,2,2,2,1,2,0,0},
+            {0,0,2,2,2,1,2,0,0},
+            {0,0,0,0,0,0,0,0,0}
+    };
+
+    private static int[][] gridForLevel11b = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0}
+    };
+
+
+    private static int[][] gridForLevel12 = {
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
             {0,2,1,1,1,1,1,2,0},
@@ -84,7 +174,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0},
     };
 
-    private static int[][] gridForLevel6 = {
+    private static int[][] gridForLevel13 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -96,7 +186,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel7 = {
+    private static int[][] gridForLevel14 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
@@ -108,7 +198,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0}
     };
 
-    private static int[][] gridForLevel8 = {
+    private static int[][] gridForLevel15 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -122,7 +212,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel9 = {
+    private static int[][] gridForLevel16 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,1,1,1,0,0,0},
@@ -134,7 +224,7 @@ public class GameLevels {
             {0,0,0,0,0,0,0,0,0},
     };
 
-    private static int[][] gridForLevel10 = {
+    private static int[][] gridForLevel17 = {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
@@ -147,7 +237,7 @@ public class GameLevels {
 
     };
 
-    private static int[][] gridForLevel11 = {
+    private static int[][] gridForLevel18 = {
             {0,0,0,2,2,2,0,0,0},
             {0,0,0,2,1,2,0,0,0},
             {0,0,0,1,2,1,0,0,0},
@@ -227,6 +317,41 @@ public class GameLevels {
                 ROWS = gridForLevel11.length;
                 COLS =  gridForLevel11[0].length;
                 return gridForLevel11;
+            }
+            case GameRules.Level.LEVEL12:{
+                ROWS = gridForLevel12.length;
+                COLS =  gridForLevel12[0].length;
+                return gridForLevel12;
+            }
+            case GameRules.Level.LEVEL13:{
+                ROWS = gridForLevel13.length;
+                COLS =  gridForLevel13[0].length;
+                return gridForLevel13;
+            }
+            case GameRules.Level.LEVEL14:{
+                ROWS = gridForLevel14.length;
+                COLS =  gridForLevel14[0].length;
+                return gridForLevel14;
+            }
+            case GameRules.Level.LEVEL15:{
+                ROWS = gridForLevel15.length;
+                COLS =  gridForLevel15[0].length;
+                return gridForLevel15;
+            }
+            case GameRules.Level.LEVEL16:{
+                ROWS = gridForLevel16.length;
+                COLS =  gridForLevel16[0].length;
+                return gridForLevel16;
+            }
+            case GameRules.Level.LEVEL17:{
+                ROWS = gridForLevel17.length;
+                COLS =  gridForLevel17[0].length;
+                return gridForLevel17;
+            }
+            case GameRules.Level.LEVEL18:{
+                ROWS = gridForLevel18.length;
+                COLS =  gridForLevel18[0].length;
+                return gridForLevel18;
             }
             default:break;
         }
