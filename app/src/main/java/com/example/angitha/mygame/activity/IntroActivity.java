@@ -72,6 +72,9 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onBackPressed() {
+        if(value.equalsIgnoreCase("yesFromMenu")){
+            GameLevels.getInstance().gameTour=false;
+        }
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
