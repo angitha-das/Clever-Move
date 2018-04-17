@@ -71,6 +71,7 @@ public class GamePlayController{
     private Drawable emptySquare;
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
+    private Boolean dragStarted = false;
 
     /**
      * current status
@@ -157,6 +158,7 @@ public class GamePlayController{
      */
     private boolean initialize() {
         // unfinished the game
+        dragStarted = false;
         mTotalScore = 0;
         // initialize board as per level
         if(undo){
@@ -411,7 +413,8 @@ public class GamePlayController{
             PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    notDropped=true;
+
+                    notDropped = true;
                     break;
                  case DragEvent.ACTION_DROP:
 				    /*
@@ -474,6 +477,7 @@ public class GamePlayController{
                     view = (PegView) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
                     v.setBackgroundDrawable(emptySquare);
+                    dragStarted = false;
 
                 default:
                     break;
@@ -492,7 +496,8 @@ public class GamePlayController{
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
+                if(!dragStarted) {
+                dragStarted = true;
                 PegView chosenSquare = (PegView) v;
                 PegLayout[][] squares = getSquares();
                 Pair[] allPredictions  = chosenSquare.predict(chosenSquare, mGrid);
@@ -505,9 +510,10 @@ public class GamePlayController{
                     }
                 }
 
-                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-                v.startDrag(null, shadowBuilder, v, 0);
-                v.setVisibility(View.INVISIBLE);
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                    v.startDrag(null, shadowBuilder, v, 0);
+                    v.setVisibility(View.INVISIBLE);
+                }
                 return true;
             } else {
                 return false;

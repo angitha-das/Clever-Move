@@ -21,12 +21,15 @@ import agency.tango.materialintroscreen.SlideFragment;
  */
 
 public class HowToPlayCustomSlide extends SlideFragment {
-
+    int unicodeHappy = 0x1F60A;
+    int unicodeSad = 0x1F61E;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.how_to_play_custom_fragment, container, false);
-      return view;
+      TextView partOne = view.findViewById(R.id.part_one);
+      partOne.setText(String.format("%s%s\n%s%s", getResources().getString(R.string.goalPartOne), getEmojiByUnicode(unicodeHappy), getResources().getString(R.string.goalPartTwo), getEmojiByUnicode(unicodeSad)));
+        return view;
     }
 
     @Override
@@ -42,5 +45,9 @@ public class HowToPlayCustomSlide extends SlideFragment {
     @Override
     public boolean canMoveFurther() {
         return true;
+    }
+
+    public String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
     }
 }

@@ -11,11 +11,11 @@
     <string name="back">Back</string>
     <string name="difficulty">DIFFICULTY</string>
     <string name="tour_intro">Make your moves by jumping a tile vertically or horizontally over an adjacent tile into a hole and remove the jumped tile.</string>
-    <string name="goal">The goal is to have just one tile left on the board! \n\n If several tiles stay on the board and no move is possible, you lose.</string>
+    <string name="goalPartOne">The goal is to have just one tile left on the board!\n</string>
+    <string name="goalPartTwo">\nIf several tiles stay on the board and no move is possible, you lose.\n</string>
     <string name="level_1">Easy</string>
     <string name="level_2">Medium</string>
     <string name="level_3">Extreme</string>
-
     <string name="timer">Timer</string>
     <string name="finish_game">Quit</string>
     <string name="game_level">Levels</string>

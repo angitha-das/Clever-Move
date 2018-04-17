@@ -6,7 +6,7 @@
     android:background="@color/transparent">
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/part_one"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:fontFamily="@font/imprima"
         android:textSize="30sp"
@@ -14,8 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/goal"
-        android:textColor="@android:color/white" />
-
+        android:textColor="@color/colorWhite" />
 </RelativeLayout>
 

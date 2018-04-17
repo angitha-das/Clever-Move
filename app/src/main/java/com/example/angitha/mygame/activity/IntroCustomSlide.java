@@ -37,4 +37,5 @@ public class IntroCustomSlide extends SlideFragment {
     public boolean canMoveFurther() {
         return true;
     }
+
 }
