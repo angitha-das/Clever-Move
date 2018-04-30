@@ -94,6 +94,28 @@ public class GameRules {
         public static final int LEVEL78 = 77;
         public static final int LEVEL79 = 78;
         public static final int LEVEL80 = 79;
+        public static final int LEVEL81 = 80;
+        public static final int LEVEL82 = 81;
+        public static final int LEVEL83 = 82;
+        public static final int LEVEL84 = 83;
+        public static final int LEVEL85 = 84;
+        public static final int LEVEL86 = 85;
+        public static final int LEVEL87 = 86;
+        public static final int LEVEL88 = 87;
+        public static final int LEVEL89 = 88;
+        public static final int LEVEL90 = 89;
+        public static final int LEVEL91 = 90;
+        public static final int LEVEL92 = 91;
+        public static final int LEVEL93 = 92;
+        public static final int LEVEL94 = 93;
+        public static final int LEVEL95 = 94;
+        public static final int LEVEL96 = 95;
+        public static final int LEVEL97 = 96;
+        public static final int LEVEL98 = 97;
+        public static final int LEVEL99 = 98;
+        public static final int LEVEL100 = 99;
+        public static final int LEVEL101 = 100;
+        public static final int LEVEL102 = 101;
 
         Level() {
             super(new int[]{LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5,
@@ -104,7 +126,9 @@ public class GameRules {
                     LEVEL46,LEVEL47,LEVEL48,LEVEL49,LEVEL50,LEVEL51,LEVEL52,LEVEL53,LEVEL54,LEVEL55,
                     LEVEL56,LEVEL57,LEVEL58,LEVEL59,LEVEL60,LEVEL61,LEVEL62,LEVEL63,LEVEL64,LEVEL65,
                     LEVEL66,LEVEL67,LEVEL68,LEVEL69,LEVEL70,LEVEL71,LEVEL72,LEVEL73,LEVEL74,LEVEL75,
-                    LEVEL76,LEVEL77,LEVEL78,LEVEL79,LEVEL80});
+                    LEVEL76,LEVEL77,LEVEL78,LEVEL79,LEVEL80,LEVEL81,LEVEL82,LEVEL83,LEVEL84,LEVEL85,
+                    LEVEL86,LEVEL87,LEVEL88,LEVEL89,LEVEL90,LEVEL91,LEVEL92,LEVEL93,LEVEL94,LEVEL95,
+                    LEVEL96,LEVEL97,LEVEL98,LEVEL99,LEVEL100,LEVEL101,LEVEL102});
         }
     }
 

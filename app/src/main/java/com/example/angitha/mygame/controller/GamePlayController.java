@@ -216,7 +216,7 @@ public class GamePlayController{
 
     private void applyGameTheme() {
         Random rand = new Random();
-        int themeId = rand.nextInt(3);
+        int themeId = rand.nextInt(2);
         ThemePak mPak = ThemePak.getInstance();
 
         mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, mPak.getBackground(themeId)));
