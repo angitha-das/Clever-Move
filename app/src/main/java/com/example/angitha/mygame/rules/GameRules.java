@@ -34,10 +34,77 @@ public class GameRules {
         public static final int LEVEL18 = 17;
         public static final int LEVEL19 = 18;
         public static final int LEVEL20 = 19;
+        public static final int LEVEL21 = 20;
+        public static final int LEVEL22 = 21;
+        public static final int LEVEL23 = 22;
+        public static final int LEVEL24 = 23;
+        public static final int LEVEL25 = 24;
+        public static final int LEVEL26 = 25;
+        public static final int LEVEL27 = 26;
+        public static final int LEVEL28 = 27;
+        public static final int LEVEL29 = 28;
+        public static final int LEVEL30 = 29;
+        public static final int LEVEL31 = 30;
+        public static final int LEVEL32 = 31;
+        public static final int LEVEL33 = 32;
+        public static final int LEVEL34 = 33;
+        public static final int LEVEL35 = 34;
+        public static final int LEVEL36 = 35;
+        public static final int LEVEL37 = 36;
+        public static final int LEVEL38 = 37;
+        public static final int LEVEL39 = 38;
+        public static final int LEVEL40 = 39;
+        public static final int LEVEL41 = 40;
+        public static final int LEVEL42 = 41;
+        public static final int LEVEL43 = 42;
+        public static final int LEVEL44 = 43;
+        public static final int LEVEL45 = 44;
+        public static final int LEVEL46 = 45;
+        public static final int LEVEL47 = 46;
+        public static final int LEVEL48 = 47;
+        public static final int LEVEL49 = 48;
+        public static final int LEVEL50 = 49;
+        public static final int LEVEL51 = 50;
+        public static final int LEVEL52 = 51;
+        public static final int LEVEL53 = 52;
+        public static final int LEVEL54 = 53;
+        public static final int LEVEL55 = 54;
+        public static final int LEVEL56 = 55;
+        public static final int LEVEL57 = 56;
+        public static final int LEVEL58 = 57;
+        public static final int LEVEL59 = 58;
+        public static final int LEVEL60 = 59;
+        public static final int LEVEL61 = 60;
+        public static final int LEVEL62 = 61;
+        public static final int LEVEL63 = 62;
+        public static final int LEVEL64 = 63;
+        public static final int LEVEL65 = 64;
+        public static final int LEVEL66 = 65;
+        public static final int LEVEL67 = 66;
+        public static final int LEVEL68 = 67;
+        public static final int LEVEL69 = 68;
+        public static final int LEVEL70 = 69;
+        public static final int LEVEL71 = 70;
+        public static final int LEVEL72 = 71;
+        public static final int LEVEL73 = 72;
+        public static final int LEVEL74 = 73;
+        public static final int LEVEL75 = 74;
+        public static final int LEVEL76 = 75;
+        public static final int LEVEL77 = 76;
+        public static final int LEVEL78 = 77;
+        public static final int LEVEL79 = 78;
+        public static final int LEVEL80 = 79;
+
         Level() {
             super(new int[]{LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5,
                     LEVEL6,LEVEL7,LEVEL8,LEVEL9,LEVEL10,LEVEL11,LEVEL12,LEVEL13,LEVEL14,LEVEL15,
-                    LEVEL16,LEVEL17,LEVEL18,LEVEL19,LEVEL20});
+                    LEVEL16,LEVEL17,LEVEL18,LEVEL19,LEVEL20,LEVEL21,LEVEL22,LEVEL23,LEVEL24,LEVEL25,
+                    LEVEL26,LEVEL27,LEVEL28,LEVEL29,LEVEL30,LEVEL31,LEVEL32,LEVEL33,LEVEL34,LEVEL35,
+                    LEVEL36,LEVEL37,LEVEL38,LEVEL39,LEVEL40,LEVEL41,LEVEL42,LEVEL43,LEVEL44,LEVEL45,
+                    LEVEL46,LEVEL47,LEVEL48,LEVEL49,LEVEL50,LEVEL51,LEVEL52,LEVEL53,LEVEL54,LEVEL55,
+                    LEVEL56,LEVEL57,LEVEL58,LEVEL59,LEVEL60,LEVEL61,LEVEL62,LEVEL63,LEVEL64,LEVEL65,
+                    LEVEL66,LEVEL67,LEVEL68,LEVEL69,LEVEL70,LEVEL71,LEVEL72,LEVEL73,LEVEL74,LEVEL75,
+                    LEVEL76,LEVEL77,LEVEL78,LEVEL79,LEVEL80});
         }
     }
 
