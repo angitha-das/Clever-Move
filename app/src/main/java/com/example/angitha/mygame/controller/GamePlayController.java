@@ -210,13 +210,13 @@ public class GamePlayController{
     private void applyGameTourBackground(){
         ThemePak mPak = ThemePak.getInstance();
         hoverSquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext,R.color.colorWhite),dpToPixels(2),dpToPixels(5));
-        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, R.color.lightBlue),dpToPixels(2),dpToPixels(5));
+        emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, R.color.belize_hole),dpToPixels(2),dpToPixels(5));
         cellDrawable =mPak.createDrawable(mContext,dpToPixels(5), ContextCompat.getColor(mContext, R.color.pink_dark),ContextCompat.getColor(mContext,  R.color.pink));
     }
 
     private void applyGameTheme() {
         Random rand = new Random();
-        int themeId = rand.nextInt(2);
+        int themeId = rand.nextInt(13);
         ThemePak mPak = ThemePak.getInstance();
 
         mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, mPak.getBackground(themeId)));

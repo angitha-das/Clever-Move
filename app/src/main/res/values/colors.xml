@@ -5,13 +5,17 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorBlack">#000000</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="mid_purple">#6A1B9A</color>
+
     <color name="colorGrey">#808080</color>
     <color name="colorButtonBlue">#3A5898</color>
     <color name="dull_yellow">#febe00</color>
 
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+
     //game tour background
+
     <color name="first_slide_bg">#1A237E</color>
     <color name="first_slide_but">#3F51B5</color>
 
@@ -21,38 +25,55 @@
     <color name="custom_slide_background">#FFC524</color>
     <color name="custom_slide_buttons">#6A1B9A</color>
 
-    <color name="colorDarkBlue">#121e6e</color>
-    <color name="darkerPink">#FC0896</color>
-    <color name="pink">#e66c95</color>
-    <color name="pink_dark">#E32F6C</color>
-    <color name="alizarin">#e74c3c</color>
-    <color name="alizarin_dark">#d22d1b</color>
-    <color name="pomegranate">#a13024</color>
+    //Theme colors
+    <color name="sunflower">#f1c40f</color>
+    <color name="dark_sunflower">#e1b403</color>
+
+    <color name="peterriver">#3498db</color>
     <color name="belize_hole">#2980b9</color>
-    <color name="belize_hole_dark">#026baf</color>
-    <color name="peter_river">#90c7ec</color>
-    <color name="peter_river_dark">#6bb5e7</color>
-    <color name="peter_river_light">#d0edff</color>
-#E79221    <color name="sun_flower">#f1c40f</color>
-    <color name="pumpkin_orange">#d35400</color>
-    <color name="app_title">#2c3e50</color>
-    <color name="dark_purple">#2c0b41</color>
-    <color name="mid_purple">#6A1B9A</color>
-    <color name="light_purple">#8E24AA</color>
-    <color name="yellow">#f2b809</color>
-    <color name="light_orange">#f37402</color>
-    <color name="dark_orange">#d2450f</color>
-    <color name="bright_yellow">#fee600</color>
 
-    <color name="darkBlue">#232C6D</color>
-    <color name="lightBlue">#5D69BA</color>
-    <color name="lightOrange">#f9ab5c</color>
     <color name="orange">#FF8A11</color>
+    <color name="lightOrange">#f9ab5c</color>
 
-    <color name="lightViolet">#3004DB</color>
-    <color name="lighterViolet">#5389f5</color>
-    <color name="green"> #1F9F0C</color>
-    <color name="lightGreen"> #55B32A</color>
+    <color name="tile_primary_yellow">#FFEA00</color>
+    <color name="tile_secondary_yellow">#F1C40F</color>
+
+    <color name="pink_darker">#E91E63</color>
+    <color name="pink_dark">#EB2E7D</color>
+    <color name="pink">#e66c95</color>
+
+    <color name="bg_violet">#9724dc</color>
+    <color name="empty_tile_violet">#b154ea</color>
+
+    <color name="alizirin">#e74c3c</color>
+    <color name="pomegranate">#c0392b</color>
+
+    <color name="tile_primary_green">#1FAED9</color>
+    <color name="tile_secondaary_green">#099ac6</color>
+
+    <color name="turquoise">#1abc9c</color>
+    <color name="green_sea">#16a085</color>
+
+    <color name="emerald">#2ecc71</color>
+    <color name="nephtiris">#27ae60</color>
+    
+    <color name="amethyst">#9b59b6</color>
+    <color name="wisteria">#8e44ad</color>
+
+    <color name="wetsalphet">#455A64</color>
+    <color name="midnightblue">#2c3e50</color>
+
+    <color name="carrot">#e67e22</color>
+    <color name="pumpkin">#d35400</color>
+
+    <color name="light_yellow">#FAD12A</color>
+    <color name="dark_yellow">#D79917</color>
+
+    <color name="grey_light">#94CFCD</color>
+    <color name="grey_dark">#49A29F</color>
+
+    <color name="light_blue">#20DDC3</color>
+    <color name="yellow">#FBCE00</color>
 
     //ece7db icons
 </resources>

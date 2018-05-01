@@ -23,6 +23,8 @@ import com.example.angitha.mygame.utils.Constants;
 import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.view.MenuView;
 
+import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+
 /**
  * Created by angitha on 1/7/17.
  */
@@ -39,6 +41,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_game_menu);
 
