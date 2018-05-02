@@ -21,8 +21,7 @@
         </activity>
         <activity
             android:name=".activity.IntroActivity"
-            android:theme="@style/Theme.Intro"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.Intro"/>
         <activity android:name=".activity.GameMenuActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.GamePlayActivity"
@@ -34,7 +33,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".activity.About" />
     </application>
 
 </manifest>
