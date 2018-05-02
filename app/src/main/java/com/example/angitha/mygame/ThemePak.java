@@ -28,11 +28,11 @@ public class ThemePak {
         return themePakObj;
     }
 
-    private int[] game_background = {R.color.colorPrimary,R.color.colorPrimary,R.color.colorPrimary,R.color.alizirin,R.color.mid_purple,R.color.carrot,R.color.emerald,R.color.colorPrimary,R.color.light_yellow,R.color.tile_primary_green,R.color.yellow,R.color.mid_purple,R.color.yellow};
-    private int[] empty_cell_color = {R.color.belize_hole,R.color.belize_hole,R.color.belize_hole,R.color.pomegranate,R.color.wisteria,R.color.pumpkin,R.color.nephtiris,R.color.belize_hole,R.color.dark_yellow,R.color.tile_secondaary_green,R.color.dark_yellow,R.color.bg_violet,R.color.dark_yellow};
-    private int[] hover_cell_color = {R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite,R.color.colorWhite};
-    private int[] primary_cell_color = {R.color.pink_dark,R.color.orange,R.color.tile_primary_yellow,R.color.wetsalphet,R.color.tile_primary_green,R.color.colorPrimary,R.color.amethyst,R.color.alizirin,R.color.colorPrimary,R.color.bg_violet,R.color.pink_dark,R.color.yellow,R.color.mid_purple};
-    private int[] secondary_cell_color = {R.color.pink,R.color.lightOrange,R.color.tile_secondary_yellow,R.color.midnightblue,R.color.tile_secondaary_green,R.color.belize_hole,R.color.wisteria,R.color.pomegranate,R.color.belize_hole,R.color.mid_purple,R.color.pink,R.color.dark_yellow,R.color.bg_violet};
+    private int[] game_background =      { R.color.orange_light,   R.color.orange_light,   R.color.orange_light,   R.color.colorPrimary,  R.color.colorPrimary,    R.color.colorPrimary,           R.color.mid_purple,    R.color.emerald,    R.color.colorPrimary,   R.color.orange_light,   R.color.mid_purple,     R.color.orange};
+    private int[] empty_cell_color =     { R.color.bgc_yellow,     R.color.bgc_yellow,     R.color.bgc_yellow,     R.color.belize_hole,   R.color.belize_hole,     R.color.belize_hole,            R.color.wisteria,      R.color.nephtiris,  R.color.belize_hole,    R.color.dark_yellow,     R.color.bg_violet,     R.color.pumpkin};
+    private int[] hover_cell_color =     { R.color.colorWhite,     R.color.colorWhite,     R.color.colorWhite,     R.color.colorWhite,    R.color.colorWhite,      R.color.colorWhite,             R.color.colorWhite,    R.color.colorWhite, R.color.colorWhite,     R.color.colorWhite,     R.color.colorWhite,     R.color.colorWhite};
+    private int[] primary_cell_color =   { R.color.green_dark,     R.color.bgc_blue,       R.color.violet_dark,    R.color.pink_dark,     R.color.orange_dark,     R.color.tile_primary_yellow,    R.color.blue_light,    R.color.amethyst,   R.color.alizirin,       R.color.pink_dark,      R.color.yellow,         R.color.bgc_blue};
+    private int[] secondary_cell_color = { R.color.green_darker,   R.color.blue_darker,    R.color.violet_darker,  R.color.pink,          R.color.orange_darker,   R.color.tile_secondary_yellow,  R.color.peterriver,    R.color.wisteria,   R.color.pomegranate,    R.color.pink,           R.color.dark_yellow,    R.color.colorPrimary};
 
 
     public int[] getThemeSet(int theme_id){

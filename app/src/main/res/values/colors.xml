@@ -75,5 +75,44 @@
     <color name="light_blue">#20DDC3</color>
     <color name="yellow">#FBCE00</color>
 
+    //Lighter themes
+    <color name="bg_green">#7EF68D</color>
+    <color name="empty_green">#30E847</color>
+    <color name="primary_green">#0BDD25</color>
+    <color name="secondary_green">#30E847</color>
+
+    <color name="bg_orange">#FEBB6E</color>
+    <color name="empty_orange">#FFAB35</color>
+    <color name="primary_orange">#FF9B0D</color>
+    <color name="secondary_orange">#FCAB00</color>
+
+
+
+
+
+    <color name="bgc_blue">#4888f6</color>
+    <color name="blue_darker">#1162a1</color>
+    <color name="blue_dark">#009bef</color>
+    <color name="blue_light">#3ed5f9</color>
+
+    <color name="violet_darker">#50359A</color>
+    <color name="violet_dark">#9c0ed5</color>
+    <color name="violet_light">#c83bdb</color>
+
+    <color name="bgc_green">#3cab5a</color>
+    <color name="green_darker">#1e7d49</color>
+    <color name="green_dark">#00ab55</color>
+    <color name="green_light">#00e16b</color>
+
+    <color name="bgc_red">#eb5144</color>
+    <color name="red_darker">#750a45</color>
+    <color name="red_dark">#ce0045</color>
+    <color name="red_light">#e80031</color>
+
+    <color name="bgc_yellow">#fcbf0b</color>
+    <color name="orange_darker">#f45731</color>
+    <color name="orange_dark">#fe8c00</color>
+    <color name="orange_light">#fed019</color>
+
     //ece7db icons
 </resources>

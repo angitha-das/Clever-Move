@@ -26,7 +26,6 @@ public class IntroActivity extends MaterialIntroActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         enableLastSlideAlphaExitTransition(false);
