@@ -2,7 +2,6 @@ package com.example.angitha.mygame.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,24 +11,21 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GameMenuController;
-import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.utils.Constants;
+import com.example.angitha.mygame.utils.ForceUpdateChecker;
 import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.view.MenuView;
-
-import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 
 /**
  * Created by angitha on 1/7/17.
  */
 
-public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener {
+public class GameMenuActivity extends AppCompatActivity implements GameMenuController.MenuControllerListener,ForceUpdateChecker.OnUpdateNeededListener {
     GameLevels gameLevels = GameLevels.getInstance();
     ImageView play_button;
     ImageView mute_button;
@@ -38,6 +34,8 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -105,5 +103,41 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
         }
+    }
+
+    @Override
+    public void onUpdateNeeded(String updateUrl) {
+//        AlertDialog dialog = new AlertDialog.Builder(this)
+//                .setTitle(R.string.force_update_title)
+//                .setMessage(R.string.force_update_message)
+//                .setPositiveButton(R.string.update,
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                redirectStore(updateUrl);
+//                            }
+//                        }).setNegativeButton(R.string.later,
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                initialize();
+//                                dialog.dismiss();
+//                            }
+//                        }).create();
+//        dialog.show();
+    }
+
+    @Override
+    public void isUpdateNeeded(boolean isUpdateNeeded) {
+//        if(!isUpdateNeeded){
+//            initialize();
+//        }
+    }
+
+    private void redirectStore(String updateUrl) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

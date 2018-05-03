@@ -3,7 +3,6 @@ package com.example.angitha.mygame.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.FloatRange;
@@ -11,12 +10,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.levels.GameLevels;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 
 public class IntroActivity extends MaterialIntroActivity {

@@ -2,17 +2,12 @@ package com.example.angitha.mygame.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.controller.GamePlayController;
-import com.example.angitha.mygame.levels.GameLevels;
-import com.example.angitha.mygame.view.BoardView;
 
 import agency.tango.materialintroscreen.SlideFragment;
 

@@ -1,6 +1,5 @@
 package com.example.angitha.mygame.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.activity.GameMenuActivity;
-import com.example.angitha.mygame.activity.IntroActivity;
 import com.example.angitha.mygame.levels.GameLevels;
 import com.example.angitha.mygame.utils.Constants;
 

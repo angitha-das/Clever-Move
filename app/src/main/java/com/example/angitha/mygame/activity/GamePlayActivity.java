@@ -14,8 +14,6 @@ import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
 
-import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-
 /**
  * Created by angitha on 1/7/17.
  */
