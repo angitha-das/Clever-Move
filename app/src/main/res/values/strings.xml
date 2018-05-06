@@ -20,10 +20,12 @@
     <string name="finish_game">Quit</string>
     <string name="game_level">Levels</string>
     <string name="close">Close</string>
+    <string name="later">Later</string>
+    <string name="update">Update</string>
     <string name="share">Share</string>
     <string name="congrats">Congrats!!!</string>
     <string name="game_completed">See you soon with more challenges.</string>
-
+    <string name="update_subtitle">The version you are using is too old.Update for a delightful gaming experience.</string>
     <string name="you_lost">That was your last move!</string>
     <string name="retry_text_alert">Would you retry this level?</string>
     <string name="error_message">Complete the game and move forward.</string>

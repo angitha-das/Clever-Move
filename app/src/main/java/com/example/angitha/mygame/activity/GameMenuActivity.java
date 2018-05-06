@@ -1,15 +1,20 @@
 package com.example.angitha.mygame.activity;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.angitha.mygame.R;
@@ -35,7 +40,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -106,25 +111,28 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     }
 
     @Override
-    public void onUpdateNeeded(String updateUrl) {
-//        AlertDialog dialog = new AlertDialog.Builder(this)
-//                .setTitle(R.string.force_update_title)
-//                .setMessage(R.string.force_update_message)
-//                .setPositiveButton(R.string.update,
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                redirectStore(updateUrl);
-//                            }
-//                        }).setNegativeButton(R.string.later,
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                initialize();
-//                                dialog.dismiss();
-//                            }
-//                        }).create();
-//        dialog.show();
+    public void onUpdateNeeded(final String updateUrl) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.app_update);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button share =  dialog.findViewById(R.id.share);
+        Button close = dialog.findViewById(R.id.close);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectStore(updateUrl);
+
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                //initialize();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
     @Override

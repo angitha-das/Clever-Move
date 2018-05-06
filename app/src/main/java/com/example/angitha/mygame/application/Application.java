@@ -14,7 +14,7 @@ import java.util.Map;
 public class Application {
 
     private static final String TAG = Application.class.getSimpleName();
-    //initializeRemoteConfig(); //Force Update
+//    initializeRemoteConfig(); //Force Update
 
 
     public void initializeRemoteConfig(){
