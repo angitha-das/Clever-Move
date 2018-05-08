@@ -102,7 +102,7 @@ public class ThemePak {
      * @param dps
      * @return pixels
      */
-    public int dpToPixels(int dps) {
+    private int dpToPixels(int dps) {
         float scale =  context.getResources().getDisplayMetrics().density;
         int pixels = (int) (dps * scale + 0.5f);
         return pixels;

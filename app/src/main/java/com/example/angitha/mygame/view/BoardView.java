@@ -53,9 +53,8 @@ public class BoardView extends TableLayout {
 
 
 	private void init() {
-		ThemePak mPak = ThemePak.getInstance();
-		emptySquare = mPak.getSquareDrawable();
-		cellDrawable = (LayerDrawable) mPak.getCellDrawable();
+		emptySquare = ThemePak.getSquareDrawable();
+		cellDrawable = (LayerDrawable) ThemePak.getCellDrawable();
 	}
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
