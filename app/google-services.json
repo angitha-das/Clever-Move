@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "842687349342",
-    "firebase_url": "https://clever-move.firebaseio.com",
-    "project_id": "clever-move",
-    "storage_bucket": "clever-move.appspot.com"
+    "project_number": "615547264592",
+    "firebase_url": "https://clevermove-a4df3.firebaseio.com",
+    "project_id": "clevermove-a4df3",
+    "storage_bucket": "clevermove-a4df3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:842687349342:android:d7801e053067cf12",
+        "mobilesdk_app_id": "1:615547264592:android:b8e03e63a4978c42",
         "android_client_info": {
-          "package_name": "com.clever.move.android"
+          "package_name": "com.clevermove.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "842687349342-qkc37qhs56tvi4hu4qcedm4gohmg3290.apps.googleusercontent.com",
+          "client_id": "615547264592-1hmo2q09hvihl5bqf5308ustqd7bmi5b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCoRneSJdPTCaf-E5d7rjkD4eLtx6nsHzg"
+          "current_key": "AIzaSyDBfZe0mTiHyoqnambjrrmip9y9T8TGkvA"
         }
       ],
       "services": {

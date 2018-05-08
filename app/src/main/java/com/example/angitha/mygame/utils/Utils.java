@@ -14,7 +14,7 @@ public class Utils {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
             i.putExtra(Intent.EXTRA_SUBJECT,context.getResources().getString(R.string.app_name));
-            String sAux = "\nI have crossed level "+ GameLevels.getInstance().getHighestLevelCrossed(context)+" in the game Clever Move!"+ getEmojiByUnicode(unicodeVictory)+"\n\n";
+            String sAux = "\nI have crossed level "+ GameLevels.getInstance().getHighestLevelCrossed(context)+" in the game Clever Move!"+ getEmojiByUnicode(unicodeVictory)+"\nGet it for Android:";
             sAux = sAux + "https://play.google.com/store/apps/details?id=" + context.getPackageName();
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             context.startActivity(Intent.createChooser(i, "choose one"));

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.clever.move.android"
+        applicationId "com.clevermove.android"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
