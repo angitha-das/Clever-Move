@@ -1,4 +1,4 @@
-package com.example.angitha.mygame.activity;
+package com.example.angitha.mygame.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +20,7 @@ import agency.tango.materialintroscreen.SlideFragment;
  * Created by angitha on 17/10/17.
  */
 
-public class CustomSlide extends SlideFragment {
+public class CustomSlideFragment extends SlideFragment {
     private GamePlayController mGameController;
     GameLevels gameLevels = GameLevels.getInstance();
 

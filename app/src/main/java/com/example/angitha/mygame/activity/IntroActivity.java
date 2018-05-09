@@ -3,6 +3,7 @@ package com.example.angitha.mygame.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.FloatRange;
@@ -10,6 +11,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.angitha.mygame.fragment.CustomSlideFragment;
+import com.example.angitha.mygame.fragment.HowToPlayCustomSlideFragment;
+import com.example.angitha.mygame.fragment.IntroCustomSlideFragment;
 import com.example.angitha.mygame.levels.GameLevels;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
@@ -23,6 +27,7 @@ public class IntroActivity extends MaterialIntroActivity {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         enableLastSlideAlphaExitTransition(false);
 
@@ -45,9 +50,9 @@ public class IntroActivity extends MaterialIntroActivity {
 
             GameLevels.getInstance().gameTour = true;
 
-            addSlide(new IntroCustomSlide());
-            addSlide(new HowToPlayCustomSlide());
-            addSlide(new CustomSlide());
+            addSlide(new IntroCustomSlideFragment());
+            addSlide(new HowToPlayCustomSlideFragment());
+            addSlide(new CustomSlideFragment());
 
         }
     }

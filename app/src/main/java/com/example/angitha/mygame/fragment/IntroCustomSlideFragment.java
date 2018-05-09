@@ -1,4 +1,4 @@
-package com.example.angitha.mygame.activity;
+package com.example.angitha.mygame.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +14,7 @@ import agency.tango.materialintroscreen.SlideFragment;
  * Created by angitha on 17/10/17.
  */
 
-public class IntroCustomSlide extends SlideFragment {
+public class IntroCustomSlideFragment extends SlideFragment {
 
     @Nullable
     @Override
