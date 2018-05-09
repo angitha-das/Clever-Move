@@ -11,11 +11,28 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Application {
+public class Application extends android.app.Application {
 
+    private static Application mInstance = null;
     private static final String TAG = Application.class.getSimpleName();
-//    initializeRemoteConfig(); //Force Update
 
+    //Setters
+    public static synchronized Application getInstance() {
+        return mInstance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mInstance = this;
+        initializeRemoteConfig();
+    }
+
+    @Override
+    public void onTerminate() {
+        mInstance = null;
+        super.onTerminate();
+    }
 
     public void initializeRemoteConfig(){
         final FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
@@ -24,7 +41,7 @@ public class Application {
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0.0");
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL,
-                "https://play.google.com/store/apps/details?id=com.envision.wellness.android&hl=en");
+                "https://play.google.com/store/apps/details?"+getPackageName());
 
         firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
         firebaseRemoteConfig.fetch(60) // fetch every minutes

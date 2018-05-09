@@ -80,7 +80,7 @@ public class ForceUpdateChecker {
             return this;
         }
 
-        public ForceUpdateChecker build() {
+        ForceUpdateChecker build() {
             return new ForceUpdateChecker(context, onUpdateNeededListener);
         }
 

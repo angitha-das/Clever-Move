@@ -39,15 +39,16 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_game_menu);
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
+    }
+
+    public void initialize(){
+        setContentView(R.layout.activity_game_menu);
         MenuView menuView = findViewById(R.id.menuView);
 
         play_button =  findViewById(R.id.play);
@@ -115,9 +116,9 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.app_update);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button share =  dialog.findViewById(R.id.share);
+        Button update =  dialog.findViewById(R.id.update);
         Button close = dialog.findViewById(R.id.close);
-        share.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 redirectStore(updateUrl);
@@ -128,7 +129,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                //initialize();
+                initialize();
             }
         });
         dialog.setCancelable(false);
@@ -137,9 +138,9 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
     @Override
     public void isUpdateNeeded(boolean isUpdateNeeded) {
-//        if(!isUpdateNeeded){
-//            initialize();
-//        }
+        if(!isUpdateNeeded){
+            initialize();
+        }
     }
 
     private void redirectStore(String updateUrl) {
