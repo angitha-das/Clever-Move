@@ -14,6 +14,8 @@ import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
 import com.example.angitha.mygame.view.BoardView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * Created by angitha on 1/7/17.
@@ -23,6 +25,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private GamePlayController mGameController;
     private final GameRules mGameRules = new GameRules();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

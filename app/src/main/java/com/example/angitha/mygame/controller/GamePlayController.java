@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.angitha.mygame.Pair;
 import com.example.angitha.mygame.R;
@@ -22,11 +23,19 @@ import com.example.angitha.mygame.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.levels.GameLevels;
+import com.example.angitha.mygame.utils.Constants;
 import com.example.angitha.mygame.utils.SoundHandler;
 import com.example.angitha.mygame.utils.Utils;
 import com.example.angitha.mygame.view.BoardView;
 import com.example.angitha.mygame.view.PegLayout;
 import com.example.angitha.mygame.view.PegView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Random;
 
@@ -40,7 +49,7 @@ import static com.example.angitha.mygame.view.PegView.mGridCopy;
  * Created by angitha on 1/7/17.
  */
 
-public class GamePlayController{
+public class GamePlayController implements RewardedVideoAdListener{
 
     /**
      * mGrid, contains 0 for empty cell or player ID
@@ -69,6 +78,10 @@ public class GamePlayController{
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
     private Boolean dragStarted = false;
+    private int levelRetryCounter = 0;
+    private InterstitialAd mInterstitialAd;
+    private RewardedVideoAd mRewardedVideoAd;
+
 
     /**
      * current status
@@ -102,6 +115,7 @@ public class GamePlayController{
         }else{
             completedAllLevels();
         }
+        initializeAdMob();
     }
 
     public GamePlayController(Context context, BoardView boardView,ImageView step1, ImageView step2, ImageView step3,TextView textView,ConstraintLayout gameBackground) {
@@ -124,6 +138,36 @@ public class GamePlayController{
         }
 
     }
+
+    private void initializeAdMob(){
+        MobileAds.initialize(mContext, Constants.ADMOB_APP_ID);
+
+        mInterstitialAd = new InterstitialAd(mContext);
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+
+        mInterstitialAd.setAdUnitId(Constants.INTERSTITIAL_UNIT_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        loadRewardedVideoAd();
+
+
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
+    }
+
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd(Constants.REWARDED_UNIT_ID,
+                new AdRequest.Builder().build());
+    }
+
 
     public boolean hideAnimationInUndo(){
         return undoAnim;
@@ -329,6 +373,12 @@ public class GamePlayController{
         }
     }
 
+    private void skipGameWithReward(){
+        mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext) + 1);
+        mGameLevels.updateLevelStatus(mContext);
+        saveGameLevelCompleted();
+    }
+
     private void saveGameLevelCompleted(){
         undo = false;
         if(initialize()) {
@@ -378,6 +428,13 @@ public class GamePlayController{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ImageView retry =  dialog.findViewById(R.id.retry);
         ImageView close = dialog.findViewById(R.id.close);
+        TextView skip = dialog.findViewById(R.id.skip);
+        if (mRewardedVideoAd.isLoaded() && mGameLevels.levelToPlay == mGameLevels.getHighestLevelCrossed(mContext) && levelRetryCounter !=5) {
+            skip.setVisibility(View.VISIBLE);
+        }else {
+            skip.setVisibility(View.GONE);
+        }
+
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -392,8 +449,63 @@ public class GamePlayController{
                 exitGame();
             }
         });
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                mRewardedVideoAd.show();
+                levelRetryCounter = 0;
+            }
+        });
+
         dialog.setCancelable(false);
         dialog.show();
+    }
+
+    @Override
+    public void onRewarded(RewardItem reward) {
+        Toast.makeText(mContext, "onRewarded! currency: " + reward.getType() + "  amount: " +
+                reward.getAmount(), Toast.LENGTH_SHORT).show();
+        // Reward the user.
+        skipGameWithReward();
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+        Toast.makeText(mContext, "onRewardedVideoAdLeftApplication",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+        Toast.makeText(mContext, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
+        restartGame();
+        loadRewardedVideoAd();
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int errorCode) {
+        Toast.makeText(mContext, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        Toast.makeText(mContext, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+        Toast.makeText(mContext, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+        Toast.makeText(mContext, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoCompleted() {
+        Toast.makeText(mContext, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -462,7 +574,12 @@ public class GamePlayController{
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
                             SoundHandler.levelLost(mContext);
+                            levelRetryCounter++;
                             alertRetryLevel();
+                            if(levelRetryCounter==5){
+                                showRetryAds();
+                                levelRetryCounter = 0;
+                            }
                         }
                     }
                     break;
@@ -480,6 +597,13 @@ public class GamePlayController{
                     break;
             }
             return true;
+        }
+    }
+
+
+    private void showRetryAds(){
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
         }
     }
 

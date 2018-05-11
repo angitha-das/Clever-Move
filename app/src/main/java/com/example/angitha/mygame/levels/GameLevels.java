@@ -1695,7 +1695,7 @@ public class GameLevels {
     }
 
     public int getHighestLevelCrossed(Context mContext) {
-        return getFromPrefs(mContext, Constants.KEY_LEVEL, 1);
+        return getFromPrefs(mContext, Constants.KEY_LEVEL, 101);
     }
 
     public int getLastLevel() {

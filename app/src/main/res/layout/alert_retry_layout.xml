@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.v7.widget.CardView
     android:layout_width="match_parent"
     app:cardCornerRadius="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,3 +72,22 @@
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card_view"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="@dimen/alert_sub_heading"
+        android:background="@drawable/share_button_background"
+        android:fontFamily="@font/imprima"
+        android:text="@string/skip_level_watching_a_video"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:visibility="gone"/>
+</RelativeLayout>

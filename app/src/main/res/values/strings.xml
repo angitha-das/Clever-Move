@@ -30,6 +30,7 @@
     <string name="retry_text_alert">Would you retry this level?</string>
     <string name="error_message">Complete the game and move forward.</string>
     <string name="tour_completed">Awesome!</string>
+    <string name="skip_level_watching_a_video">Watch video &amp; skip this level</string>
 
 
 </resources>
