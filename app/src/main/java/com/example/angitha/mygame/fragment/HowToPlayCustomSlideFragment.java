@@ -24,7 +24,7 @@ public class HowToPlayCustomSlideFragment extends SlideFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.how_to_play_custom_fragment, container, false);
       TextView partOne = view.findViewById(R.id.part_one);
-      partOne.setText(String.format("%s%s\n%s%s", getResources().getString(R.string.goalPartOne), Utils.getEmojiByUnicode(unicodeHappy), getResources().getString(R.string.goalPartTwo), Utils.getEmojiByUnicode(unicodeSad)));
+      partOne.setText(String.format("%s%s\n%s%s", getResources().getString(R.string.goalPartOne), Utils.INSTANCE.getEmojiByUnicode(unicodeHappy), getResources().getString(R.string.goalPartTwo), Utils.INSTANCE.getEmojiByUnicode(unicodeSad)));
         return view;
     }
 

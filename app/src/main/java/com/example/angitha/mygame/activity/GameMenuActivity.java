@@ -43,7 +43,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
+        ForceUpdateChecker.Companion.with(this).onUpdateNeeded(this).check();
 
     }
 

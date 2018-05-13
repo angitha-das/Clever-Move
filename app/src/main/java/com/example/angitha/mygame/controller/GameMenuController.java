@@ -32,7 +32,8 @@ public class GameMenuController implements View.OnClickListener{
                  break;
             case R.id.like:mListener.rateApp();
                 break;
-            case R.id.share:Utils.shareApp(v.getContext());
+            case R.id.share:
+                Utils.INSTANCE.shareApp(v.getContext());
                 break;
            default:break;
         }

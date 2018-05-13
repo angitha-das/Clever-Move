@@ -89,7 +89,7 @@ public class GamePlayController implements RewardedVideoAdListener{
         this.mCloseButton = close;
         this.mRefresh = refresh;
         this.mGameBackground = gameBackground;
-        SoundHandler.initializeTunes(context);
+        SoundHandler.INSTANCE.initializeTunes(context);
 
         if(initialize()) {
             previousNextLevelSetup();
@@ -112,7 +112,7 @@ public class GamePlayController implements RewardedVideoAdListener{
         this.step2 = step2;
         this.step3 = step3;
         this.textView = textView;
-        SoundHandler.initializeTunes(context);
+        SoundHandler.INSTANCE.initializeTunes(context);
 
         if(initialize()){
             setScore(mTotalScore);
@@ -355,7 +355,7 @@ public class GamePlayController implements RewardedVideoAdListener{
     }
 
     private void completedAllLevels() {
-        SoundHandler.levelCompleted(mContext);
+        SoundHandler.INSTANCE.levelCompleted(mContext);
         hideAllViewsInBackground();
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.game_over_layout);
@@ -367,7 +367,7 @@ public class GamePlayController implements RewardedVideoAdListener{
             public void onClick(View view) {
                 exitGame();
                 dialog.dismiss();
-                Utils.shareApp(view.getContext());
+                Utils.INSTANCE.shareApp(view.getContext());
 
             }
         });
@@ -490,9 +490,9 @@ public class GamePlayController implements RewardedVideoAdListener{
                         mScore = getScore();
                         --mScore;
                         if(mScore >1){
-                            SoundHandler.playSuccessMove(mContext);
+                            SoundHandler.INSTANCE.playSuccessMove(mContext);
                         }else{
-                            SoundHandler.levelCompleted(mContext);
+                            SoundHandler.INSTANCE.levelCompleted(mContext);
                         }
                         setScore(mScore);
                         if(mGameLevels.gameTour) {
@@ -521,11 +521,11 @@ public class GamePlayController implements RewardedVideoAdListener{
                         }
                         updateTextViewScore();
                     }else{
-                        SoundHandler.playFailMove(mContext);
+                        SoundHandler.INSTANCE.playFailMove(mContext);
                     }
                     if(!view.anyMoreMovesPossible(mGrid)){
                         if(mScore>1){
-                            SoundHandler.levelLost(mContext);
+                            SoundHandler.INSTANCE.levelLost(mContext);
                             levelRetryCounter++;
                             alertRetryLevel();
                             if(levelRetryCounter==5){
@@ -537,7 +537,7 @@ public class GamePlayController implements RewardedVideoAdListener{
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(notDropped){
-                        SoundHandler.playFailMove(mContext);
+                        SoundHandler.INSTANCE.playFailMove(mContext);
                     }
 
                     view = (PegView) event.getLocalState();

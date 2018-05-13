@@ -147,26 +147,6 @@ public class GameRules {
         };
     }
 
-    /**
-     * Returns current rule state
-     *
-     * @param rule rule to get selected value
-     * @return return selected value
-     */
-    public int getRule(int rule) {
-        return rules[rule].getSelectedId();
-    }
-
-    /**
-     * Sets new rule state
-     *
-     * @param rule game rule to set value
-     * @param value rule value
-     */
-    public void setRule(int rule, int value) {
-        rules[rule].setId(value);
-    }
-
     @NonNull
     public Bundle exportTo(@NonNull Bundle bundle) {
         int[] bundleRules = new int[rules.length];
