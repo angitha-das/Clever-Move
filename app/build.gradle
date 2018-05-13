@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-ads:15.0.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.firebase:firebase-config:15.0.2'
+    implementation 'com.google.firebase:firebase-crash:15.0.2'
 }
 
 apply plugin: 'kotlin-android'
