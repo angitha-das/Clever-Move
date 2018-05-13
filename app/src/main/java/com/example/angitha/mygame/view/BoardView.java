@@ -12,7 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.ThemePak;
+import com.example.angitha.mygame.utils.ThemePak;
 import com.example.angitha.mygame.controller.GamePlayController;
 
 import static com.example.angitha.mygame.levels.GameLevels.COLS;

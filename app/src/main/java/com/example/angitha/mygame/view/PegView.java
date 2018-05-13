@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.angitha.mygame.Pair;
+import com.example.angitha.mygame.utils.Pair;
 
 import static com.example.angitha.mygame.levels.GameLevels.COLS;
 import static com.example.angitha.mygame.levels.GameLevels.ROWS;

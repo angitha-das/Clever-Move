@@ -1,4 +1,4 @@
-package com.example.angitha.mygame;
+package com.example.angitha.mygame.utils;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+
+import com.example.angitha.mygame.R;
 
 /**
  * Created by angitha on 20/10/17.

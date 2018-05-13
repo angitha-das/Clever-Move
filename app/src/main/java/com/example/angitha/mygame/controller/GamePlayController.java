@@ -15,11 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.angitha.mygame.Pair;
+import com.example.angitha.mygame.utils.Pair;
 import com.example.angitha.mygame.R;
-import com.example.angitha.mygame.ThemePak;
+import com.example.angitha.mygame.utils.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
 import com.example.angitha.mygame.levels.GameLevels;
@@ -36,7 +34,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-
 import java.util.Random;
 
 import static com.example.angitha.mygame.levels.GameLevels.COLS;
@@ -51,14 +48,7 @@ import static com.example.angitha.mygame.view.PegView.mGridCopy;
 
 public class GamePlayController implements RewardedVideoAdListener{
 
-    /**
-     * mGrid, contains 0 for empty cell or player ID
-     */
     private int[][] mGrid;
-
-    /**
-     * mScore, contains number of Pegs in the game level
-     */
     private int mScore;
     private int mTotalScore;
     private TextView mLevelIndicator;
@@ -82,10 +72,6 @@ public class GamePlayController implements RewardedVideoAdListener{
     private int levelRetryCounter = 0;
     private InterstitialAd mInterstitialAd;
     private RewardedVideoAd mRewardedVideoAd;
-
-    /**
-     * current status
-     */
     private final Context mContext;
     private final BoardView mBoardView;
     private PegLayout[][] squares;
@@ -296,28 +282,14 @@ public class GamePlayController implements RewardedVideoAdListener{
         undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)-1);
         mGameLevels.fromMenu = false;
-        if(initialize()) {
-            previousNextLevelSetup();
-            setScore(mTotalScore);
-            updateTextViewScore();
-            mBoardView.buildCells(mGrid);
-        }else{
-            completedAllLevels();
-        }
+        setupBoard();
     }
 
     public void playNextGameLevel() {
         undo = false;
         mGameLevels.setGameLevelToPlay(mGameLevels.getGameLevelToPlay(mContext)+1);
         mGameLevels.fromMenu = false;
-        if(initialize()) {
-            previousNextLevelSetup();
-            setScore(mTotalScore);
-            updateTextViewScore();
-            mBoardView.buildCells(mGrid);
-        }else{
-            completedAllLevels();
-        }
+        setupBoard();
     }
 
     /**
@@ -325,6 +297,10 @@ public class GamePlayController implements RewardedVideoAdListener{
      */
     public void restartGame() {
         undo=false;
+        setupBoard();
+    }
+
+    private void setupBoard(){
         if(initialize()) {
             previousNextLevelSetup();
             setScore(mTotalScore);
@@ -337,14 +313,7 @@ public class GamePlayController implements RewardedVideoAdListener{
 
     public void undoPreviousMove() {
         undo=true;
-        if(initialize()) {
-            previousNextLevelSetup();
-            setScore(mTotalScore);
-            updateTextViewScore();
-            mBoardView.buildCells(mGrid);
-        }else{
-            completedAllLevels();
-        }
+        setupBoard();
     }
 
     private void setScore(int s) {
@@ -382,14 +351,7 @@ public class GamePlayController implements RewardedVideoAdListener{
 
     private void saveGameLevelCompleted(){
         undo = false;
-        if(initialize()) {
-            previousNextLevelSetup();
-            setScore(mTotalScore);
-            updateTextViewScore();
-            mBoardView.buildCells(mGrid);
-        }else{
-            completedAllLevels();
-        }
+        setupBoard();
     }
 
     private void completedAllLevels() {
