@@ -11,10 +11,10 @@
 
     <ImageView
         android:id="@+id/close"
+        android:contentDescription="@string/close"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/close"
@@ -42,11 +42,11 @@
 
     <ImageView
         android:id="@+id/undo"
+        android:contentDescription="@string/undo"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/undo"
         app:layout_constraintEnd_toStartOf="@+id/refresh"
@@ -54,10 +54,10 @@
 
     <ImageView
         android:id="@+id/refresh"
+        android:contentDescription="@string/refresh"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/refresh"
@@ -76,12 +76,12 @@
 
     <ImageView
         android:id="@+id/previousLevel"
+        android:contentDescription="@string/previousLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
         android:rotation="180"
         android:src="@drawable/back"
         android:visibility="invisible"
@@ -104,12 +104,12 @@
 
     <ImageView
         android:id="@+id/nextLevel"
+        android:contentDescription="@string/nextLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
         android:src="@drawable/back"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

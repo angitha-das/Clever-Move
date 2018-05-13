@@ -8,10 +8,12 @@ import android.util.Log;
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
+import static com.example.angitha.mygame.utils.Constants.KEY_CURRENT_VERSION;
+import static com.example.angitha.mygame.utils.Constants.KEY_UPDATE_REQUIRED;
+import static com.example.angitha.mygame.utils.Constants.KEY_UPDATE_URL;
+
 public class ForceUpdateChecker {
-    public static final String KEY_UPDATE_REQUIRED = "force_update_required";
-    public static final String KEY_CURRENT_VERSION = "force_update_current_version";
-    public static final String KEY_UPDATE_URL = "force_update_store_url";
+
     private static final String TAG = ForceUpdateChecker.class.getSimpleName();
     private OnUpdateNeededListener onUpdateNeededListener;
     private Context context;

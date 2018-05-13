@@ -77,11 +77,11 @@ public class GamePlayController implements RewardedVideoAdListener{
     private Drawable emptySquare;
     private Drawable hoverSquare;
     private LayerDrawable cellDrawable;
+    private  int previousThemeId = 0;
     private Boolean dragStarted = false;
     private int levelRetryCounter = 0;
     private InterstitialAd mInterstitialAd;
     private RewardedVideoAd mRewardedVideoAd;
-
 
     /**
      * current status
@@ -150,8 +150,6 @@ public class GamePlayController implements RewardedVideoAdListener{
         mInterstitialAd.setAdUnitId(Constants.INTERSTITIAL_UNIT_ID);
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         loadRewardedVideoAd();
-
-
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -258,8 +256,11 @@ public class GamePlayController implements RewardedVideoAdListener{
     private void applyGameTheme() {
         Random rand = new Random();
         int themeId = rand.nextInt(12);
+        while(themeId == previousThemeId){
+            themeId = rand.nextInt(12);
+        }
         ThemePak mPak = ThemePak.getInstance();
-
+        previousThemeId = themeId;
         mGameBackground.setBackgroundColor(ContextCompat.getColor(mContext, mPak.getBackground(themeId)));
         hoverSquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext,mPak.getHoverCellColor(themeId)),dpToPixels(2),dpToPixels(5));
         emptySquare = ThemePak.createSquareDrawable(ContextCompat.getColor(mContext, mPak.getEmptyCellColor(themeId)),dpToPixels(2),dpToPixels(5));
@@ -464,48 +465,37 @@ public class GamePlayController implements RewardedVideoAdListener{
 
     @Override
     public void onRewarded(RewardItem reward) {
-        Toast.makeText(mContext, "onRewarded! currency: " + reward.getType() + "  amount: " +
-                reward.getAmount(), Toast.LENGTH_SHORT).show();
-        // Reward the user.
         skipGameWithReward();
     }
 
     @Override
     public void onRewardedVideoAdLeftApplication() {
-        Toast.makeText(mContext, "onRewardedVideoAdLeftApplication",
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
-        Toast.makeText(mContext, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
         restartGame();
         loadRewardedVideoAd();
     }
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int errorCode) {
-        Toast.makeText(mContext, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdLoaded() {
-        Toast.makeText(mContext, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdOpened() {
-        Toast.makeText(mContext, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoStarted() {
-        Toast.makeText(mContext, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoCompleted() {
-        Toast.makeText(mContext, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
     }
 
     /**

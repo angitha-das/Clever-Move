@@ -14,7 +14,7 @@ public class PrefUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         final SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(key,value);
-        editor.commit();
+        editor.apply();
     }
 
     public static int getFromPrefs(Context context, String key, int defaultValue) {
@@ -26,7 +26,7 @@ public class PrefUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         final SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(key,value);
-        editor.commit();
+        editor.apply();
     }
 
     public static boolean getMuteStatus(Context context, String key, boolean defaultValue) {

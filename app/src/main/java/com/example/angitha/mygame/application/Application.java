@@ -2,14 +2,15 @@ package com.example.angitha.mygame.application;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-
-import com.example.angitha.mygame.utils.ForceUpdateChecker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.angitha.mygame.utils.Constants.KEY_CURRENT_VERSION;
+import static com.example.angitha.mygame.utils.Constants.KEY_UPDATE_REQUIRED;
+import static com.example.angitha.mygame.utils.Constants.KEY_UPDATE_URL;
 
 public class Application extends android.app.Application {
 
@@ -38,9 +39,9 @@ public class Application extends android.app.Application {
         final FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         // set in-app defaults
         Map<String, Object> remoteConfigDefaults = new HashMap();
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0.0");
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL,
+        remoteConfigDefaults.put(KEY_UPDATE_REQUIRED, false);
+        remoteConfigDefaults.put(KEY_CURRENT_VERSION, "1.0.0");
+        remoteConfigDefaults.put(KEY_UPDATE_URL,
                 "https://play.google.com/store/apps/details?"+getPackageName());
 
         firebaseRemoteConfig.setDefaults(remoteConfigDefaults);

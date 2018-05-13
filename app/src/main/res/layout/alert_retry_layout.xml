@@ -28,11 +28,12 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:contentDescription="@string/appIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@mipmap/ic_launcher_circle_final" />
+            app:srcCompat="@mipmap/ic_laucher_round" />
 
         <TextView
             android:id="@+id/subtitle"
@@ -56,6 +57,7 @@
 
             <ImageView
                 android:id="@+id/close"
+                android:contentDescription="@string/close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -64,6 +66,7 @@
 
             <ImageView
                 android:id="@+id/retry"
+                android:contentDescription="@string/refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

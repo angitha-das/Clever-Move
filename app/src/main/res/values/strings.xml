@@ -32,5 +32,16 @@
     <string name="tour_completed">Awesome!</string>
     <string name="skip_level_watching_a_video">Watch video &amp; skip this level</string>
 
-
+    <string name="closeGame">CloseGame</string>
+    <string name="undo">Undo</string>
+    <string name="refresh">Refresh</string>
+    <string name="previousLevel">Previous Level</string>
+    <string name="nextLevel">Next Level</string>
+    <string name="play">Play</string>
+    <string name="levels">Levels</string>
+    <string name="muteUnmute">mute or unmute</string>
+    <string name="gameTour">Game Tour</string>
+    <string name="like">Like</string>
+    <string name="appIcon">App Icon</string>
+    <string name="directionIcon">Direction Icon</string>
 </resources>
