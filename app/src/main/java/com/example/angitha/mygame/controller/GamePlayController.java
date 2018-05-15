@@ -75,7 +75,7 @@ public class GamePlayController implements RewardedVideoAdListener{
     private final Context mContext;
     private final BoardView mBoardView;
     private PegLayout[][] squares;
-    private boolean notDropped = true;
+    private boolean dropped=false;
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
@@ -339,6 +339,7 @@ public class GamePlayController implements RewardedVideoAdListener{
                     mGameLevels.levelToPlay = mGameLevels.getGameLevelToPlay(mContext);
                 }
                 saveGameLevelCompleted();
+                dropped=true;
             }
         }
     }
@@ -474,14 +475,13 @@ public class GamePlayController implements RewardedVideoAdListener{
             PegLayout oldSquare;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-
-                    notDropped = true;
+                    dropped = false;
                     break;
                  case DragEvent.ACTION_DROP:
 				    /*
 				    * When Peg is dropped move method is called and score is updated
 				    */
-				    notDropped = false;
+				    dropped = true;
                     view = (PegView) event.getLocalState();
                     PegLayout newSquare = (PegLayout) v;
                     oldSquare = (PegLayout) view.getParent();
@@ -536,10 +536,9 @@ public class GamePlayController implements RewardedVideoAdListener{
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(notDropped){
+                    if(!dropped) {
                         SoundHandler.INSTANCE.playFailMove(mContext);
                     }
-
                     view = (PegView) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
                     v.setBackgroundDrawable(emptySquare);

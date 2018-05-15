@@ -13,12 +13,13 @@
         android:id="@+id/step1_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/directionIcon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="100dp"
+        android:contentDescription="@string/directionIcon"
         android:src="@drawable/move_cell"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/game_tour_table_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,46 +28,46 @@
         android:id="@+id/step2_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/directionIcon"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="8dp"
+        android:contentDescription="@string/directionIcon"
         android:rotation="270"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/step3_img"
-        app:layout_constraintEnd_toStartOf="@+id/game_tour_table_layout"
+        app:layout_constraintBottom_toBottomOf="@+id/game_tour_table_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step1_img" />
+        app:layout_constraintTop_toTopOf="@+id/game_tour_table_layout"
+        app:layout_constraintVertical_bias="0.503" />
 
     <ImageView
         android:id="@+id/step3_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/directionIcon"
-        android:layout_marginBottom="135dp"
         android:layout_marginStart="28dp"
+        android:layout_marginBottom="88dp"
+        android:contentDescription="@string/directionIcon"
         android:rotation="180"
         android:src="@drawable/move_cell"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_tour_table_layout" />
 
 
     <com.example.angitha.mygame.view.BoardView
         android:id="@+id/game_tour_table_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="48dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/step3_img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step1_img" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tour_completed"

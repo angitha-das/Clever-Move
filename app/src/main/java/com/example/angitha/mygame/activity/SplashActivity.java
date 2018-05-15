@@ -37,8 +37,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(prefs!=null && !prefs.getBoolean("first_time", false)){
                     Intent i = new Intent(SplashActivity.this, IntroActivity.class);
-                    startActivity(i);
-                    finish();
+                    startActivityForResult(i,1);
                 }else{
                     GameLevels.getInstance().gameTour=false;
                     Intent i = new Intent(SplashActivity.this, GameMenuActivity.class);
@@ -48,6 +47,12 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, Constants.SPLASH_TIME_OUT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        finish();
     }
 
     @Override

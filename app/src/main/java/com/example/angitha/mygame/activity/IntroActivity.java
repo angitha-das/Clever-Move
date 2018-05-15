@@ -80,6 +80,8 @@ public class IntroActivity extends MaterialIntroActivity {
         if(value.equalsIgnoreCase("yesFromMenu")){
             GameLevels.getInstance().gameTour=false;
         }
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 }

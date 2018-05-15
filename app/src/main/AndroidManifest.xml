@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name=".activity.IntroActivity"
-            android:theme="@style/Theme.Intro"/>
+            android:theme="@style/Theme.Intro"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.GameMenuActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.GamePlayActivity"

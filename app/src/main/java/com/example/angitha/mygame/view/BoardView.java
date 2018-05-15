@@ -59,8 +59,12 @@ public class BoardView extends TableLayout {
 
 	public void initialize(GamePlayController gamePlayController, int[][] boardMatrix,
 						    GamePlayController.SquareDragListener squareDragListener, GamePlayController.PegTouchListener pegTouchListener) {
-		this.squareDragListener = squareDragListener;
-		this.pegTouchListener = pegTouchListener;
+		if(this.squareDragListener == null){
+			this.squareDragListener = squareDragListener;
+		}
+		if(this.pegTouchListener == null){
+			this.pegTouchListener = pegTouchListener;
+		}
 		this.gamePlayController = gamePlayController;
 		buildCells(boardMatrix);
 	}

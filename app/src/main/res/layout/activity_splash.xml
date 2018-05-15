@@ -10,8 +10,8 @@
     tools:context="com.example.angitha.mygame.activity.SplashActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:contentDescription="@string/appIcon"
         android:src="@mipmap/ic_laucher_round"/>
     <TextView
