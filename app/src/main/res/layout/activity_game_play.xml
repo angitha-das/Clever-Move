@@ -61,8 +61,19 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/refresh"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sound"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sound"
+        android:contentDescription="@string/undo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.example.angitha.mygame.view.BoardView
         android:id="@+id/game_table_layout"

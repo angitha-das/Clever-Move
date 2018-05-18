@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.angitha.mygame.utils.Pair;
 import com.example.angitha.mygame.R;
+import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.utils.ThemePak;
 import com.example.angitha.mygame.activity.GamePlayActivity;
 import com.example.angitha.mygame.activity.LevelsRecyclerActivity;
@@ -57,6 +58,7 @@ public class GamePlayController implements RewardedVideoAdListener{
     private ImageView mUndoMove;
     private ImageView mCloseButton;
     private ImageView mRefresh;
+    private ImageView mSound;
     private ConstraintLayout mGameBackground;
     private  ImageView step1;
     private  ImageView step2;
@@ -79,7 +81,7 @@ public class GamePlayController implements RewardedVideoAdListener{
     private GameLevels mGameLevels = GameLevels.getInstance();
 
     public GamePlayController(Context context, BoardView boardView
-            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove,ImageView close, ImageView refresh,ConstraintLayout gameBackground) {
+            , TextView levelIndicator, ImageView previousLevel, ImageView nextLevel, ImageView undoMove,ImageView close, ImageView refresh,ImageView sound,ConstraintLayout gameBackground) {
         this.mContext = context;
         this.mBoardView = boardView;
         this.mLevelIndicator = levelIndicator;
@@ -88,6 +90,7 @@ public class GamePlayController implements RewardedVideoAdListener{
         this.mUndoMove = undoMove;
         this.mCloseButton = close;
         this.mRefresh = refresh;
+        this.mSound = sound;
         this.mGameBackground = gameBackground;
         SoundHandler.INSTANCE.initializeTunes(context);
 
@@ -459,6 +462,11 @@ public class GamePlayController implements RewardedVideoAdListener{
 
     @Override
     public void onRewardedVideoCompleted() {
+    }
+
+    public void handleSound() {
+        PrefUtils.saveMuteStatus(mContext, Constants.MUTE_SOUND, !PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true));
+        mSound.setImageResource(PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true)?R.drawable.ic_music_player_on:R.drawable.ic_music_player_off);
     }
 
     /**

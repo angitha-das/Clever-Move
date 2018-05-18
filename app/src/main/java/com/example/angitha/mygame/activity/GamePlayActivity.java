@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.angitha.mygame.R;
 import com.example.angitha.mygame.controller.GamePlayController;
 import com.example.angitha.mygame.rules.GameRules;
+import com.example.angitha.mygame.utils.Constants;
+import com.example.angitha.mygame.utils.PrefUtils;
 import com.example.angitha.mygame.view.BoardView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -24,7 +26,9 @@ import com.google.android.gms.ads.MobileAds;
 public class GamePlayActivity extends AppCompatActivity {
 
     private GamePlayController mGameController;
+    private ImageView sound_button;
     private final GameRules mGameRules = new GameRules();
+
 
 
     @Override
@@ -52,6 +56,14 @@ public class GamePlayActivity extends AppCompatActivity {
         ImageView previousLevel = findViewById(R.id.previousLevel);
         ImageView nextLevel = findViewById(R.id.nextLevel);
         ImageView undo = findViewById(R.id.undo);
+        sound_button = findViewById(R.id.sound);
+
+        sound_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGameController.handleSound();
+            }
+        });
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +103,13 @@ public class GamePlayActivity extends AppCompatActivity {
         });
 
         mGameController = new GamePlayController(this, boardView, levelIndicator,
-                previousLevel, nextLevel,undo,close,refresh, gameBackground);
+                previousLevel, nextLevel,undo,close,refresh,sound_button,gameBackground);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sound_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true)?R.drawable.ic_music_player_on:R.drawable.ic_music_player_off);
     }
 
     @Override

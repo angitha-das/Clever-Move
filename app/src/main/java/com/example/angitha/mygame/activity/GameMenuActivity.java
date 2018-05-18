@@ -55,6 +55,7 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
         mute_button = findViewById(R.id.muteSound);
         mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true)?R.drawable.music:R.drawable.no_music);
 
+
         ScaleAnimation scaleIn = new ScaleAnimation(0.6f, 0.9f, 0.6f, 0.9f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
@@ -65,6 +66,15 @@ public class GameMenuActivity extends AppCompatActivity implements GameMenuContr
 
         GameMenuController gameMenuController = new GameMenuController(this);
         menuView.setListeners(gameMenuController);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mute_button!=null){
+            mute_button.setImageResource(PrefUtils.getMuteStatus(this, Constants.MUTE_SOUND, true)?R.drawable.music:R.drawable.no_music);
+        }
     }
 
     @Override
