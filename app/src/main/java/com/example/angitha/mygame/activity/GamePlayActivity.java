@@ -1,6 +1,7 @@
 package com.example.angitha.mygame.activity;
 
 import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +29,6 @@ public class GamePlayActivity extends AppCompatActivity {
     private GamePlayController mGameController;
     private ImageView sound_button;
     private final GameRules mGameRules = new GameRules();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,4 +115,5 @@ public class GamePlayActivity extends AppCompatActivity {
     public void onBackPressed() {
         mGameController.exitGame();
     }
+
 }
