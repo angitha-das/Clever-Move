@@ -38,6 +38,7 @@ public class LevelsRecyclerActivity extends AppCompatActivity{
         MyLevelsAdapter adapter = new MyLevelsAdapter(getApplicationContext());
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(LevelsRecyclerActivity.this, 3));
         recyclerViewLevels.setAdapter(adapter);
+        recyclerViewLevels.getLayoutManager().scrollToPosition(GameLevels.getInstance().getHighestLevelCrossed(this)+1);
     }
 
     @Override

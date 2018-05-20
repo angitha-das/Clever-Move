@@ -115,5 +115,4 @@ public class GamePlayActivity extends AppCompatActivity {
     public void onBackPressed() {
         mGameController.exitGame();
     }
-
 }

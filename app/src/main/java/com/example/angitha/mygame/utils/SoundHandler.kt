@@ -2,7 +2,6 @@ package com.example.angitha.mygame.utils
 
 import android.content.Context
 import android.media.AudioManager
-import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Build
 import android.os.VibrationEffect
@@ -17,7 +16,7 @@ object SoundHandler {
     private var failMove: Int = 0
     private var levelCompleted: Int = 0
     private var levelLost: Int = 0
-    var failVibrate:Vibrator?= null
+    private var failVibrate:Vibrator?= null
     private var loaded = false
     private var volume: Float = 0.0f
 
@@ -28,7 +27,7 @@ object SoundHandler {
 
         // Load the sound
         soundPool = SoundPool(10, AudioManager.STREAM_MUSIC, 0)
-        soundPool!!.setOnLoadCompleteListener({ soundPool, sampleId, status -> loaded = true })
+        soundPool!!.setOnLoadCompleteListener({ _, _, _ -> loaded = true })
 
         successMove = soundPool!!.load(mContext, R.raw.success_move, 1)
         failMove = soundPool!!.load(mContext, R.raw.fail_move, 1)
@@ -45,7 +44,6 @@ object SoundHandler {
 
     fun playSuccessMove(mContext: Context) {
         if (PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true)) {
-//            successMove!!.start()
             if (loaded) {
                 soundPool!!.play(successMove, volume, volume, 1, 0, 1f)
             }
@@ -54,7 +52,6 @@ object SoundHandler {
 
     fun playFailMove(mContext: Context) {
         if (PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true)) {
-//            failMove!!.start()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     failVibrate!!.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
                 } else {
@@ -66,7 +63,6 @@ object SoundHandler {
 
     fun levelCompleted(mContext: Context) {
         if (PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true)) {
-//            levelCompleted!!.start()
             if (loaded) {
                 soundPool!!.play(levelCompleted, volume, volume, 1, 0, 1f)
             }
@@ -75,7 +71,6 @@ object SoundHandler {
 
     fun levelLost(mContext: Context) {
         if (PrefUtils.getMuteStatus(mContext, Constants.MUTE_SOUND, true)) {
-//            levelLost!!.start()
             if (loaded) {
                 soundPool!!.play(levelLost, volume, volume, 1, 0, 1f)
             }

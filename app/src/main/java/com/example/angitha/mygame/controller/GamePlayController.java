@@ -266,6 +266,7 @@ public class GamePlayController implements RewardedVideoAdListener{
         mCloseButton.setVisibility(View.INVISIBLE);
         mUndoMove.setVisibility(View.INVISIBLE);
         mRefresh.setVisibility(View.INVISIBLE);
+        mSound.setVisibility(View.INVISIBLE);
         mLevelIndicator.setVisibility(View.INVISIBLE);
         mPreviousLevel.setVisibility(View.INVISIBLE);
         mNextLevel.setVisibility(View.INVISIBLE);
@@ -276,6 +277,7 @@ public class GamePlayController implements RewardedVideoAdListener{
         mCloseButton.setVisibility(View.VISIBLE);
         mUndoMove.setVisibility(View.VISIBLE);
         mRefresh.setVisibility(View.VISIBLE);
+        mSound.setVisibility(View.VISIBLE);
         mLevelIndicator.setVisibility(View.VISIBLE);
         mPreviousLevel.setVisibility(View.VISIBLE);
         mNextLevel.setVisibility(View.VISIBLE);
