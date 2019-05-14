@@ -14,6 +14,7 @@ public class Constants {
     public static final String INTERSTITIAL_UNIT_ID = "";
     public static final String REWARDED_UNIT_ID = "";
 
+
     public static final String KEY_UPDATE_REQUIRED = "force_update_required";
     public static final String KEY_CURRENT_VERSION = "force_update_current_version";
     public static final String KEY_UPDATE_URL = "force_update_store_url";
